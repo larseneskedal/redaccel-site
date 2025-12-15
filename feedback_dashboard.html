@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Feedback Simulator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback_style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="logo">Product Feedback</h1>
+                <p class="tagline">AI-powered insights for better products</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mode Selection -->
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="existing" id="existingBtn">
+                    <span class="mode-icon">🌐</span>
+                    <span>Analyze Existing Product</span>
+                </button>
+                <button class="mode-btn" data-mode="new" id="newBtn">
+                    <span class="mode-icon">💡</span>
+                    <span>New Product Idea</span>
+                </button>
+            </div>
+
+            <!-- Existing Product Mode -->
+            <div id="existingMode" class="input-mode active">
+                <div class="card">
+                    <h2 class="card-title">Analyze an Existing Product</h2>
+                    <p class="card-description">Enter a website URL to analyze and get feedback</p>
+                    
+                    <div class="form-group">
+                        <label for="websiteUrl">Website URL</label>
+                        <div class="input-with-button">
+                            <input type="url" id="websiteUrl" placeholder="https://example.com" class="input">
+                            <button id="analyzeWebsiteBtn" class="btn btn-primary">Analyze</button>
+                        </div>
+                    </div>
+
+                    <div id="analyzedProductInfo" class="analyzed-info hidden">
+                        <h3>Extracted Product Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Product Name</span>
+                                <span class="info-value" id="extractedName">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Description</span>
+                                <span class="info-value" id="extractedDescription">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Features</span>
+                                <span class="info-value" id="extractedFeatures">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Pricing</span>
+                                <span class="info-value" id="extractedPricing">-</span>
+                            </div>
+                        </div>
+                        <button id="useAnalyzedBtn" class="btn btn-secondary">Use This Information</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Product Idea Mode -->
+            <div id="newMode" class="input-mode">
+                <div class="card">
+                    <h2 class="card-title">New Product Idea</h2>
+                    <p class="card-description">Describe your product idea to get AI-powered feedback</p>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="productName" placeholder="e.g., TaskMaster Pro" class="input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="targetAudience">Target Audience</label>
+                            <input type="text" id="targetAudience" placeholder="e.g., Small business owners" class="input">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="productDescription">Product Description</label>
+                            <textarea id="productDescription" rows="4" placeholder="Describe your product, what it does, and its value proposition..." class="input"></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="productFeatures">Product Features (one per line)</label>
+                            <textarea id="productFeatures" rows="4" placeholder="Feature 1&#10;Feature 2&#10;Feature 3..." class="input"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pricing">Pricing</label>
+                            <input type="text" id="pricing" placeholder="e.g., $29/month" class="input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Persona Selection -->
+            <div class="card">
+                <h2 class="card-title">Select Personas</h2>
+                <p class="card-description">Choose which user types to simulate</p>
+                <div class="persona-grid" id="personaGrid"></div>
+            </div>
+
+            <!-- Simulation Settings -->
+            <div class="card">
+                <div class="settings-grid">
+                    <div class="form-group">
+                        <label for="numUsers">Users per Persona (2 recommended for speed)</label>
+                        <input type="number" id="numUsers" value="2" min="1" max="5" class="input">
+                    </div>
+                    <div class="form-group">
+                        <label for="marketSize">Target Market Size</label>
+                        <input type="number" id="marketSize" value="10000" min="100" step="100" class="input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button id="simulateBtn" class="btn btn-primary btn-large">
+                <span>Simulate Feedback</span>
+                <span class="btn-icon">→</span>
+            </button>
+
+            <!-- Loading State -->
+            <div id="loading" class="loading-overlay hidden">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <p>Analyzing feedback...</p>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <!-- MRR Estimate - Prominent -->
+                <div class="card" id="mrrPreviewCard" style="display: none;">
+                    <h2 class="card-title">Revenue Potential</h2>
+                    <div class="mrr-metrics">
+                        <div class="mrr-card highlight">
+                            <div class="mrr-label">Estimated Monthly Revenue</div>
+                            <div class="mrr-value" id="previewMRR">$0</div>
+                            <div style="margin-top: 12px; font-size: 14px; opacity: 0.8;">Based on <span id="previewUsers">0</span> user feedback</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; color: var(--text-tertiary); font-size: 14px;">
+                        Add pricing tiers below to get detailed MRR breakdown and growth projections.
+                    </p>
+                </div>
+
+                <!-- Overview Metrics -->
+                <div class="card">
+                    <h2 class="card-title">Overview</h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value" id="totalUsers">-</div>
+                            <div class="metric-label">Users Simulated</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="avgPurchaseIntent">-</div>
+                            <div class="metric-label">Purchase Intent</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="positiveSentiment">-</div>
+                            <div class="metric-label">Positive Sentiment</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="conversionRate">-</div>
+                            <div class="metric-label">Conversion Rate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Chart -->
+                <div class="card">
+                    <h2 class="card-title">Sentiment Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Persona Breakdown -->
+                <div class="card">
+                    <h2 class="card-title">Persona Analysis</h2>
+                    <div id="personaBreakdown" class="persona-breakdown"></div>
+                </div>
+
+                <!-- Pricing & MRR Section -->
+                <div class="card">
+                    <h2 class="card-title">Revenue Estimation</h2>
+                    <div class="pricing-input">
+                        <div class="pricing-tiers" id="pricingTiers">
+                            <div class="pricing-tier-input">
+                                <input type="text" placeholder="Tier name" class="input tier-name">
+                                <input type="number" placeholder="Price ($)" class="input tier-price" min="0" step="0.01">
+                                <input type="number" placeholder="% of users" class="input tier-percentage" min="0" max="100" step="1">
+                                <button class="btn-icon-only btn-remove-tier">×</button>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <button id="addTierBtn" class="btn btn-secondary">Add Tier</button>
+                            <button id="estimateMRRBtn" class="btn btn-primary">Estimate MRR</button>
+                        </div>
+                    </div>
+                    
+                    <div id="mrrResults" class="hidden">
+                        <div class="mrr-metrics">
+                            <div class="mrr-card highlight">
+                                <div class="mrr-label">Estimated MRR</div>
+                                <div class="mrr-value" id="estimatedMRR">$0</div>
+                            </div>
+                            <div class="mrr-card">
+                                <div class="mrr-label">Estimated ARR</div>
+                                <div class="mrr-value" id="estimatedARR">$0</div>
+                            </div>
+                            <div class="mrr-card">
+                                <div class="mrr-label">Total Conversions</div>
+                                <div class="mrr-value" id="totalConversions">0</div>
+                            </div>
+                            <div class="mrr-card">
+                                <div class="mrr-label">Confidence</div>
+                                <div class="mrr-value" id="confidenceScore">0%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <h3>Growth Projections</h3>
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                        
+                        <div class="tier-breakdown">
+                            <h3>Tier Breakdown</h3>
+                            <div id="tierBreakdown" class="tier-grid"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Improvement Tips -->
+                <div class="card">
+                    <h2 class="card-title">💡 Improvement Tips</h2>
+                    <div id="improvementTips" class="insights-grid"></div>
+                </div>
+
+                <!-- Key Insights -->
+                <div class="card">
+                    <h2 class="card-title">Insights & Recommendations</h2>
+                    <div class="insights-grid">
+                        <div class="insights-card">
+                            <h3>Key Insights</h3>
+                            <ul id="keyInsights" class="insights-list"></ul>
+                        </div>
+                        <div class="insights-card">
+                            <h3>Recommendations</h3>
+                            <ul id="recommendations" class="insights-list"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Feedback -->
+                <div class="card">
+                    <h2 class="card-title">User Feedback (<span id="feedbackCount">0</span> responses)</h2>
+                    <p class="card-description">Click any feedback card to read more details</p>
+                    <div id="detailedFeedback"></div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error" class="error-message hidden"></div>
+        </main>
+    </div>
+
+    <script>
+        let currentFeedback = null;
+        let currentProductInfo = null;
+        let sentimentChart = null;
+        let growthChart = null;
+        let availablePersonas = {};
+        let currentMode = 'existing';
+
+        // Mode switching
+        document.getElementById('existingBtn').addEventListener('click', () => switchMode('existing'));
+        document.getElementById('newBtn').addEventListener('click', () => switchMode('new'));
+
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.input-mode').forEach(m => m.classList.remove('active'));
+            
+            if (mode === 'existing') {
+                document.getElementById('existingBtn').classList.add('active');
+                document.getElementById('existingMode').classList.add('active');
+            } else {
+                document.getElementById('newBtn').classList.add('active');
+                document.getElementById('newMode').classList.add('active');
+            }
+        }
+
+        // Check configuration
+        async function checkConfig() {
+            try {
+                const response = await fetch('/api/check-config');
+                const data = await response.json();
+                if (!data.openai_configured) {
+                    showError('OpenAI API not configured. Please check your .env file.');
+                }
+            } catch (error) {
+                console.error('Error checking config:', error);
+            }
+        }
+
+        // Load personas
+        async function loadPersonas() {
+            try {
+                const response = await fetch('/api/personas');
+                const data = await response.json();
+                availablePersonas = data.personas;
+                
+                const personaGrid = document.getElementById('personaGrid');
+                personaGrid.innerHTML = '';
+                
+                for (const [key, persona] of Object.entries(availablePersonas)) {
+                    const personaCard = document.createElement('label');
+                    personaCard.className = 'persona-card';
+                    personaCard.innerHTML = `
+                        <input type="checkbox" id="persona-${key}" checked>
+                        <div class="persona-content">
+                            <strong>${persona.name}</strong>
+                            <p>${persona.description}</p>
+                        </div>
+                    `;
+                    personaGrid.appendChild(personaCard);
+                }
+            } catch (error) {
+                console.error('Error loading personas:', error);
+            }
+        }
+
+        // Analyze website
+        document.getElementById('analyzeWebsiteBtn').addEventListener('click', async () => {
+            const url = document.getElementById('websiteUrl').value.trim();
+            if (!url) {
+                showError('Please enter a website URL');
+                return;
+            }
+
+            showLoading();
+            hideError();
+
+            try {
+                const response = await fetch('/api/analyze-website', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    showError(data.error);
+                    hideLoading();
+                    return;
+                }
+
+                currentProductInfo = data.product_info;
+                displayAnalyzedInfo(data.product_info);
+                hideLoading();
+            } catch (error) {
+                showError('Error analyzing website: ' + error.message);
+                hideLoading();
+            }
+        });
+
+        function displayAnalyzedInfo(info) {
+            document.getElementById('extractedName').textContent = info.product_name || 'Not specified';
+            document.getElementById('extractedDescription').textContent = info.product_description || 'Not specified';
+            document.getElementById('extractedFeatures').textContent = 
+                Array.isArray(info.product_features) ? info.product_features.join(', ') : 'Not specified';
+            document.getElementById('extractedPricing').textContent = info.pricing || 'Not specified';
+            document.getElementById('analyzedProductInfo').classList.remove('hidden');
+        }
+
+        document.getElementById('useAnalyzedBtn').addEventListener('click', () => {
+            if (!currentProductInfo) return;
+            
+            // Switch to new mode and populate fields
+            switchMode('new');
+            document.getElementById('productName').value = currentProductInfo.product_name || '';
+            document.getElementById('productDescription').value = currentProductInfo.product_description || '';
+            document.getElementById('productFeatures').value = 
+                Array.isArray(currentProductInfo.product_features) 
+                    ? currentProductInfo.product_features.join('\n') 
+                    : '';
+            document.getElementById('pricing').value = currentProductInfo.pricing || '';
+            document.getElementById('targetAudience').value = currentProductInfo.target_audience || '';
+        });
+
+        // Get selected personas
+        function getSelectedPersonas() {
+            const selected = [];
+            document.querySelectorAll('.persona-card input[type="checkbox"]:checked').forEach(checkbox => {
+                selected.push(checkbox.id.replace('persona-', ''));
+            });
+            return selected.length > 0 ? selected : null;
+        }
+
+        // Simulate feedback
+        document.getElementById('simulateBtn').addEventListener('click', async () => {
+            let productName, productDescription, productFeatures, pricing, targetAudience;
+
+            if (currentMode === 'existing' && currentProductInfo) {
+                productName = currentProductInfo.product_name;
+                productDescription = currentProductInfo.product_description;
+                productFeatures = Array.isArray(currentProductInfo.product_features) 
+                    ? currentProductInfo.product_features 
+                    : [];
+                pricing = currentProductInfo.pricing;
+                targetAudience = currentProductInfo.target_audience;
+            } else {
+                productName = document.getElementById('productName').value.trim();
+                productDescription = document.getElementById('productDescription').value.trim();
+                productFeatures = document.getElementById('productFeatures').value.trim().split('\n').filter(f => f.trim());
+                pricing = document.getElementById('pricing').value.trim();
+                targetAudience = document.getElementById('targetAudience').value.trim();
+            }
+
+            if (!productName || !productDescription || productFeatures.length === 0) {
+                showError('Please fill in all required fields');
+                return;
+            }
+
+            const numUsers = parseInt(document.getElementById('numUsers').value);
+            const personaTypes = getSelectedPersonas();
+
+            hideError();
+            showLoading();
+            hideSection('resultsSection');
+
+            try {
+                const response = await fetch('/api/simulate', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        product_name: productName,
+                        product_description: productDescription,
+                        product_features: productFeatures,
+                        pricing: pricing || null,
+                        target_audience: targetAudience || null,
+                        persona_types: personaTypes,
+                        num_users_per_persona: numUsers
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    showError(data.error);
+                    hideLoading();
+                    return;
+                }
+
+                currentFeedback = data.feedback;
+                displayResults(data.feedback);
+                hideLoading();
+                showSection('resultsSection');
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                showError('Error simulating feedback: ' + error.message);
+                hideLoading();
+            }
+        });
+
+        // Display results (keeping existing functions but updating selectors)
+        function displayResults(feedback) {
+            const totalUsers = feedback.total_users || 0;
+            const scaleFactor = feedback.scale_factor || 1;
+            const originalSample = feedback.original_sample_size || totalUsers;
+            
+            document.getElementById('totalUsers').textContent = totalUsers.toLocaleString();
+            document.getElementById('avgPurchaseIntent').textContent = 
+                (feedback.overall_metrics?.avg_purchase_intent || 0).toFixed(1) + '%';
+            document.getElementById('positiveSentiment').textContent = 
+                (feedback.overall_metrics?.sentiment_percentage?.positive || 0).toFixed(1) + '%';
+            document.getElementById('conversionRate').textContent = '-';
+            
+            // Show preview MRR if we have purchase intent
+            const purchaseIntent = feedback.overall_metrics?.avg_purchase_intent || 0;
+            if (purchaseIntent > 0) {
+                // Quick estimate: assume $50/month average, 2% conversion
+                const quickMRR = (totalUsers * 0.02 * 50).toLocaleString();
+                document.getElementById('previewMRR').textContent = '$' + quickMRR;
+                document.getElementById('previewUsers').textContent = totalUsers.toLocaleString();
+                document.getElementById('mrrPreviewCard').style.display = 'block';
+            }
+            
+            // Display improvement tips
+            displayImprovementTips(feedback);
+
+            const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+            if (sentimentChart) sentimentChart.destroy();
+            
+            const sentimentData = feedback.overall_metrics?.sentiment_distribution || {};
+            sentimentChart = new Chart(sentimentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Positive', 'Neutral', 'Negative'],
+                    datasets: [{
+                        data: [
+                            sentimentData.positive || 0,
+                            sentimentData.neutral || 0,
+                            sentimentData.negative || 0
+                        ],
+                        backgroundColor: ['#5E6AD2', '#94A3B8', '#F87171']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            displayPersonaBreakdown(feedback.persona_breakdown || {});
+            displayList('keyInsights', feedback.key_insights || []);
+            displayList('recommendations', feedback.recommendations || []);
+            displayDetailedFeedback(feedback.detailed_feedback || []);
+            
+            // Update MRR preview with actual estimate if available
+            if (feedback.overall_metrics?.avg_purchase_intent) {
+                const intent = feedback.overall_metrics.avg_purchase_intent;
+                const users = feedback.total_users || 0;
+                // Rough estimate: intent% * users * 0.02 conversion * $50 avg price
+                const estimate = (users * (intent / 100) * 0.02 * 50);
+                document.getElementById('previewMRR').textContent = '$' + Math.round(estimate).toLocaleString();
+            }
+        }
+
+        function displayPersonaBreakdown(breakdown) {
+            const container = document.getElementById('personaBreakdown');
+            container.innerHTML = '';
+
+            for (const [personaType, stats] of Object.entries(breakdown)) {
+                const personaInfo = availablePersonas[personaType] || {};
+                const card = document.createElement('div');
+                card.className = 'persona-stats-card';
+                card.innerHTML = `
+                    <h3>${personaInfo.name || personaType}</h3>
+                    <div class="persona-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Users</span>
+                            <span class="stat-value">${stats.count}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Purchase Intent</span>
+                            <span class="stat-value">${stats.avg_purchase_intent.toFixed(1)}%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Positive</span>
+                            <span class="stat-value">${stats.sentiment_distribution.positive}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Neutral</span>
+                            <span class="stat-value">${stats.sentiment_distribution.neutral}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Negative</span>
+                            <span class="stat-value">${stats.sentiment_distribution.negative}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            }
+        }
+
+        function displayList(elementId, items) {
+            const list = document.getElementById(elementId);
+            list.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+
+        function displayDetailedFeedback(feedbacks) {
+            const container = document.getElementById('detailedFeedback');
+            container.innerHTML = '';
+            
+            // Update feedback count
+            document.getElementById('feedbackCount').textContent = feedbacks.length;
+
+            // Show first 50, allow expansion
+            const displayCount = Math.min(50, feedbacks.length);
+            const displayed = feedbacks.slice(0, displayCount);
+            
+            displayed.forEach((feedback, idx) => {
+                const card = document.createElement('div');
+                card.className = 'feedback-card';
+                card.dataset.index = idx;
+                
+                const insights = feedback.key_insights || [];
+                const recommendations = feedback.recommendations || [];
+                const likes = feedback.likes || [];
+                const concerns = feedback.concerns || [];
+                
+                card.innerHTML = `
+                    <div class="feedback-header">
+                        <span class="feedback-persona">User #${idx + 1}</span>
+                        <span class="feedback-sentiment ${feedback.overall_sentiment}">${feedback.overall_sentiment}</span>
+                        <span class="feedback-intent">${feedback.overall_purchase_intent}% purchase intent</span>
+                    </div>
+                    <div class="feedback-content">
+                        ${insights.length > 0 ? `<p><strong>Insights:</strong> ${insights.slice(0, 2).join(', ')}${insights.length > 2 ? '...' : ''}</p>` : ''}
+                        ${recommendations.length > 0 ? `<p><strong>Recommendations:</strong> ${recommendations.slice(0, 1).join(', ')}${recommendations.length > 1 ? '...' : ''}</p>` : ''}
+                        <div class="feedback-details">
+                            ${likes.length > 0 ? `
+                                <h4>What they like:</h4>
+                                <ul>${likes.map(l => `<li>${l}</li>`).join('')}</ul>
+                            ` : ''}
+                            ${concerns.length > 0 ? `
+                                <h4>Concerns:</h4>
+                                <ul>${concerns.map(c => `<li>${c}</li>`).join('')}</ul>
+                            ` : ''}
+                            ${insights.length > 2 ? `
+                                <h4>Additional Insights:</h4>
+                                <ul>${insights.slice(2).map(i => `<li>${i}</li>`).join('')}</ul>
+                            ` : ''}
+                            ${recommendations.length > 1 ? `
+                                <h4>More Recommendations:</h4>
+                                <ul>${recommendations.slice(1).map(r => `<li>${r}</li>`).join('')}</ul>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                // Add click handler for expansion
+                card.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') {
+                        this.classList.toggle('expanded');
+                    }
+                });
+                
+                container.appendChild(card);
+            });
+            
+            if (feedbacks.length > displayCount) {
+                const moreCard = document.createElement('div');
+                moreCard.className = 'card';
+                moreCard.style.textAlign = 'center';
+                moreCard.style.padding = '20px';
+                moreCard.innerHTML = `
+                    <p style="color: var(--text-tertiary);">
+                        Showing ${displayCount} of ${feedbacks.length} feedback responses. 
+                        All responses are included in the analysis above.
+                    </p>
+                `;
+                container.appendChild(moreCard);
+            }
+        }
+        
+        function displayImprovementTips(feedback) {
+            const container = document.getElementById('improvementTips');
+            container.innerHTML = '';
+            
+            const insights = feedback.key_insights || [];
+            const recommendations = feedback.recommendations || [];
+            const sentiment = feedback.overall_metrics?.sentiment_percentage || {};
+            const purchaseIntent = feedback.overall_metrics?.avg_purchase_intent || 0;
+            
+            const tips = [];
+            
+            // Generate tips based on data
+            if (purchaseIntent < 40) {
+                tips.push({
+                    title: 'Low Purchase Intent',
+                    description: `Only ${purchaseIntent.toFixed(1)}% purchase intent. Consider improving value proposition, pricing, or addressing key concerns.`,
+                    priority: 'high'
+                });
+            }
+            
+            if (sentiment.negative > 30) {
+                tips.push({
+                    title: 'High Negative Sentiment',
+                    description: `${sentiment.negative}% negative feedback. Focus on addressing the most common concerns: ${(feedback.recommendations || []).slice(0, 2).join(', ')}`,
+                    priority: 'high'
+                });
+            }
+            
+            if (purchaseIntent > 60 && sentiment.positive > 50) {
+                tips.push({
+                    title: 'Strong Market Fit',
+                    description: `High purchase intent (${purchaseIntent.toFixed(1)}%) and positive sentiment (${sentiment.positive}%). Focus on scaling and conversion optimization.`,
+                    priority: 'medium'
+                });
+            }
+            
+            // Add top recommendations as tips
+            recommendations.slice(0, 3).forEach(rec => {
+                tips.push({
+                    title: 'Action Item',
+                    description: rec,
+                    priority: 'medium'
+                });
+            });
+            
+            // Display tips
+            tips.forEach(tip => {
+                const tipCard = document.createElement('div');
+                tipCard.className = 'insights-card';
+                tipCard.style.borderLeft = `4px solid ${tip.priority === 'high' ? 'var(--error)' : tip.priority === 'medium' ? 'var(--warning)' : 'var(--success)'}`;
+                tipCard.innerHTML = `
+                    <h3 style="color: ${tip.priority === 'high' ? 'var(--error)' : tip.priority === 'medium' ? 'var(--warning)' : 'var(--success)'}; margin-bottom: 12px;">
+                        ${tip.title}
+                    </h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">${tip.description}</p>
+                `;
+                container.appendChild(tipCard);
+            });
+        }
+
+        // MRR Estimation
+        document.getElementById('addTierBtn').addEventListener('click', () => {
+            const container = document.getElementById('pricingTiers');
+            const newTier = document.createElement('div');
+            newTier.className = 'pricing-tier-input';
+            newTier.innerHTML = `
+                <input type="text" placeholder="Tier name" class="input tier-name">
+                <input type="number" placeholder="Price ($)" class="input tier-price" min="0" step="0.01">
+                <input type="number" placeholder="% of users" class="input tier-percentage" min="0" max="100" step="1">
+                <button class="btn-icon-only btn-remove-tier">×</button>
+            `;
+            container.appendChild(newTier);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-remove-tier')) {
+                e.target.closest('.pricing-tier-input').remove();
+            }
+        });
+
+        document.getElementById('estimateMRRBtn').addEventListener('click', async () => {
+            if (!currentFeedback) {
+                showError('Please run feedback simulation first');
+                return;
+            }
+
+            const tierInputs = document.querySelectorAll('.pricing-tier-input');
+            const pricingTiers = [];
+            let totalPercentage = 0;
+
+            tierInputs.forEach(tier => {
+                const name = tier.querySelector('.tier-name').value.trim();
+                const price = parseFloat(tier.querySelector('.tier-price').value);
+                const percentage = parseFloat(tier.querySelector('.tier-percentage').value);
+
+                if (name && !isNaN(price) && !isNaN(percentage)) {
+                    pricingTiers.push({ name, price, percentage });
+                    totalPercentage += percentage;
+                }
+            });
+
+            if (pricingTiers.length === 0) {
+                showError('Please add at least one pricing tier');
+                return;
+            }
+
+            if (Math.abs(totalPercentage - 100) > 0.01) {
+                showError(`Pricing tier percentages must sum to 100% (currently ${totalPercentage.toFixed(1)}%)`);
+                return;
+            }
+
+            const marketSize = parseInt(document.getElementById('marketSize').value);
+
+            showLoading();
+
+            try {
+                const response = await fetch('/api/estimate-mrr', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        feedback: currentFeedback,
+                        pricing_tiers: pricingTiers,
+                        target_market_size: marketSize
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    showError(data.error);
+                    hideLoading();
+                    return;
+                }
+
+                displayMRRResults(data.mrr_estimate, data.arr_estimate);
+                hideLoading();
+            } catch (error) {
+                showError('Error estimating MRR: ' + error.message);
+                hideLoading();
+            }
+        });
+
+        function displayMRRResults(mrrEstimate, arrEstimate) {
+            document.getElementById('estimatedMRR').textContent = 
+                '$' + mrrEstimate.estimated_mrr.toLocaleString();
+            document.getElementById('estimatedARR').textContent = 
+                '$' + arrEstimate.estimated_arr.toLocaleString();
+            document.getElementById('totalConversions').textContent = 
+                mrrEstimate.total_conversions.toLocaleString();
+            document.getElementById('confidenceScore').textContent = 
+                mrrEstimate.confidence_score.toFixed(1) + '%';
+
+            const growthCtx = document.getElementById('growthChart').getContext('2d');
+            if (growthChart) growthChart.destroy();
+            
+            const projections = mrrEstimate.growth_projections;
+            growthChart = new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 3', 'Month 6', 'Month 12'],
+                    datasets: [{
+                        label: 'Projected MRR',
+                        data: [
+                            projections.month_1,
+                            projections.month_3,
+                            projections.month_6,
+                            projections.month_12
+                        ],
+                        borderColor: '#5E6AD2',
+                        backgroundColor: 'rgba(94, 106, 210, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const tierContainer = document.getElementById('tierBreakdown');
+            tierContainer.innerHTML = '';
+            mrrEstimate.pricing_tier_breakdown.forEach(tier => {
+                const card = document.createElement('div');
+                card.className = 'tier-card';
+                card.innerHTML = `
+                    <h4>${tier.tier}</h4>
+                    <div class="tier-details">
+                        <div>Price: $${tier.price}</div>
+                        <div>Conversions: ${tier.conversions.toLocaleString()}</div>
+                        <div>MRR: $${tier.mrr.toLocaleString()}</div>
+                        <div>Distribution: ${tier.percentage}%</div>
+                    </div>
+                `;
+                tierContainer.appendChild(card);
+            });
+
+            showSection('mrrResults');
+        }
+
+        // Utility functions
+        function showLoading() {
+            document.getElementById('loading').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.add('hidden');
+        }
+
+        function showSection(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function hideSection(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+
+        function hideError() {
+            document.getElementById('error').classList.add('hidden');
+        }
+
+        // Initialize
+        checkConfig();
+        loadPersonas();
+    </script>
+</body>
+</html>

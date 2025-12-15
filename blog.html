@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Redaccel</title>
+    <meta name="description" content="Learn about Reddit marketing, LLM ranking, and digital marketing strategies.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/redaccel.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-link">
+                    <svg class="logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="12" y="24" width="8" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+                        <path d="M16 20L12 16L16 12L20 16L16 20Z" fill="currentColor" opacity="0.6"/>
+                        <path d="M16 16L10 10L16 4L22 10L16 16Z" fill="currentColor" opacity="0.8"/>
+                        <path d="M16 12L8 4L16 0L24 4L16 12Z" fill="currentColor"/>
+                        <path d="M4 8L16 4L28 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                        <path d="M6 12L16 8L26 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+                        <path d="M8 16L16 12L24 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+                    </svg>
+                    <span>Redaccel</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="/#what-we-do" class="nav-link">What We Do</a>
+                <a href="/#case-studies" class="nav-link">Case Studies</a>
+                <a href="/blog" class="nav-link active">Articles</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="/#contact" class="nav-cta">Get Started</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <div class="blog-hero-content reveal">
+                <h1 class="blog-hero-title">Articles & Insights</h1>
+                <p class="blog-hero-subtitle">Learn how Reddit marketing and LLM optimization drive real results</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-posts">
+        <div class="container">
+            <div class="blog-grid">
+                <article class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&q=80" alt="Reddit ranking analytics" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Reddit Marketing</span>
+                            <span class="blog-date">December 2024</span>
+                        </div>
+                        <h2 class="blog-title">Why Reddit Posts Rank So Quickly in Search Results</h2>
+                        <p class="blog-excerpt">
+                            Reddit has become one of the most powerful platforms for SEO and content marketing. 
+                            But why do Reddit posts rank so quickly compared to traditional blog content? The answer 
+                            lies in Reddit's unique combination of high domain authority, fresh content, and authentic 
+                            user engagement that search engines love.
+                        </p>
+                        <a href="/blog/why-reddit-posts-rank-quickly" class="blog-read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop&q=80" alt="AI and machine learning" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">LLM Ranking</span>
+                            <span class="blog-date">December 2024</span>
+                        </div>
+                        <h2 class="blog-title">How Large Language Models Are Changing SEO Forever</h2>
+                        <p class="blog-excerpt">
+                            Traditional SEO is dead. With ChatGPT, Claude, and other LLMs powering search results, 
+                            the way content ranks has fundamentally changed. Learn how to optimize your content for 
+                            LLM understanding and why structured data, semantic meaning, and context are now more 
+                            important than keyword density.
+                        </p>
+                        <a href="/blog/how-llms-are-changing-seo" class="blog-read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=400&fit=crop&q=80" alt="Digital traffic and analytics" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Strategy</span>
+                            <span class="blog-date">November 2024</span>
+                        </div>
+                        <h2 class="blog-title">The Science Behind Reddit's Massive Traffic Potential</h2>
+                        <p class="blog-excerpt">
+                            Reddit drives more traffic than most people realize. With over 50 billion monthly page views 
+                            and millions of engaged users, Reddit is a goldmine for businesses that know how to leverage it. 
+                            Discover why Reddit's community-driven model creates such powerful backlinks and how to tap into 
+                            this traffic source effectively.
+                        </p>
+                        <a href="/blog/reddit-traffic-potential" class="blog-read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=400&fit=crop&q=80" alt="SEO optimization and search" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">LLM Ranking</span>
+                            <span class="blog-date">November 2024</span>
+                        </div>
+                        <h2 class="blog-title">Optimizing Content for AI-Powered Search: A Complete Guide</h2>
+                        <p class="blog-excerpt">
+                            As AI becomes the primary way people search, your content strategy needs to evolve. This guide 
+                            covers everything you need to know about optimizing for LLM-powered search engines, including 
+                            structured data, semantic optimization, and why traditional keyword stuffing no longer works.
+                        </p>
+                        <a href="/blog/optimizing-for-ai-search" class="blog-read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop&q=80" alt="Success metrics and growth" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Case Study</span>
+                            <span class="blog-date">November 2024</span>
+                        </div>
+                        <h2 class="blog-title">How We Ranked a Client #1 in 90 Days Using Reddit + LLM Strategy</h2>
+                        <p class="blog-excerpt">
+                            Real results from a real campaign. We'll break down exactly how we took a client from page 3 
+                            to #1 rankings in just 90 days using a combination of strategic Reddit marketing and LLM 
+                            optimization. Learn the tactics, the numbers, and the strategy behind the success.
+                        </p>
+                        <a href="/blog/case-study-90-days" class="blog-read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=400&fit=crop&q=80" alt="Community engagement and psychology" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Strategy</span>
+                            <span class="blog-date">October 2024</span>
+                        </div>
+                        <h2 class="blog-title">The Psychology of Reddit: Why Authentic Engagement Works</h2>
+                        <p class="blog-excerpt">
+                            Reddit users can smell inauthentic marketing from a mile away. But when done right, Reddit 
+                            marketing creates genuine connections that drive real business results. Learn the psychology 
+                            behind Reddit's community culture and how to authentically engage without being seen as spam.
+                        </p>
+                        <a href="/blog/reddit-psychology" class="blog-read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg class="logo-icon" width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="24" width="8" height="2" rx="1" fill="currentColor" opacity="0.4"/>
+                            <path d="M16 20L12 16L16 12L20 16L16 20Z" fill="currentColor" opacity="0.6"/>
+                            <path d="M16 16L10 10L16 4L22 10L16 16Z" fill="currentColor" opacity="0.8"/>
+                            <path d="M16 12L8 4L16 0L24 4L16 12Z" fill="currentColor"/>
+                            <path d="M4 8L16 4L28 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                            <path d="M6 12L16 8L26 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+                            <path d="M8 16L16 12L24 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+                        </svg>
+                        Redaccel
+                    </div>
+                    <p class="footer-tagline">LLM Ranking & Reddit Marketing</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-title">Services</h4>
+                        <a href="/#what-we-do" class="footer-link">What We Do</a>
+                        <a href="/pricing" class="footer-link">Pricing</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Resources</h4>
+                        <a href="/blog" class="footer-link">Articles</a>
+                        <a href="/#case-studies" class="footer-link">Case Studies</a>
+                        <a href="/#contact" class="footer-link">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Redaccel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/redaccel.js') }}"></script>
+</body>
+</html>
