@@ -1,0 +1,25 @@
+# Reddit API Configuration
+# Get these from https://www.reddit.com/prefs/apps
+REDDIT_CLIENT_ID=your_reddit_client_id
+REDDIT_CLIENT_SECRET=your_reddit_client_secret
+REDDIT_USER_AGENT=YourApp/1.0 by yourusername
+
+# OpenAI API Configuration
+# Get from https://platform.openai.com/api-keys
+OPENAI_API_KEY=your_openai_api_key
+
+# Ahrefs API Token (optional - for search traffic data)
+# Get from https://ahrefs.com/api
+AHREFS_API_TOKEN=your_ahrefs_api_token_here
+
+# Promotion Settings (optional - can also be set via UI)
+PROMOTION_TARGET=Your Website or Business Name
+PROMOTION_CONTEXT=What you're promoting and why it's helpful
+
+# Email Configuration (for contact form)
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+MAIL_DEFAULT_SENDER=contact@redaccel.com

@@ -1,0 +1,22 @@
+⚠️  REDDIT API CREDENTIALS NEEDED
+
+Your Reddit API credentials are still set to placeholder values.
+
+QUICK FIX (2 minutes):
+1. Go to: https://www.reddit.com/prefs/apps
+2. Click "create another app" or "create app"
+3. Choose "script" type
+4. Copy:
+   - Client ID (the string under your app name)
+   - Secret (the "secret" field)
+5. Send me:
+   - Your Reddit Client ID
+   - Your Reddit Client Secret  
+   - Your Reddit username (for user agent)
+
+Then I'll add them to your .env file immediately!
+
+Or edit .env yourself and replace:
+REDDIT_CLIENT_ID=your_actual_client_id
+REDDIT_CLIENT_SECRET=your_actual_secret
+REDDIT_USER_AGENT=RedditCommentTool/1.0 by your_username
