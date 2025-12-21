@@ -1,0 +1,16 @@
+QUICK RENDER SETUP - DO THIS:
+
+1. Go to your Render dashboard → Your service → Environment tab
+
+2. Add these 5 environment variables (click "Add Environment Variable" for each):
+
+   MAIL_SERVER = smtp.hostinger.com
+   MAIL_PORT = 465
+   MAIL_USERNAME = contact@redaccel.com
+   MAIL_PASSWORD = Larseneskedal1!
+   MAIL_DEFAULT_SENDER = contact@redaccel.com
+
+3. Save - Render will auto-redeploy
+
+That's it! The form will now send emails to contact@redaccel.com
+
