@@ -99,13 +99,21 @@ if (contactForm) {
             if (result.success) {
                 submitButton.textContent = 'Message Sent! ✓';
                 submitButton.style.background = '#10b981';
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'margin-top: 16px; padding: 16px; background: #d1fae5; color: #065f46; border-radius: 8px; font-weight: 500;';
+                successMsg.textContent = '✓ Your inquiry has been sent to contact@redaccel.com. We\'ll get back to you soon!';
+                contactForm.appendChild(successMsg);
+                
                 contactForm.reset();
                 
                 setTimeout(() => {
                     submitButton.textContent = originalText;
                     submitButton.style.background = '';
                     submitButton.disabled = false;
-                }, 3000);
+                    successMsg.remove();
+                }, 5000);
             } else {
                 throw new Error(result.error || 'Failed to send message');
             }

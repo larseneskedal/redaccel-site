@@ -153,7 +153,7 @@ def contact():
         success, error = send_email(name, email, company, message)
         
         if success:
-            return jsonify({'success': True, 'message': 'Message sent successfully! We\'ll get back to you soon.'})
+            return jsonify({'success': True, 'message': 'Your inquiry has been sent to contact@redaccel.com. We\'ll get back to you soon!'})
         else:
             # Provide helpful error message
             error_message = 'Failed to send message. '
