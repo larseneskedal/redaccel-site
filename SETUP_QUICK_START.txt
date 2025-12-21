@@ -1,0 +1,56 @@
+╔══════════════════════════════════════════════════════════════╗
+║     REDDIT COMMENT TOOL - QUICK SETUP GUIDE                 ║
+╚══════════════════════════════════════════════════════════════╝
+
+📋 STEP 1: GET YOUR API KEYS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  REDDIT API (Required)
+   🔗 https://www.reddit.com/prefs/apps
+   → Click "create another app"
+   → Choose "script" type
+   → Copy Client ID and Secret
+
+2️⃣  OPENAI API (Required)
+   🔗 https://platform.openai.com/api-keys
+   → Create new secret key
+   → Copy the key
+   → Add credits: https://platform.openai.com/account/billing
+
+3️⃣  AHREFS API (Optional)
+   🔗 https://ahrefs.com/api
+   → Sign up and get API token
+   → (Tool works without this, but better with it)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 STEP 2: ADD KEYS TO .env FILE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Open the file: .env (in this folder)
+
+Replace these lines with your actual keys:
+
+REDDIT_CLIENT_ID=paste_your_client_id_here
+REDDIT_CLIENT_SECRET=paste_your_secret_here
+REDDIT_USER_AGENT=RedditCommentTool/1.0 by yourusername
+
+OPENAI_API_KEY=sk-paste_your_key_here
+
+AHREFS_API_TOKEN=paste_your_token_here  (optional)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 STEP 3: START THE SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Run: python3 app.py
+
+Then open: http://localhost:5000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ DONE! The web interface will show which APIs are configured.
+
+For detailed instructions, see: API_SETUP.md
+

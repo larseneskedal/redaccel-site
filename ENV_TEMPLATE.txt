@@ -1,0 +1,28 @@
+# ============================================
+# COPY THIS FILE TO .env AND ADD YOUR KEYS
+# ============================================
+# 
+# Quick command: cp ENV_TEMPLATE.txt .env
+# Then edit .env with your actual keys
+#
+# 🔗 GET YOUR API KEYS:
+# ============================================
+
+# Reddit API
+# Get from: https://www.reddit.com/prefs/apps
+REDDIT_CLIENT_ID=PASTE_YOUR_CLIENT_ID_HERE
+REDDIT_CLIENT_SECRET=PASTE_YOUR_SECRET_HERE
+REDDIT_USER_AGENT=RedditCommentTool/1.0 by YOUR_USERNAME
+
+# OpenAI API
+# Get from: https://platform.openai.com/api-keys
+OPENAI_API_KEY=PASTE_YOUR_OPENAI_KEY_HERE
+
+# Ahrefs API (Optional)
+# Get from: https://ahrefs.com/api
+AHREFS_API_TOKEN=PASTE_YOUR_AHREFS_TOKEN_HERE
+
+# Optional Promotion Settings
+PROMOTION_TARGET=
+PROMOTION_CONTEXT=
+
