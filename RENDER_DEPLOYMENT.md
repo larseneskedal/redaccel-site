@@ -17,7 +17,7 @@ Go to your Render dashboard and add these environment variables:
 1. **MAIL_SERVER**: `smtp.hostinger.com`
 2. **MAIL_PORT**: `465`
 3. **MAIL_USERNAME**: `contact@redaccel.com`
-4. **MAIL_PASSWORD**: `Larseneskedal1!`
+4. **MAIL_PASSWORD**: *(set this in Render — do not store passwords in the repo)*
 5. **MAIL_DEFAULT_SENDER**: `contact@redaccel.com`
 
 **How to add environment variables in Render:**

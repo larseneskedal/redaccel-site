@@ -222,6 +222,34 @@ body {
     text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
+.hero-line-white {
+    display: inline-block;
+    color: var(--text-primary);
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: currentColor;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.12);
+}
+
+.hero-line-red {
+    display: inline-block;
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: red !important;
+    color: red !important;
+    text-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+}
+
+.hero-title .hero-line-red {
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: red !important;
+    color: red !important;
+}
+
 .gradient-text {
     background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
     -webkit-background-clip: text;
@@ -343,14 +371,15 @@ body {
 
 /* Reveal Animation */
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Disabled: no fade/slide on scroll */
+    opacity: 1;
+    transform: none;
+    transition: none;
 }
 
 .reveal.revealed {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 /* What We Do Section */
@@ -748,10 +777,6 @@ section {
 .contact-icon svg {
     width: 32px;
     height: 32px;
-}
-    justify-content: center;
-    background: var(--bg-tertiary);
-    border-radius: 8px;
 }
 
 .contact-label {

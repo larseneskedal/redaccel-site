@@ -7,7 +7,7 @@ QUICK RENDER SETUP - DO THIS:
    MAIL_SERVER = smtp.hostinger.com
    MAIL_PORT = 465
    MAIL_USERNAME = contact@redaccel.com
-   MAIL_PASSWORD = Larseneskedal1!
+   MAIL_PASSWORD = (set this in Render — do not store passwords in the repo)
    MAIL_DEFAULT_SENDER = contact@redaccel.com
 
 3. Save - Render will auto-redeploy

@@ -14,6 +14,18 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# Local dev quality-of-life: don't aggressively cache templates/static.
+# IMPORTANT: keep this scoped to local dev only (Render/gunicorn should keep defaults).
+_is_local_dev = os.getenv("FLASK_ENV") == "development" or os.getenv("DEBUG") == "True"
+if _is_local_dev:
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
+    app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+    try:
+        app.jinja_env.auto_reload = True
+    except Exception:
+        # If Jinja env isn't ready for some reason, fail open.
+        pass
+
 
 def get_local_ip():
     """Get the local IP address for external access."""

@@ -156,19 +156,5 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Smooth parallax effect for hero
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    
-    if (hero && scrolled < window.innerHeight) {
-        const heroContent = hero.querySelector('.hero-content');
-        if (heroContent) {
-            const opacity = Math.max(0, 1 - (scrolled / window.innerHeight) * 0.5);
-            heroContent.style.opacity = opacity;
-        }
-    }
-    
-    lastScroll = scrolled;
-});
+// NOTE: Intentionally disabled the "fade on scroll" effect for the hero.
+// Keeping the rest of the scroll behaviors (nav + active link highlighting) intact.
