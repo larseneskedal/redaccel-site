@@ -74,6 +74,22 @@ def blog_post(slug: str):
         abort(404)
 
 
+@app.route("/case-studies/<slug>")
+def case_study(slug: str):
+    """
+    Render an individual case study page.
+
+    We keep case study templates under `templates/case_studies/` and use the slug
+    from the URL to choose the correct file, e.g.:
+    /case-studies/gpm-music-group -> templates/case_studies/gpm-music-group.html
+    """
+    template_name = f"case_studies/{slug}.html"
+    try:
+        return render_template(template_name)
+    except TemplateNotFound:
+        abort(404)
+
+
 @app.route("/about")
 def about():
     """About page."""
