@@ -487,8 +487,11 @@ section {
 
 .case-studies-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* Auto-fit so 2 cards fill the row (no empty column) */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 32px;
+    /* Fallback: if tracks don't fully expand, keep cards centered */
+    justify-content: center;
 }
 
 .case-study-card {
