@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, jsonify, abort
 import socket
 import os
 import smtplib
+import requests
+from typing import Optional
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from jinja2 import TemplateNotFound
@@ -95,7 +97,7 @@ def about():
     """About page."""
     return render_template("about.html")
 
-def send_email(name, email, company, message):
+def send_email(reply_to_email: str, subject: str, email_body: str):
     """Send email using SMTP."""
     try:
         # Get email configuration from environment (defaults to Hostinger SMTP)
@@ -116,22 +118,9 @@ def send_email(name, email, company, message):
         msg = MIMEMultipart()
         msg['From'] = sender_email
         msg['To'] = recipient_email
-        msg['Reply-To'] = email
-        msg['Subject'] = f'New Contact Form Submission from {name}'
-        
-        # Email body
-        email_body = f"""New contact form submission from Redaccel website:
-
-Name: {name}
-Email: {email}
-Company: {company if company else 'Not provided'}
-
-Message:
-{message}
-
----
-This email was sent from the Redaccel contact form.
-"""
+        if reply_to_email:
+            msg['Reply-To'] = reply_to_email
+        msg['Subject'] = subject
         
         msg.attach(MIMEText(email_body, 'plain'))
         
@@ -160,6 +149,54 @@ This email was sent from the Redaccel contact form.
         print(f"Error sending email: {error_msg}")
         return False, error_msg
 
+def _fetch_calendly_details(event_uri: Optional[str], invitee_uri: Optional[str]):
+    """
+    Best-effort enrichment of meeting details (start/end time, etc.) from Calendly's API.
+    Requires CALENDLY_API_TOKEN to be set in the environment.
+    """
+    token = os.getenv("CALENDLY_API_TOKEN", "").strip()
+    if not token:
+        return None
+
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+
+    details = {
+        "event_uri": event_uri,
+        "invitee_uri": invitee_uri,
+    }
+
+    try:
+        if invitee_uri:
+            inv = requests.get(invitee_uri, headers=headers, timeout=12)
+            inv.raise_for_status()
+            invitee_resource = inv.json().get("resource", {})
+            details["invitee_name"] = invitee_resource.get("name")
+            details["invitee_email"] = invitee_resource.get("email")
+            details["scheduled_event"] = invitee_resource.get("scheduled_event") or invitee_resource.get("event")
+            # If Calendly has custom Q&A configured, it may show up here:
+            details["questions_and_answers"] = invitee_resource.get("questions_and_answers")
+
+            # Prefer the scheduled_event URI from the invitee response if present.
+            if not event_uri and details.get("scheduled_event"):
+                event_uri = details["scheduled_event"]
+                details["event_uri"] = event_uri
+
+        if event_uri:
+            ev = requests.get(event_uri, headers=headers, timeout=12)
+            ev.raise_for_status()
+            event_resource = ev.json().get("resource", {})
+            details["event_name"] = event_resource.get("name")
+            details["start_time"] = event_resource.get("start_time")
+            details["end_time"] = event_resource.get("end_time")
+            details["status"] = event_resource.get("status")
+            details["location"] = event_resource.get("location")
+
+        return details
+    except Exception as e:
+        print(f"Calendly enrichment failed: {e}")
+        return details
+
+
 @app.route('/api/contact', methods=['POST'])
 def contact():
     """Handle contact form submission."""
@@ -177,8 +214,22 @@ def contact():
         if '@' not in email or '.' not in email.split('@')[1]:
             return jsonify({'success': False, 'error': 'Please enter a valid email address'}), 400
         
+        subject = f'New Contact Form Submission from {name}'
+        email_body = f"""New contact form submission from Redaccel website:
+
+Name: {name}
+Email: {email}
+Company: {company if company else 'Not provided'}
+
+Message:
+{message}
+
+---
+This email was sent from the Redaccel contact form.
+"""
+
         # Send email
-        success, error = send_email(name, email, company, message)
+        success, error = send_email(email, subject, email_body)
         
         if success:
             return jsonify({'success': True, 'message': 'Your inquiry has been sent to contact@redaccel.com. We\'ll get back to you soon!'})
@@ -197,6 +248,89 @@ def contact():
     except Exception as e:
         print(f"Error in contact endpoint: {str(e)}")
         return jsonify({'success': False, 'error': 'An unexpected error occurred. Please try again later.'}), 500
+
+
+@app.route('/api/booking', methods=['POST'])
+def booking():
+    """
+    Called from the Calendly embed after an invitee schedules a meeting.
+    We email contact@redaccel.com with the lead intake + meeting details.
+    """
+    try:
+        data = request.json or {}
+        lead = data.get("lead") or {}
+        calendly = data.get("calendly") or {}
+
+        name = str(lead.get("name", "")).strip()
+        email = str(lead.get("email", "")).strip()
+        business = str(lead.get("business", "")).strip()
+        found_us = str(lead.get("found_us", "")).strip()
+        page_url = str(data.get("page_url", "")).strip()
+
+        event_uri = str(calendly.get("event_uri", "") or "").strip() or None
+        invitee_uri = str(calendly.get("invitee_uri", "") or "").strip() or None
+
+        if not name or not email or not business or not found_us:
+            return jsonify({"success": False, "error": "Missing required lead fields"}), 400
+
+        if '@' not in email or '.' not in email.split('@')[1]:
+            return jsonify({"success": False, "error": "Please enter a valid email address"}), 400
+
+        calendly_details = _fetch_calendly_details(event_uri=event_uri, invitee_uri=invitee_uri)
+
+        subject = f"New meeting booking: {name} ({found_us})"
+
+        lines = [
+            "New meeting booking (via Redaccel website)",
+            "",
+            f"Name: {name}",
+            f"Email: {email}",
+            f"Business: {business}",
+            f"How they found us: {found_us}",
+        ]
+
+        if page_url:
+            lines.append(f"Page URL: {page_url}")
+
+        lines += ["", "Calendly booking:"]
+
+        if calendly_details and calendly_details.get("start_time"):
+            lines.append(f"Start time: {calendly_details.get('start_time')}")
+        if calendly_details and calendly_details.get("end_time"):
+            lines.append(f"End time: {calendly_details.get('end_time')}")
+        if calendly_details and calendly_details.get("event_name"):
+            lines.append(f"Event name: {calendly_details.get('event_name')}")
+
+        if event_uri:
+            lines.append(f"Event URI: {event_uri}")
+        if invitee_uri:
+            lines.append(f"Invitee URI: {invitee_uri}")
+
+        if calendly_details and calendly_details.get("questions_and_answers"):
+            lines += ["", "Calendly questions & answers:"]
+            for qa in calendly_details.get("questions_and_answers") or []:
+                q = (qa.get("question") or "").strip()
+                a = (qa.get("answer") or "").strip()
+                if q or a:
+                    lines.append(f"- {q}: {a}")
+
+        if calendly_details is None:
+            lines += [
+                "",
+                "Note: CALENDLY_API_TOKEN is not set, so meeting time may not be included above.",
+                "You will still receive the booking in Calendly + your connected calendar as usual."
+            ]
+
+        email_body = "\n".join(lines) + "\n"
+
+        success, error = send_email(email, subject, email_body)
+        if success:
+            return jsonify({"success": True})
+        return jsonify({"success": False, "error": error or "Failed to send email"}), 500
+
+    except Exception as e:
+        print(f"Error in booking endpoint: {str(e)}")
+        return jsonify({"success": False, "error": "An unexpected error occurred. Please try again later."}), 500
 
 if __name__ == '__main__':
     import sys

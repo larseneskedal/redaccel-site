@@ -64,72 +64,211 @@ revealElements.forEach(el => {
     revealObserver.observe(el);
 });
 
-// Form submission handler
-const contactForm = document.getElementById('contactForm');
+// Booking modal + Calendly integration
+const BOOKING_CALENDLY_URL = 'https://calendly.com/redaccel/30min';
 
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
+const bookingModal = document.getElementById('bookingModal');
+const bookingModalClose = document.getElementById('bookingModalClose');
+const bookingCloseBtn = document.getElementById('bookingCloseBtn');
+const bookingBackBtn = document.getElementById('bookingBackBtn');
+const bookingLeadForm = document.getElementById('bookingLeadForm');
+const bookingError = document.getElementById('bookingError');
+const bookingConfirm = document.getElementById('bookingConfirm');
+const calendlyInline = document.getElementById('calendlyInline');
+const stepIndicators = document.querySelectorAll('[data-step-indicator]');
+
+let bookingLeadData = null;
+let bookingCalendlyInitialized = false;
+let bookingSubmitInFlight = false;
+
+function setBookingStep(step) {
+    if (!bookingModal) return;
+    const step1 = bookingModal.querySelector('.booking-step[data-step="1"]');
+    const step2 = bookingModal.querySelector('.booking-step[data-step="2"]');
+    if (step1 && step2) {
+        step1.hidden = step !== 1;
+        step2.hidden = step !== 2;
+    }
+    stepIndicators.forEach(el => {
+        const elStep = parseInt(el.getAttribute('data-step-indicator'), 10);
+        el.classList.toggle('modal-step-active', elStep === step);
+    });
+}
+
+function openBookingModal() {
+    if (!bookingModal) return;
+    bookingModal.classList.add('is-open');
+    bookingModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    bookingSubmitInFlight = false;
+    bookingCalendlyInitialized = false;
+    if (bookingConfirm) bookingConfirm.hidden = true;
+    if (bookingError) bookingError.textContent = '';
+    setBookingStep(1);
+
+    // Focus first input
+    const firstInput = bookingModal.querySelector('#booking_name');
+    if (firstInput) setTimeout(() => firstInput.focus(), 50);
+}
+
+function closeBookingModal() {
+    if (!bookingModal) return;
+    bookingModal.classList.remove('is-open');
+    bookingModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    setBookingStep(1);
+}
+
+async function ensureCalendlyLoaded() {
+    if (window.Calendly) return;
+    await new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[data-calendly-widget="true"]');
+        if (existing) {
+            existing.addEventListener('load', () => resolve(), { once: true });
+            existing.addEventListener('error', () => reject(new Error('Failed to load Calendly')), { once: true });
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.async = true;
+        script.setAttribute('data-calendly-widget', 'true');
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error('Failed to load Calendly'));
+        document.head.appendChild(script);
+    });
+}
+
+async function initCalendlyInline() {
+    if (!calendlyInline) return;
+    if (bookingCalendlyInitialized) return;
+    await ensureCalendlyLoaded();
+
+    // Reset container (Calendly writes into it)
+    calendlyInline.innerHTML = '';
+
+    window.Calendly.initInlineWidget({
+        url: BOOKING_CALENDLY_URL,
+        parentElement: calendlyInline,
+        prefill: {
+            name: bookingLeadData?.name || '',
+            email: bookingLeadData?.email || '',
+        },
+        utm: {
+            utmCampaign: 'website_booking',
+            utmSource: bookingLeadData?.found_us || 'website',
+        }
+    });
+
+    bookingCalendlyInitialized = true;
+}
+
+function extractCalendlyUris(messageData) {
+    const payload = messageData?.payload || {};
+    const eventUri = payload?.event?.uri || payload?.event_uri || null;
+    const inviteeUri = payload?.invitee?.uri || payload?.invitee_uri || null;
+    return { eventUri, inviteeUri };
+}
+
+async function notifyBookingToServer({ eventUri, inviteeUri }) {
+    if (bookingSubmitInFlight) return;
+    bookingSubmitInFlight = true;
+
+    try {
+        const res = await fetch('/api/booking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                lead: bookingLeadData,
+                calendly: { event_uri: eventUri, invitee_uri: inviteeUri },
+                page_url: window.location.href,
+            }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.success) {
+            throw new Error(json.error || 'Failed to record booking');
+        }
+
+        if (bookingConfirm) bookingConfirm.hidden = false;
+    } catch (err) {
+        console.error('Booking notify error:', err);
+        if (bookingError) bookingError.textContent = 'Booked successfully, but we couldn’t notify our team automatically. Please email contact@redaccel.com.';
+    }
+}
+
+// Open modal from any button/link with data-open-booking
+document.querySelectorAll('[data-open-booking]').forEach(el => {
+    el.addEventListener('click', (e) => {
         e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            company: formData.get('company'),
-            message: formData.get('message')
+        openBookingModal();
+    });
+});
+
+// Close behaviors
+if (bookingModalClose) bookingModalClose.addEventListener('click', closeBookingModal);
+if (bookingCloseBtn) bookingCloseBtn.addEventListener('click', closeBookingModal);
+if (bookingBackBtn) bookingBackBtn.addEventListener('click', () => {
+    setBookingStep(1);
+});
+
+// Click outside dialog closes
+if (bookingModal) {
+    bookingModal.addEventListener('click', (e) => {
+        if (e.target === bookingModal) closeBookingModal();
+    });
+}
+
+// Esc closes
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && bookingModal?.classList.contains('is-open')) {
+        closeBookingModal();
+    }
+});
+
+// Lead intake → Calendly
+if (bookingLeadForm) {
+    bookingLeadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!bookingLeadForm.checkValidity()) {
+            bookingLeadForm.reportValidity();
+            return;
+        }
+
+        const formData = new FormData(bookingLeadForm);
+        bookingLeadData = {
+            name: String(formData.get('name') || '').trim(),
+            email: String(formData.get('email') || '').trim(),
+            business: String(formData.get('business') || '').trim(),
+            found_us: String(formData.get('found_us') || '').trim(),
         };
-        
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
-        
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-        
+
+        if (bookingError) bookingError.textContent = '';
+        setBookingStep(2);
+
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                submitButton.textContent = 'Message Sent! ✓';
-                submitButton.style.background = '#10b981';
-                
-                // Show success message
-                const successMsg = document.createElement('div');
-                successMsg.style.cssText = 'margin-top: 16px; padding: 16px; background: #d1fae5; color: #065f46; border-radius: 8px; font-weight: 500;';
-                successMsg.textContent = '✓ Your inquiry has been sent to contact@redaccel.com. We\'ll get back to you soon!';
-                contactForm.appendChild(successMsg);
-                
-                contactForm.reset();
-                
-                setTimeout(() => {
-                    submitButton.textContent = originalText;
-                    submitButton.style.background = '';
-                    submitButton.disabled = false;
-                    successMsg.remove();
-                }, 5000);
-            } else {
-                throw new Error(result.error || 'Failed to send message');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            submitButton.textContent = 'Error - Try Again';
-            submitButton.style.background = '#ef4444';
-            
-            setTimeout(() => {
-                submitButton.textContent = originalText;
-                submitButton.style.background = '';
-                submitButton.disabled = false;
-            }, 3000);
+            await initCalendlyInline();
+        } catch (err) {
+            console.error(err);
+            if (bookingError) bookingError.textContent = 'Failed to load scheduling. Please refresh or email contact@redaccel.com.';
+            setBookingStep(1);
         }
     });
 }
+
+// Calendly postMessage events (booking completed)
+window.addEventListener('message', (e) => {
+    const data = e.data;
+    if (!data || typeof data !== 'object') return;
+    if (!data.event || typeof data.event !== 'string') return;
+    if (!data.event.startsWith('calendly.')) return;
+
+    if (data.event === 'calendly.event_scheduled') {
+        const { eventUri, inviteeUri } = extractCalendlyUris(data);
+        if (eventUri || inviteeUri) {
+            notifyBookingToServer({ eventUri, inviteeUri });
+        }
+    }
+});
 
 // Add active state to nav links based on scroll position
 const sections = document.querySelectorAll('section[id]');

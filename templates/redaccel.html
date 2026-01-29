@@ -35,7 +35,7 @@
                 <a href="/pricing" class="nav-link">Pricing</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <a href="#contact" class="nav-cta">Get Started</a>
+            <button type="button" class="nav-cta" data-open-booking>Book a meeting</button>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
@@ -410,25 +410,18 @@
                     </div>
                 </div>
                 <div class="contact-form-container reveal">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
-                    </form>
+                    <div class="booking-card">
+                        <h3 class="booking-title">Book a 30-minute call</h3>
+                        <p class="booking-description">
+                            Tell us a bit about your business, then pick a time that works for you.
+                        </p>
+                        <button type="button" class="btn btn-primary btn-full" data-open-booking>
+                            Book a meeting
+                        </button>
+                        <p class="booking-note">
+                            Prefer async? Email us at <a class="contact-value" href="mailto:contact@redaccel.com">contact@redaccel.com</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -473,6 +466,86 @@
             </div>
         </div>
     </footer>
+
+    <!-- Booking Modal (Lead Intake → Calendly) -->
+    <div class="modal-overlay" id="bookingModal" aria-hidden="true">
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+            <div class="modal-header">
+                <div class="modal-header-left">
+                    <div class="modal-eyebrow">Book a meeting</div>
+                    <h3 class="modal-title" id="bookingModalTitle">30-minute strategy call</h3>
+                    <div class="modal-steps" aria-label="Booking steps">
+                        <span class="modal-step modal-step-active" data-step-indicator="1">1</span>
+                        <span class="modal-step-divider"></span>
+                        <span class="modal-step" data-step-indicator="2">2</span>
+                    </div>
+                </div>
+                <button type="button" class="modal-close" id="bookingModalClose" aria-label="Close">×</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Step 1: Lead Intake -->
+                <div class="booking-step" data-step="1">
+                    <form class="booking-form" id="bookingLeadForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="booking_name">Name</label>
+                                <input type="text" id="booking_name" name="name" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="booking_email">Email</label>
+                                <input type="email" id="booking_email" name="email" autocomplete="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="booking_business">Business website (or describe your business)</label>
+                            <textarea id="booking_business" name="business" rows="4" required placeholder="https://example.com — or a short description if you don’t have a website yet"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="booking_found_us">How did you find us?</label>
+                            <select id="booking_found_us" name="found_us" required>
+                                <option value="" disabled selected>Select one…</option>
+                                <option value="friend_referral">Friend / referral</option>
+                                <option value="llm">LLM (ChatGPT, Claude, Gemini, etc.)</option>
+                                <option value="google">Google</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="swapd">Swapd</option>
+                                <option value="bhw">BHW</option>
+                                <option value="reddit">Reddit</option>
+                                <option value="forum">Forum</option>
+                                <option value="blog">Blog</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Next
+                        </button>
+                        <div class="booking-error" id="bookingError" role="alert" aria-live="polite"></div>
+                    </form>
+                </div>
+
+                <!-- Step 2: Calendly -->
+                <div class="booking-step" data-step="2" hidden>
+                    <div class="booking-calendly-wrap">
+                        <div class="booking-calendly" id="calendlyInline"></div>
+                    </div>
+
+                    <div class="booking-actions">
+                        <button type="button" class="btn btn-secondary" id="bookingBackBtn">Back</button>
+                        <button type="button" class="btn btn-secondary" id="bookingCloseBtn">Close</button>
+                    </div>
+
+                    <div class="booking-confirm" id="bookingConfirm" hidden>
+                        <div class="booking-confirm-title">Meeting booked</div>
+                        <div class="booking-confirm-text">You’ll get a confirmation email shortly.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/redaccel.js') }}"></script>
 </body>
