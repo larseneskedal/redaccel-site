@@ -264,13 +264,14 @@ def booking():
         name = str(lead.get("name", "")).strip()
         email = str(lead.get("email", "")).strip()
         business = str(lead.get("business", "")).strip()
+        goals = str(lead.get("goals", "")).strip()
         found_us = str(lead.get("found_us", "")).strip()
         page_url = str(data.get("page_url", "")).strip()
 
         event_uri = str(calendly.get("event_uri", "") or "").strip() or None
         invitee_uri = str(calendly.get("invitee_uri", "") or "").strip() or None
 
-        if not name or not email or not business or not found_us:
+        if not name or not email or not business or not goals or not found_us:
             return jsonify({"success": False, "error": "Missing required lead fields"}), 400
 
         if '@' not in email or '.' not in email.split('@')[1]:
@@ -286,6 +287,7 @@ def booking():
             f"Name: {name}",
             f"Email: {email}",
             f"Business: {business}",
+            f"Package / goals: {goals if goals else 'Not provided'}",
             f"How they found us: {found_us}",
         ]
 

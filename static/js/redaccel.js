@@ -240,6 +240,7 @@ if (bookingLeadForm) {
             email: String(formData.get('email') || '').trim(),
             business: String(formData.get('business') || '').trim(),
             found_us: String(formData.get('found_us') || '').trim(),
+            goals: String(formData.get('goals') || '').trim(),
         };
 
         if (bookingError) bookingError.textContent = '';
