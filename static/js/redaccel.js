@@ -89,6 +89,9 @@ function setBookingStep(step) {
         step1.hidden = step !== 1;
         step2.hidden = step !== 2;
     }
+    // Ensure the modal content starts at the top when switching steps.
+    const modalBody = bookingModal.querySelector('.modal-body');
+    if (modalBody) modalBody.scrollTop = 0;
     stepIndicators.forEach(el => {
         const elStep = parseInt(el.getAttribute('data-step-indicator'), 10);
         el.classList.toggle('modal-step-active', elStep === step);
