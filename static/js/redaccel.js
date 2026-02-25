@@ -65,6 +65,7 @@ revealElements.forEach(el => {
 });
 
 // Booking modal + Calendly integration
+// Booking URL – ensure Calendly subscription is active so the embed loads
 const BOOKING_CALENDLY_URL = 'https://calendly.com/redaccel/30min';
 
 const bookingModal = document.getElementById('bookingModal');
