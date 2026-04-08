@@ -1,7 +1,7 @@
 """
 Flask web application for the Redaccel marketing website.
 """
-from flask import Flask, render_template, request, jsonify, abort
+from flask import Flask, render_template, request, jsonify, abort, redirect, send_from_directory
 import socket
 import os
 import smtplib
@@ -27,6 +27,49 @@ if _is_local_dev:
     except Exception:
         # If Jinja env isn't ready for some reason, fail open.
         pass
+
+
+@app.route("/<filename>.html")
+def serve_verification_file(filename: str):
+    """
+    Serve third-party HTML verification files from `static/verification/` at the site root.
+
+    Many providers require a file like `abc123.html` to be accessible at:
+    https://www.example.com/abc123.html
+    """
+    safe = (filename or "").strip()
+    if "/" in safe or "\\" in safe or ".." in safe:
+        abort(404)
+
+    verification_dir = os.path.join(app.static_folder or "static", "verification")
+    requested = f"{safe}.html"
+    file_path = os.path.join(verification_dir, requested)
+    if not os.path.isfile(file_path):
+        abort(404)
+
+    return send_from_directory(verification_dir, requested)
+
+
+def _request_host():
+    """Host the client used (respects X-Forwarded-Host behind Render/proxies)."""
+    raw = request.headers.get("X-Forwarded-Host") or request.host or ""
+    # Can be "host" or "host:port" or "host1, host2" (proxies)
+    host = raw.split(",")[0].strip().lower().split(":")[0]
+    return host
+
+
+@app.before_request
+def redirect_apex_to_www():
+    """Redirect redaccel.com to https://www.redaccel.com so one canonical host is used."""
+    host = _request_host()
+    if host != "redaccel.com":
+        return None
+    path = request.path or "/"
+    qs = request.query_string
+    url = f"https://www.redaccel.com{path}"
+    if qs:
+        url += "?" + qs.decode()
+    return redirect(url, code=301)
 
 
 def get_local_ip():

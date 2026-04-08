@@ -59,3 +59,7 @@ Website for Redaccel with blog, pricing, and about pages.
 
 This project is completely independent. Opening it in Cursor will show only this project's files.
 
+
+
+
+
