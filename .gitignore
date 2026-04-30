@@ -6,3 +6,57 @@ redaccel_server.log
 
 # macOS
 .DS_Store
+
+# Appended by Claude backup script
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / JS
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+.parcel-cache/
+.cache/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Testing
+coverage/
+.eslintcache
+
+# Misc
+*.tmp
+.swc/
