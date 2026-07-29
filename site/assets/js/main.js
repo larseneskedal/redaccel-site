@@ -27,8 +27,8 @@
   /* ----- scroll reveals (auto-tagged; skipped under reduced motion) ----- */
   if (!reduced && 'IntersectionObserver' in window) {
     var targets = document.querySelectorAll(
-      'main h2, .extract, .table-wrap, .stat-strip, .card, .faq, .sources, ' +
-      '.hero-grid > div, .cta-band, .audit-form, main .kicker'
+      'main h2, .extract, .table-wrap, .stat-strip, .card, .faq, .faq-item, .sources, ' +
+      '.hero-center, .panel-stage, .hero-grid > div, .steps > li, .cta-panel, .audit-form, main .kicker'
     );
     var siblings = {};
     targets.forEach(function (el, i) {
@@ -118,6 +118,58 @@
       }
     };
     setTimeout(type, 500);
+  }
+
+  /* ----- article pages: reading progress + on-this-page nav ----- */
+  var article = document.querySelector('main.article');
+  if (article) {
+    var bar = document.createElement('div');
+    bar.className = 'progress-bar';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    var onProgress = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    };
+    onProgress();
+    window.addEventListener('scroll', onProgress, { passive: true });
+
+    var heads = Array.prototype.filter.call(
+      article.querySelectorAll('.shell > h2'),
+      function (h) { return !h.closest('.sources'); }
+    );
+    if (heads.length > 2) {
+      var toc = document.createElement('nav');
+      toc.className = 'toc';
+      toc.setAttribute('aria-label', 'On this page');
+      var title = document.createElement('h2');
+      title.textContent = 'On this page';
+      var list = document.createElement('ul');
+      heads.forEach(function (h, i) {
+        if (!h.id) h.id = 'sec-' + (i + 1);
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.replace(/\?$/, '?') ;
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+      toc.appendChild(title);
+      toc.appendChild(list);
+      document.body.appendChild(toc);
+
+      if ('IntersectionObserver' in window) {
+        var spy = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            toc.querySelectorAll('a').forEach(function (a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+            });
+          });
+        }, { rootMargin: '-15% 0px -70% 0px' });
+        heads.forEach(function (h) { spy.observe(h); });
+      }
+    }
   }
 
   /* ----- citation links: open the sources panel before jumping ----- */
