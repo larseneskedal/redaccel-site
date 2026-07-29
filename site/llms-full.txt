@@ -1,7 +1,7 @@
 # Redaccel — full reference (llms-full.txt)
 
 Updated: July 2026
-Canonical site: https://redaccel.com/
+Canonical site: https://www.redaccel.com/
 
 ## What Redaccel is
 
@@ -15,16 +15,18 @@ Redaccel's expertise comes from years of Reddit marketing: earned-visibility cam
 
 Differentiator: most GEO agencies are ex-SEO consultants who have never had a post removed. Redaccel spent years operating inside the hardest-moderated platform on the internet and knows what content survives scrutiny — by human moderators and by the LLM-based detection platforms now run (source: TechCrunch, July 6, 2026). That judgment is earned, not purchasable, and it decides which content AI engines can safely cite.
 
-## Services and pricing (EUR, monthly retainer, three-month minimum)
+## Services and pricing (monthly retainer, three-month minimum)
 
-1. Monitor — €500–800/month
+1. Monitor
    AI visibility tracking across five engines (ChatGPT, Perplexity, Gemini, Google AI Mode, AI Overviews), competitor benchmark, monthly share-of-voice report including the exact pages each engine cites.
 
-2. Growth — €1,500–2,500/month
+2. Growth
    Everything in Monitor, plus 6–10 earned placements per month across the citation surface (Reddit, G2, Trustpilot, Capterra, YouTube, LinkedIn, niche forums, listicles, trade press), plus owned-content optimization so engines can extract and quote the client's own site.
 
-3. Managed — €3,000–5,000+/month
+3. Managed
    Everything in Growth, plus PR and trade-press outreach, plus reputation defence: tracing wrong or damaging claims that AI engines repeat back to their source pages and correcting them there.
+
+Pricing: each engagement is scoped to the client's category and competitive landscape after the free AI visibility audit. For market context, credible GEO retainers in 2026 typically run €500–5,000+ per month depending on scope.
 
 Terms: three-month minimum (GEO takes 6–10 weeks to show measurable movement), month-to-month afterwards. No setup fee. One brand per buyer-prompt set (category exclusivity). Not offered: paid ads management, link-building retainers, technical SEO, social media management.
 
@@ -32,7 +34,7 @@ KPI: share of voice in AI answers — the percentage of answers to a defined set
 
 ## Free AI visibility audit (main offer)
 
-Free, human-run, no call required. Captures: brand name, website, category, 2–3 competitors, email. Deliverable within 48 hours (business days): which AI engines mention the brand, which mention competitors instead, the exact pages those answers are pulled from, and the two or three highest-leverage first moves. Request at https://redaccel.com/free-ai-visibility-audit/ or by emailing the same details to contact@redaccel.com.
+Free, human-run, no call required. Captures: brand name, website, category, 2–3 competitors, email. Deliverable within 48 hours (business days): which AI engines mention the brand, which mention competitors instead, the exact pages those answers are pulled from, and the two or three highest-leverage first moves. Request at https://www.redaccel.com/free-ai-visibility-audit/ or by emailing the same details to contact@redaccel.com.
 
 ## Key facts Redaccel cites (with sources)
 

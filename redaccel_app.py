@@ -45,7 +45,8 @@ def serve_verification_file(filename: str):
     requested = f"{safe}.html"
     file_path = os.path.join(verification_dir, requested)
     if not os.path.isfile(file_path):
-        abort(404)
+        # Not a verification file — fall through to the static site (e.g. /404.html)
+        return _serve_site_path(requested)
 
     return send_from_directory(verification_dir, requested)
 
@@ -85,60 +86,94 @@ def get_local_ip():
         return "localhost"
 
 
+# ---------------------------------------------------------------------------
+# The site is now the static GEO build in `site/`. Flask serves it directly so
+# the existing Render service (gunicorn redaccel_app:app) needs no config
+# changes. Old URLs from the previous template-based site 301 to their closest
+# equivalents so inbound links and search equity carry over.
+# ---------------------------------------------------------------------------
+
+SITE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "site")
+
+LEGACY_REDIRECTS = {
+    "/blog": "/what-is-geo/",
+    "/blog/how-llms-are-changing-seo": "/geo-vs-seo/",
+    "/blog/optimizing-for-ai-search": "/what-is-geo/",
+    "/blog/reddit-traffic-potential": "/reddit-marketing-2026/",
+    "/blog/reddit-psychology": "/reddit-marketing-2026/",
+    "/blog/why-reddit-posts-rank-quickly": "/reddit-marketing-2026/",
+    "/blog/case-study-90-days": "/about/",
+    "/case-studies/gpm-music-group": "/about/",
+    "/case-studies/creator-management-platform": "/about/",
+}
+
+
+def _serve_site_path(path: str):
+    """Serve a file or directory index from the static site build in `site/`."""
+    clean = (path or "").strip("/")
+    if clean.startswith("functions"):
+        abort(404)  # Cloudflare-only backend code; never serve it as content
+    if not clean:
+        return send_from_directory(SITE_DIR, "index.html")
+    candidate = os.path.normpath(os.path.join(SITE_DIR, clean))
+    if not candidate.startswith(SITE_DIR):
+        abort(404)
+    if os.path.isfile(candidate):
+        return send_from_directory(SITE_DIR, clean)
+    if os.path.isfile(os.path.join(candidate, "index.html")):
+        if not (request.path or "").endswith("/"):
+            return redirect(request.path + "/", code=301)
+        return send_from_directory(SITE_DIR, clean + "/index.html")
+    return send_from_directory(SITE_DIR, "404.html"), 404
+
+
 @app.route("/")
 def index():
-    """Main marketing page."""
-    return render_template("redaccel.html")
+    return _serve_site_path("")
 
 
-@app.route("/pricing")
-def pricing():
-    """Pricing page."""
-    return render_template("pricing.html")
+@app.route("/<path:path>")
+def site_page(path: str):
+    target = LEGACY_REDIRECTS.get("/" + path.strip("/"))
+    if target:
+        return redirect(target, code=301)
+    return _serve_site_path(path)
 
 
-@app.route("/blog")
-def blog():
-    """Articles index page."""
-    return render_template("blog.html")
+@app.route("/api/audit", methods=["POST"])
+def audit_request():
+    """Handle free AI visibility audit requests from the new site's form."""
+    data = request.get_json(silent=True) or {}
 
+    def clean(key: str) -> str:
+        value = data.get(key)
+        return value.strip()[:500] if isinstance(value, str) else ""
 
-@app.route("/blog/<slug>")
-def blog_post(slug: str):
-    """
-    Render an individual article page.
+    brand = clean("brand")
+    website = clean("website")
+    category = clean("category")
+    competitors = clean("competitors")
+    email = clean("email")
 
-    We keep article templates under `templates/blog/` and use the slug
-    from the URL to choose the correct file, e.g.:
-    /blog/why-reddit-posts-rank-quickly -> templates/blog/why-reddit-posts-rank-quickly.html
-    """
-    template_name = f"blog/{slug}.html"
-    try:
-        return render_template(template_name)
-    except TemplateNotFound:
-        abort(404)
+    if not all([brand, website, category, competitors, email]) or "@" not in email:
+        return jsonify({"error": "All fields are required"}), 400
 
-
-@app.route("/case-studies/<slug>")
-def case_study(slug: str):
-    """
-    Render an individual case study page.
-
-    We keep case study templates under `templates/case_studies/` and use the slug
-    from the URL to choose the correct file, e.g.:
-    /case-studies/gpm-music-group -> templates/case_studies/gpm-music-group.html
-    """
-    template_name = f"case_studies/{slug}.html"
-    try:
-        return render_template(template_name)
-    except TemplateNotFound:
-        abort(404)
-
-
-@app.route("/about")
-def about():
-    """About page."""
-    return render_template("about.html")
+    body = "\n".join([
+        "New free AI visibility audit request",
+        "",
+        f"Brand:       {brand}",
+        f"Website:     {website}",
+        f"Category:    {category}",
+        f"Competitors: {competitors}",
+        f"Reply to:    {email}",
+        "",
+        "The 48-hour clock starts now.",
+    ])
+    ok, error = send_email(email, f"Audit request: {brand} ({category})", body)
+    if not ok:
+        # 503 makes the site's JS show the mailto fallback, so no lead is lost.
+        return jsonify({"error": error or "Email delivery not configured"}), 503
+    return jsonify({"ok": True})
 
 def send_email(reply_to_email: str, subject: str, email_body: str):
     """Send email using SMTP."""
