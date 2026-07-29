@@ -120,6 +120,14 @@
     setTimeout(type, 500);
   }
 
+  /* ----- citation links: open the sources panel before jumping ----- */
+  document.querySelectorAll('sup.cite a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var d = document.querySelector('details.sources');
+      if (d) d.setAttribute('open', '');
+    });
+  });
+
   /* ----- audit form ----- */
   var form = document.querySelector('.audit-form[data-endpoint]');
   if (form) {
