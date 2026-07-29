@@ -4,17 +4,18 @@
 @import url('fonts.css');
 
 :root {
-  --ink: #1B1F2A;
-  --ink-soft: #454C5C;
-  --muted: #5A6172;
-  --field: #F4F6F8;
-  --panel: #FFFFFF;
-  --red: #C8371E;
-  --red-dark: #A82C16;
-  --red-wash: rgba(200, 55, 30, 0.09);
-  --blue: #3B5BDB;
-  --line: #DDE2EA;
-  --line-soft: #E8ECF1;
+  color-scheme: dark;
+  --ink: #E9ECF3;
+  --ink-soft: #C4CAD7;
+  --muted: #98A1B3;
+  --field: #14171F;
+  --panel: #1C212C;
+  --red: #EC6D55;
+  --red-dark: #F08871;
+  --red-wash: rgba(236, 109, 85, 0.16);
+  --blue: #8DA2F5;
+  --line: #2B3242;
+  --line-soft: #232936;
   --display: 'Bricolage Grotesque', 'Arial Narrow', sans-serif;
   --serif: 'Source Serif 4', Georgia, serif;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
@@ -89,8 +90,8 @@ strong { font-weight: 600; }
   font-size: 0.98rem; text-decoration: none; border-radius: 6px;
   padding: 0.62rem 1.15rem; border: 1px solid transparent; cursor: pointer;
 }
-.btn-primary { background: var(--red); color: #fff; }
-.btn-primary:hover { background: var(--red-dark); color: #fff; }
+.btn-primary { background: #C8371E; color: #fff; }
+.btn-primary:hover { background: #DE452A; color: #fff; }
 .btn-quiet { background: transparent; color: var(--ink); border-color: var(--line); }
 .btn-quiet:hover { border-color: var(--ink-soft); color: var(--ink); }
 .btn-lg { padding: 0.85rem 1.5rem; font-size: 1.05rem; }
@@ -170,13 +171,13 @@ sup.cite a:hover { color: var(--ink); text-decoration: underline; }
 .hero p.lede { font-size: 1.18rem; margin-top: 1.2rem; }
 
 .answer-panel {
-  background: var(--ink); color: #E8EBF2; border-radius: 12px;
+  background: #242A38; color: #E8EBF2; border: 1px solid #39415A; border-radius: 12px;
   padding: 1.4rem 1.5rem; font-size: 0.95rem; line-height: 1.6;
-  box-shadow: 0 18px 40px -22px rgba(27, 31, 42, 0.45);
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.6);
 }
 .answer-panel .query {
   font-family: var(--mono); font-size: 0.82rem; color: #9AA3B5;
-  border-bottom: 1px solid #333A4C; padding-bottom: 0.8rem; margin-bottom: 0.9rem;
+  border-bottom: 1px solid #39415A; padding-bottom: 0.8rem; margin-bottom: 0.9rem;
 }
 .answer-panel .query::before { content: '› '; color: var(--red); }
 .answer-panel p { max-width: none; margin-bottom: 0.8rem; }
@@ -257,12 +258,12 @@ td .num, td.num { font-family: var(--mono); font-size: 0.87rem; }
 .audit-form button { margin-top: 1.4rem; }
 .form-note { font-size: 0.88rem; color: var(--muted); margin-top: 0.9rem; }
 .form-status { font-family: var(--mono); font-size: 0.88rem; margin-top: 1rem; display: none; }
-.form-status.ok { display: block; color: #1E7F4F; }
+.form-status.ok { display: block; color: #52C98B; }
 .form-status.err { display: block; color: var(--red); }
 
 /* ---------- footer ---------- */
 
-.site-footer { background: var(--ink); color: #B8C0D0; margin-top: 4rem; font-size: 0.92rem; }
+.site-footer { background: #0E1118; color: #B8C0D0; margin-top: 4rem; font-size: 0.92rem; border-top: 1px solid var(--line); }
 .site-footer .shell { padding-top: 2.6rem; padding-bottom: 2.6rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
 @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
@@ -277,7 +278,7 @@ td .num, td.num { font-family: var(--mono); font-size: 0.87rem; }
 /* ---------- utilities ---------- */
 
 .skip-link {
-  position: absolute; left: -9999px; top: 0; background: var(--ink); color: #fff;
+  position: absolute; left: -9999px; top: 0; background: #C8371E; color: #fff;
   padding: 0.6rem 1rem; z-index: 10; border-radius: 0 0 6px 0;
 }
 .skip-link:focus { left: 0; }
