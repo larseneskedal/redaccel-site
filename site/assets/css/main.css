@@ -513,6 +513,21 @@ td .num, td.num { font-family: var(--mono); font-size: 0.86rem; color: var(--ink
 .faq-item .faq-a p { margin-bottom: 0.6rem; max-width: none; }
 .faq-item .faq-a p:last-child { margin-bottom: 0; }
 
+/* ---------- read more ---------- */
+
+details.more { margin: -0.4rem 0 1.15rem; max-width: var(--measure); }
+details.more > summary {
+  cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--display); font-size: 0.9rem; font-weight: 600; color: var(--red);
+  user-select: none; transition: color .18s var(--ease);
+}
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: '+'; font-family: var(--mono); font-size: 0.95rem; }
+details.more[open] > summary::after { content: '−'; }
+details.more > summary:hover { color: #FF8A70; }
+details.more[open] > summary { margin-bottom: 0.7rem; }
+details.more p:last-child { margin-bottom: 0; }
+
 /* ---------- article TOC + reading progress ---------- */
 
 .progress-bar {
