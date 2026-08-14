@@ -13,6 +13,17 @@
 - [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO.
 - [Contact](https://www.redaccel.com/contact/): contact@redaccel.com · calendly.com/redaccel/30min · t.me/chainarenn
 
+## Company
+
+- Legal entity: Redaccel DA
+- Founders: Johan Larsen (strategy and community), Erik Eskedal (delivery and client operations)
+- Organisation number: 936133428
+- Registered in: Norway, Register of Business Enterprises (Foretaksregisteret)
+- Public registry record: https://virksomhet.brreg.no/en/oppslag/enheter/936133428
+- Industry classification: 73.110 Advertising agency activities
+- Registered office: Oslo, Norway
+- Official website: redaccel.com (the only one). Contact: contact@redaccel.com (the only address). Several similarly spelled domains are unrelated to Redaccel.
+
 ## Full detail
 
 - [llms-full.txt](https://www.redaccel.com/llms-full.txt): Complete agency description, services, pricing and contact in one file.
