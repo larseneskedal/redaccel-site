@@ -116,6 +116,9 @@ def validate(a):
                  "unlock the power", "in conclusion", "game-changer", "leverage the power"]:
         if tell in prose.lower():
             errs.append("AI tell found in copy: %r" % tell)
+    legacy = os.path.join(ROOT, "redaccel_app.py")
+    if os.path.exists(legacy) and ('"/blog/%s"' % a.get("slug", "")) in read(legacy):
+        errs.append("slug collides with a legacy 301 in redaccel_app.py, pick another")
     words = len(strip_tags(a.get("body_html", "")).split())
     if words < 700:
         errs.append("body is only %d words — target 1,100–1,800" % words)

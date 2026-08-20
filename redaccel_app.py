@@ -96,7 +96,6 @@ def get_local_ip():
 SITE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "site")
 
 LEGACY_REDIRECTS = {
-    "/blog": "/what-is-geo/",
     "/blog/how-llms-are-changing-seo": "/geo-vs-seo/",
     "/blog/optimizing-for-ai-search": "/what-is-geo/",
     "/blog/reddit-traffic-potential": "/reddit-marketing-2026/",
