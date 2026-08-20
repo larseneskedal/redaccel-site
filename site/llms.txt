@@ -1,6 +1,6 @@
 # Redaccel
 
-> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including Kalshi, Roobet and GPM Music Group — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €500–5,000+/month. Three-month minimum. Updated July 2026.
+> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including Kalshi, Roobet and GPM Music Group — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000–5,000+/month. Three-month minimum. Updated July 2026.
 
 ## Pages
 
@@ -12,6 +12,12 @@
 - [Free AI visibility audit](https://www.redaccel.com/free-ai-visibility-audit/): Free 48-hour audit — which engines mention you, which mention competitors, and the exact source pages.
 - [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO.
 - [Contact](https://www.redaccel.com/contact/): contact@redaccel.com · calendly.com/redaccel/30min · t.me/chainarenn
+
+## Articles
+
+One sourced article a week on GEO and AI search. Index: https://www.redaccel.com/blog/
+
+- [AI visibility, measured properly](https://www.redaccel.com/blog/what-is-ai-visibility/): What AI visibility means, the four metrics worth tracking, and why a single ChatGPT spot-check tells you almost nothing.
 
 ## Company
 

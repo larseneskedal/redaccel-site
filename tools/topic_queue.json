@@ -1,0 +1,408 @@
+{
+  "note": "Priority-ordered publishing queue for redaccel.com/blog/. Ahrefs data pulled 2026-08-20, US volumes, KD = keyword difficulty. Publish the first topic with status 'queued'. Re-pull metrics roughly every quarter. Add topics freely; never reorder just to chase a shiny keyword — the order front-loads winnable commercial terms while domain authority is still low.",
+  "metrics_pulled": "2026-08-20",
+  "cadence": "one article per week, Tuesday 09:00 Europe/Lisbon",
+  "topics": [
+    {
+      "slug": "what-is-ai-visibility",
+      "keyword": "ai visibility",
+      "volume_us": 3300,
+      "volume_global": 7400,
+      "kd": 29,
+      "cpc_usd": 0.8,
+      "secondary": [
+        "how to measure ai visibility",
+        "share of voice ai search",
+        "brand mentions in ai",
+        "ai visibility tracking"
+      ],
+      "angle": "Definition plus a real measurement method: what AI visibility is, the four metrics that actually mean something (mention rate, share of voice, citation rate, sentiment), and why a single ChatGPT spot-check is worthless because engines are non-deterministic.",
+      "must_cover": [
+        "mention rate vs share of voice vs citation rate",
+        "sampling: engines are non-deterministic, one prompt one day is noise",
+        "prompt-set design",
+        "how to see AI referrals in GA4",
+        "what a good number looks like by category"
+      ],
+      "status": "published",
+      "published": "2026-08-20",
+      "url": "https://www.redaccel.com/blog/what-is-ai-visibility/"
+    },
+    {
+      "slug": "ai-visibility-tools-compared",
+      "keyword": "ai visibility tools",
+      "volume_us": 2100,
+      "volume_global": 3000,
+      "kd": 33,
+      "cpc_usd": 1.0,
+      "secondary": [
+        "ai visibility tracking",
+        "geo tools",
+        "ai overview tracking"
+      ],
+      "angle": "Honest hands-on comparison of the AI visibility tracking platforms, including what each one cannot tell you. Name real limitations, including of the tools we pay for.",
+      "must_cover": [
+        "what each tool actually samples",
+        "price bands",
+        "where the numbers disagree and why",
+        "when a spreadsheet beats a tool"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "ai-overview-tracking",
+      "keyword": "ai overview tracking",
+      "volume_us": 2100,
+      "volume_global": 2700,
+      "kd": 15,
+      "cpc_usd": 7.0,
+      "secondary": [
+        "how to appear in ai overviews",
+        "ai overviews optimization"
+      ],
+      "angle": "How to track whether you appear in Google AI Overviews, what changes when you do, and the CTR reality.",
+      "must_cover": [
+        "AI Overviews vs AI Mode",
+        "tracking methods and their error bars",
+        "CTR data when cited vs not"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "aeo-vs-geo-vs-seo",
+      "keyword": "aeo vs seo",
+      "volume_us": 2300,
+      "volume_global": 4800,
+      "kd": 26,
+      "cpc_usd": 3.0,
+      "secondary": [
+        "answer engine optimization",
+        "geo vs seo",
+        "what is aeo"
+      ],
+      "angle": "The three acronyms, what is genuinely different between them and what is vendor rebranding. Link to the existing /geo-vs-seo/ page rather than repeating it.",
+      "must_cover": [
+        "timeline of the terms",
+        "where the work genuinely differs",
+        "which one to budget for"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "llm-seo",
+      "keyword": "llm seo",
+      "volume_us": 1400,
+      "volume_global": 5200,
+      "kd": 0,
+      "cpc_usd": 5.0,
+      "secondary": [
+        "llm optimization",
+        "seo for llms",
+        "chatgpt seo"
+      ],
+      "angle": "Practical playbook for the term SEOs actually search. KD 0 — this should rank fast, so make it the best page on the query.",
+      "must_cover": [
+        "what changes vs classic SEO",
+        "the citation surface",
+        "content structure that gets extracted",
+        "what does not work"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "reddit-and-ai-search",
+      "keyword": "reddit seo",
+      "volume_us": 1300,
+      "volume_global": 3000,
+      "kd": 34,
+      "cpc_usd": 10.0,
+      "secondary": [
+        "reddit marketing",
+        "does chatgpt use reddit",
+        "reddit citations ai"
+      ],
+      "angle": "Why Reddit is the most-cited domain in AI answers, what that means practically, and the line between earning presence and spamming. This is Redaccel's home turf — first-hand detail nobody else can write.",
+      "must_cover": [
+        "citation share data",
+        "Reddit's LLM-detection crackdown",
+        "what survives moderation",
+        "why buying accounts backfires"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "llm-optimization",
+      "keyword": "llm optimization",
+      "volume_us": 1600,
+      "volume_global": 6100,
+      "kd": 14,
+      "cpc_usd": 8.0,
+      "secondary": [
+        "how to optimize content for llms",
+        "content structure for ai"
+      ],
+      "angle": "Page-level mechanics: how to write and structure a page so an engine can lift an answer out of it.",
+      "must_cover": [
+        "front-loading answers",
+        "chunk-level retrieval",
+        "schema",
+        "tables and lists",
+        "what the extraction studies show"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "llms-txt-explained",
+      "keyword": "llms.txt",
+      "volume_us": 3100,
+      "volume_global": 15000,
+      "kd": 56,
+      "cpc_usd": 0.8,
+      "secondary": [
+        "llms.txt generator",
+        "does llms.txt work"
+      ],
+      "angle": "What llms.txt is, who actually honours it, and an evidence-based verdict on whether it is worth the ten minutes. Higher KD — write it only after two or three easier wins have aged.",
+      "must_cover": [
+        "the spec",
+        "which engines respect it (evidence, not vibes)",
+        "our own file as a worked example"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "how-to-rank-in-chatgpt",
+      "keyword": "how to rank in chatgpt",
+      "volume_us": 450,
+      "volume_global": 900,
+      "kd": 3,
+      "cpc_usd": 5.0,
+      "secondary": [
+        "how to get cited by chatgpt",
+        "chatgpt ranking factors",
+        "chatgpt citations"
+      ],
+      "angle": "Direct answer to a direct question, low difficulty, high intent. Explain there is no rank, only retrieval and selection.",
+      "must_cover": [
+        "how ChatGPT search retrieves",
+        "why 'rank' is the wrong model",
+        "the levers that exist"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "choosing-a-geo-agency",
+      "keyword": "geo agency",
+      "volume_us": 1900,
+      "volume_global": 4900,
+      "kd": 31,
+      "cpc_usd": 13.0,
+      "secondary": [
+        "best geo agencies",
+        "geo services",
+        "how to choose a geo agency"
+      ],
+      "angle": "Buyer's guide with the questions that expose a fake GEO agency. We sell this service, so declare the bias in the first paragraph and still give the honest checklist.",
+      "must_cover": [
+        "red flags",
+        "what a real deliverable looks like",
+        "pricing reality",
+        "when not to hire anyone"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "perplexity-seo",
+      "keyword": "perplexity seo",
+      "volume_us": 350,
+      "volume_global": 1400,
+      "kd": 4,
+      "cpc_usd": 7.0,
+      "secondary": [
+        "how to get cited by perplexity",
+        "perplexity ranking"
+      ],
+      "angle": "Engine-specific: Perplexity sits closest to classic search, so what actually transfers.",
+      "must_cover": [
+        "overlap with Google top 10",
+        "source preferences",
+        "practical steps"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "ai-search-ranking-factors",
+      "keyword": "ai search ranking factors",
+      "volume_us": 200,
+      "volume_global": 300,
+      "kd": 25,
+      "cpc_usd": null,
+      "secondary": [
+        "chatgpt ranking factors",
+        "how ai chooses sources"
+      ],
+      "angle": "What is evidenced, what is correlation, what is folklore. A myth-busting piece with a confidence rating per factor.",
+      "must_cover": [
+        "evidence tiers",
+        "the studies and their sample sizes",
+        "factors people repeat with zero evidence"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "schema-markup-for-ai-search",
+      "keyword": "schema markup for ai search",
+      "volume_us": 200,
+      "volume_global": 200,
+      "kd": 10,
+      "cpc_usd": null,
+      "secondary": [
+        "structured data ai search",
+        "faq schema ai"
+      ],
+      "angle": "Which schema types demonstrably help retrieval, which are cargo cult.",
+      "must_cover": [
+        "Article, FAQPage, Organization, Product",
+        "sameAs and entity resolution",
+        "testing"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "measuring-ai-referral-traffic",
+      "keyword": "ai referral traffic",
+      "volume_us": 100,
+      "volume_global": 150,
+      "kd": null,
+      "cpc_usd": null,
+      "secondary": [
+        "track chatgpt traffic ga4",
+        "ai traffic google analytics"
+      ],
+      "angle": "Copy-paste GA4 and Looker setup for isolating AI referrals, plus why the number understates reality.",
+      "must_cover": [
+        "referrer strings by engine",
+        "GA4 segment build",
+        "the dark-traffic problem",
+        "conversion comparison data"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "entity-seo-for-ai",
+      "keyword": "entity seo",
+      "volume_us": 700,
+      "volume_global": 2000,
+      "kd": 32,
+      "cpc_usd": 2.0,
+      "secondary": [
+        "knowledge graph brand",
+        "sameas schema",
+        "wikidata for brands"
+      ],
+      "angle": "Making a brand a resolvable entity: the unglamorous work that decides whether an engine can name you at all.",
+      "must_cover": [
+        "Wikidata, Wikipedia notability reality",
+        "consistent NAP and sameAs",
+        "how engines disambiguate"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "geo-strategy-first-90-days",
+      "keyword": "geo strategy",
+      "volume_us": 400,
+      "volume_global": 800,
+      "kd": 9,
+      "cpc_usd": 0.15,
+      "secondary": [
+        "geo roadmap",
+        "generative engine optimization strategy"
+      ],
+      "angle": "A 90-day plan with week-by-week actions and what to expect at each checkpoint.",
+      "must_cover": [
+        "baseline",
+        "prompt set",
+        "placement map",
+        "realistic movement curve"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "ai-brand-sentiment",
+      "keyword": "brand mentions in ai",
+      "volume_us": 400,
+      "volume_global": 450,
+      "kd": null,
+      "cpc_usd": null,
+      "secondary": [
+        "ai reputation management",
+        "what does chatgpt say about my brand"
+      ],
+      "angle": "Reputation defence: what to do when engines say something wrong or damaging about you.",
+      "must_cover": [
+        "where the claim comes from",
+        "correcting the source not the model",
+        "how long a correction takes to propagate"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "answer-engine-optimization",
+      "keyword": "answer engine optimization",
+      "volume_us": 5000,
+      "volume_global": 12000,
+      "kd": 49,
+      "cpc_usd": 6.0,
+      "secondary": [
+        "aeo",
+        "what is answer engine optimization"
+      ],
+      "angle": "Flagship pillar. Only attempt once the blog has ten or more articles and some domain authority behind it.",
+      "must_cover": [
+        "full definition",
+        "history",
+        "practice",
+        "measurement"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "ai-search-optimization",
+      "keyword": "ai search optimization",
+      "volume_us": 3500,
+      "volume_global": 6700,
+      "kd": 53,
+      "cpc_usd": 0.9,
+      "secondary": [
+        "optimize for ai search",
+        "ai seo"
+      ],
+      "angle": "Second flagship pillar, traffic potential 13,000. Same rule: later, when authority supports it.",
+      "must_cover": [
+        "the whole discipline",
+        "links out to every earlier article"
+      ],
+      "status": "queued"
+    },
+    {
+      "slug": "b2b-geo",
+      "keyword": "b2b geo",
+      "volume_us": null,
+      "volume_global": null,
+      "kd": null,
+      "cpc_usd": null,
+      "secondary": [
+        "ai search b2b buyers",
+        "saas ai visibility"
+      ],
+      "angle": "Category piece for the buyer we actually want: B2B and SaaS founders whose buyers research in ChatGPT.",
+      "must_cover": [
+        "buying-committee research behaviour",
+        "why category pages get cited",
+        "example prompt sets"
+      ],
+      "status": "queued"
+    }
+  ]
+}
