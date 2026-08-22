@@ -106,10 +106,13 @@ strong { font-weight: 600; color: #fff; }
   min-height: 4.2rem; flex-wrap: wrap; padding-top: .6rem; padding-bottom: .6rem;
 }
 .wordmark {
+  display: inline-flex; align-items: center; gap: .5rem;
   font-family: var(--display); font-weight: 700; font-size: 1.35rem;
   color: #fff; text-decoration: none; letter-spacing: -0.02em;
 }
 .wordmark .dot { color: var(--red); }
+.wordmark-icon { flex-shrink: 0; }
+.wordmark-icon path { stroke: var(--red); }
 .site-nav { display: flex; gap: 1.3rem; align-items: center; flex-wrap: wrap; margin-left: auto; }
 .site-nav a {
   font-family: var(--display); font-weight: 500; font-size: 0.95rem;
