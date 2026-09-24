@@ -102,8 +102,7 @@ LEGACY_REDIRECTS = {
     "/blog/reddit-psychology": "/reddit-marketing-2026/",
     "/blog/why-reddit-posts-rank-quickly": "/reddit-marketing-2026/",
     "/blog/case-study-90-days": "/about/",
-    "/case-studies/gpm-music-group": "/about/",
-    "/case-studies/creator-management-platform": "/about/",
+    "/case-studies/creator-management-platform": "/case-studies/content-creator-software/",
 }
 
 

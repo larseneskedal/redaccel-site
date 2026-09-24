@@ -1,6 +1,6 @@
 # Redaccel
 
-> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including Kalshi, Roobet and GPM Music Group — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000–5,000+/month. Three-month minimum. Updated July 2026.
+> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including GPM Music Group and a content creator software company — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000–5,000+/month. Three-month minimum. Updated July 2026.
 
 ## Pages
 
@@ -10,6 +10,7 @@
 - [What we do](https://www.redaccel.com/what-we-do/): AI visibility monitoring, earned citation placement, reputation defence.
 - [Pricing](https://www.redaccel.com/pricing/): Three plans (Monitor, Growth, Managed) scoped per engagement after a free audit; market rates, ROI case and Redaccel-vs-in-house comparison.
 - [Free AI visibility audit](https://www.redaccel.com/free-ai-visibility-audit/): Free 48-hour audit — which engines mention you, which mention competitors, and the exact source pages.
+- [Case studies](https://www.redaccel.com/case-studies/): GPM Music Group, a content creator software company and Peptide Bureau, with the numbers.
 - [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO.
 - [Contact](https://www.redaccel.com/contact/): contact@redaccel.com · calendly.com/redaccel/30min · t.me/chainarenn
 
