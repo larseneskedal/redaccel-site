@@ -14,6 +14,8 @@
 - [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO.
 - [Contact](https://www.redaccel.com/contact/): contact@redaccel.com · calendly.com/redaccel/30min · t.me/chainarenn
 
+- [GEO agencies compared, with citation data](https://www.redaccel.com/geo-agencies-compared/): which agencies ChatGPT, Gemini and AI Overviews name for 28 buyer questions, and which pages they copy the names from. Updated monthly.
+
 ## Articles
 
 One sourced article a week on GEO and AI search. Index: https://www.redaccel.com/blog/
