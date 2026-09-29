@@ -1,7 +1,8 @@
 # How the redaccel.com blog gets written
 
-One article per week, published Tuesday 09:00 Europe/Lisbon by a scheduled
-Cowork task. This file is the brief. Read it fully before writing.
+One article per week, published Tuesday from 09:10 Europe/Lisbon by
+`redaccel/agents/blog/blog_weekly.py` on the Mac mini (it retries Wednesday to
+Friday if Tuesday fails). This file is the brief. Read it fully before writing.
 
 ## The bar
 
@@ -112,6 +113,7 @@ rerun rather than bypassing it.
 
 ## Then
 
-`git push` (from the Mac mini, which holds the credentials). Cloudflare Pages
-builds in about 60 seconds. Verify the live URL returns 200 and the JSON-LD
-parses before reporting done.
+The runner pushes over SSH from the Mac mini. Render (service `redaccel-site`)
+deploys main automatically, usually within 2 minutes, behind Cloudflare's
+proxy. The runner then checks the live URL returns 200, carries the JSON-LD and
+is listed on /blog/ before reporting done.

@@ -451,7 +451,9 @@ def main(argv):
           % (a["slug"], len(strip_tags(a["body_html"]).split()), a["read_minutes"]))
 
     if "--no-git" not in flags:
-        git("add", "-A")
+        # only this article's files, never whatever else is lying in the tree
+        git("add", "--", os.path.relpath(path, ROOT), "site/blog", "site/sitemap.xml",
+            "site/llms.txt", "tools/articles.json", "tools/topic_queue.json")
         git("commit", "-m", "Publish: %s" % a["card_title"])
     return 0
 
