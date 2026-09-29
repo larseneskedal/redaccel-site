@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "ai-visibility-tools-compared",
+      "keyword": "ai visibility tools",
+      "card_title": "AI visibility tools, compared honestly",
+      "card_summary": "What Peec, Ahrefs Brand Radar, Semrush, Otterly and Profound actually sample, their price bands, why their numbers disagree, and when a spreadsheet does the job better.",
+      "date_published": "2026-09-29",
+      "date_modified": "2026-09-29",
+      "read_minutes": 7
+    },
+    {
       "slug": "what-is-ai-visibility",
       "keyword": "ai visibility",
       "card_title": "AI visibility, measured properly",

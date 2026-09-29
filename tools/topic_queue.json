@@ -47,7 +47,9 @@
         "where the numbers disagree and why",
         "when a spreadsheet beats a tool"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-09-29",
+      "url": "https://www.redaccel.com/blog/ai-visibility-tools-compared/"
     },
     {
       "slug": "ai-overview-tracking",
