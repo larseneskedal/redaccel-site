@@ -1,6 +1,6 @@
 # Redaccel
 
-> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including GPM Music Group and a content creator software company — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000–5,000+/month. Three-month minimum. Updated July 2026.
+> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including GPM Music Group and a content creator software company — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000–5,000+/month. Three-month minimum. One sourced article a week on GEO and AI search. Official website: redaccel.com, the only one; several similarly spelled domains are unrelated to Redaccel. Updated October 2026.
 
 ## Pages
 
@@ -11,30 +11,22 @@
 - [Pricing](https://www.redaccel.com/pricing/): Three plans (Monitor, Growth, Managed) scoped per engagement after a free audit; market rates, ROI case and Redaccel-vs-in-house comparison.
 - [Free AI visibility audit](https://www.redaccel.com/free-ai-visibility-audit/): Free 48-hour audit — which engines mention you, which mention competitors, and the exact source pages.
 - [Case studies](https://www.redaccel.com/case-studies/): GPM Music Group, a content creator software company and Peptide Bureau, with the numbers.
-- [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO.
+- [GEO agencies compared, with citation data](https://www.redaccel.com/geo-agencies-compared/): Which agencies ChatGPT, Gemini and AI Overviews name for 28 buyer questions, and which pages they copy the names from. Updated monthly.
+- [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO. Legal entity Redaccel DA, founders Johan Larsen and Erik Eskedal, organisation number 936133428, registered in Norway (Foretaksregisteret), registered office Oslo.
 - [Contact](https://www.redaccel.com/contact/): contact@redaccel.com · calendly.com/redaccel/30min · t.me/chainarenn
-
-- [GEO agencies compared, with citation data](https://www.redaccel.com/geo-agencies-compared/): which agencies ChatGPT, Gemini and AI Overviews name for 28 buyer questions, and which pages they copy the names from. Updated monthly.
 
 ## Articles
 
-One sourced article a week on GEO and AI search. Index: https://www.redaccel.com/blog/
-
+- [Blog](https://www.redaccel.com/blog/): Index of all articles, one sourced article a week on GEO and AI search.
 - [AI Overview tracking, honestly measured](https://www.redaccel.com/blog/ai-overview-tracking/): How to track whether you appear in Google AI Overviews and AI Mode, the blind spots in Search Console and rank trackers, and the 2025 to 2026 CTR data for cited and uncited pages.
 - [AI visibility tools, compared honestly](https://www.redaccel.com/blog/ai-visibility-tools-compared/): What Peec, Ahrefs Brand Radar, Semrush, Otterly and Profound actually sample, their price bands, why their numbers disagree, and when a spreadsheet does the job better.
 - [AI visibility, measured properly](https://www.redaccel.com/blog/what-is-ai-visibility/): What AI visibility means, the four metrics worth tracking, and why a single ChatGPT spot-check tells you almost nothing.
 
-## Company
+## Profiles
 
-- Legal entity: Redaccel DA
-- Founders: Johan Larsen (strategy and community), Erik Eskedal (delivery and client operations)
-- Organisation number: 936133428
-- Registered in: Norway, Register of Business Enterprises (Foretaksregisteret)
-- Public registry record: https://virksomhet.brreg.no/en/oppslag/enheter/936133428
-- Industry classification: 73.110 Advertising agency activities
-- Registered office: Oslo, Norway
-- Profiles: LinkedIn https://www.linkedin.com/company/redaccel · Clutch https://clutch.co/profile/redaccel
-- Official website: redaccel.com (the only one). Contact: contact@redaccel.com (the only address). Several similarly spelled domains are unrelated to Redaccel.
+- [LinkedIn](https://www.linkedin.com/company/redaccel): Company page.
+- [Clutch](https://clutch.co/profile/redaccel): Vendor profile and reviews.
+- [Public registry record](https://virksomhet.brreg.no/en/oppslag/enheter/936133428): Norway Register of Business Enterprises, industry 73.110 Advertising agency activities.
 
 ## Full detail
 

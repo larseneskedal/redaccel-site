@@ -364,9 +364,10 @@ def update_sitemap(articles):
 def update_llms(articles):
     path = os.path.join(SITE_DIR, "llms.txt")
     txt = read(path)
+    # Pure link list: Peec flags any prose line inside an llms.txt section.
     lines = ["## Articles", "",
-             "One sourced article a week on GEO and AI search. Index: %s/blog/"
-             % SITE, ""]
+             "- [Blog](%s/blog/): Index of all articles, one sourced article"
+             " a week on GEO and AI search." % SITE]
     for a in articles:
         lines.append("- [%s](%s/blog/%s/): %s"
                      % (a["card_title"], SITE, a["slug"], a["card_summary"]))
@@ -374,7 +375,7 @@ def update_llms(articles):
     if "## Articles" in txt:
         txt = re.sub(r"## Articles\n(?:.*?\n)*?(?=\n## |\Z)", block, txt, count=1)
     else:
-        txt = txt.replace("## Company", block + "\n## Company", 1)
+        txt = txt.replace("## Profiles", block + "\n## Profiles", 1)
     write(path, txt)
 
 
