@@ -68,7 +68,9 @@
         "tracking methods and their error bars",
         "CTR data when cited vs not"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-10-06",
+      "url": "https://www.redaccel.com/blog/ai-overview-tracking/"
     },
     {
       "slug": "aeo-vs-geo-vs-seo",

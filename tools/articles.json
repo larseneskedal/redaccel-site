@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "ai-overview-tracking",
+      "keyword": "ai overview tracking",
+      "card_title": "AI Overview tracking, honestly measured",
+      "card_summary": "How to track whether you appear in Google AI Overviews and AI Mode, the blind spots in Search Console and rank trackers, and the 2025 to 2026 CTR data for cited and uncited pages.",
+      "date_published": "2026-10-06",
+      "date_modified": "2026-10-06",
+      "read_minutes": 7
+    },
+    {
       "slug": "ai-visibility-tools-compared",
       "keyword": "ai visibility tools",
       "card_title": "AI visibility tools, compared honestly",

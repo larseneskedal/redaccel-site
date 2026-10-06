@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Overview tracking: how to measure it and the real CTR</title>
+<meta name="description" content="AI Overview tracking explained: what Search Console now shows, what it hides, how wrong each method can be, and what being cited does to your click-through rate.">
+<link rel="canonical" href="https://www.redaccel.com/blog/ai-overview-tracking/">
+<meta property="og:title" content="AI Overview tracking, with the error bars left in">
+<meta property="og:description" content="Search Console now shows AI impressions for every site, but no clicks and no queries. Here is how to fill the gaps, and what a citation is worth in CTR.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.redaccel.com/blog/ai-overview-tracking/">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+<script defer src="/assets/js/main.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "AI Overview tracking: how to see if you appear, how wrong each method can be, and what a citation does to clicks",
+      "description": "AI Overview tracking explained: what Search Console now shows, what it hides, how wrong each method can be, and what being cited does to your click-through rate.",
+      "author": {
+        "@type": "Organization",
+        "name": "Redaccel",
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "publisher": {
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "datePublished": "2026-10-06",
+      "dateModified": "2026-10-06",
+      "mainEntityOfPage": "https://www.redaccel.com/blog/ai-overview-tracking/",
+      "about": "ai overview tracking"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redaccel.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.redaccel.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Overview tracking: how to see if you appear, how wrong each method can be, and what a citation does to clicks",
+          "item": "https://www.redaccel.com/blog/ai-overview-tracking/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Google Search Console show AI Overview data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Since 31 August 2026 every site has access to a generative AI performance report showing impressions in AI Overviews and AI Mode by page, country, device and date. It does not show clicks, CTR or queries, and it combines the two features. Clicks from AI features are counted in the main Performance report, mixed in with ordinary blue-link clicks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is AI Mode tracked separately from AI Overviews?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not in Search Console's generative AI report, which covers both together. The two also count differently: every link in an AI Overview shares one position, while AI Mode uses standard position rules and treats each follow-up question as a new query. To see AI Mode on its own, you need a third-party tracker that runs your prompts there repeatedly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What CTR can I expect if I am cited in an AI Overview?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Seer Interactive's 2025 data for informational queries, cited brands averaged 2.07% organic CTR, uncited brands 0.94% and queries with no AI Overview 3.35%. Without one large account the uncited figure is about 1.61%. Seer says this is correlation, since stronger brands are cited more, so treat it as a range rather than a forecast for your site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get my site into AI Overviews?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google says there are no extra requirements beyond normal SEO: the page must be indexed and eligible to show a snippet, and no special schema or AI text file is needed. Check that nosnippet or noindex is not excluding key pages. Beyond that, clear answers to specific sub-questions help in our experience, though no public controlled study has proved it."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell">
+    <a class="wordmark" href="/">redaccel<span class="dot">.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">menu</button>
+    <nav class="site-nav" id="nav" aria-label="Main">
+      <a href="/what-we-do/">What we do</a>
+      <a href="/what-is-geo/">What is GEO?</a>
+      <a href="/geo-vs-seo/">GEO vs SEO</a>
+      <a href="/reddit-marketing-2026/">Reddit in 2026</a>
+      <a href="/blog/" aria-current="page">Blog</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+      <a class="btn btn-primary" href="/free-ai-visibility-audit/">Free AI audit</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="shell">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / <a href="/blog/">blog</a> / ai-overview-tracking</nav>
+    <h1>AI Overview tracking: how to see if you appear, how wrong each method can be, and what a citation does to clicks</h1>
+    <span class="dateline"><span class="flag">Updated October 2026</span> 7 min read</span>
+
+    <div class="extract">
+      <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com &middot; measurement &middot; October 2026</span></div>
+<p><mark>To track AI Overviews you need two sources: Google Search Console's generative AI report, which since 31 August 2026 shows every site its AI impressions by page but no clicks or queries, and a third-party tracker that checks your keywords repeatedly.</mark><sup class="cite"><a href="#src-1">[1]</a></sup> It is worth tracking because citations move clicks: in Seer Interactive's 2025 data, brands cited in an AI Overview averaged 2.07% organic CTR on informational queries, against 0.94% for brands left out<sup class="cite"><a href="#src-5">[5]</a></sup>.</p>
+    </div>
+
+<h2>What is the difference between AI Overviews and AI Mode?</h2>
+<p>AI Overviews are the AI summary that sits on top of a normal results page; AI Mode is a separate, conversational search where the whole answer is AI-generated. Google says AI Overviews are shown only when its systems judge them additive to classic Search, "and as such, often don't trigger", while AI Mode is aimed at queries that need further exploration, reasoning or comparison<sup class="cite"><a href="#src-4">[4]</a></sup>.</p>
+<p>Both may use "query fan-out", issuing several related searches across subtopics to build one answer, and Google says the two "may use different models and techniques, so the set of responses and links they show will vary"<sup class="cite"><a href="#src-4">[4]</a></sup>. Being cited in one tells you little about the other.</p>
+<p>They are also counted differently. In an AI Overview, every link shares a single position on the results page. In AI Mode, standard position rules apply, and a follow-up question counts as a brand new query with its own impressions and clicks<sup class="cite"><a href="#src-3">[3]</a></sup>. A page can look "position 1" in an AI Overview while sitting fifth in the list of sources.</p>
+
+<h2>Can Google Search Console show if you appear in AI Overviews?</h2>
+<p>Yes, at page level, but without clicks or queries. Google launched Search Generative AI performance reports on 3 June 2026 and, as of 31 August 2026, has rolled them out to all websites worldwide<sup class="cite"><a href="#src-1">[1]</a></sup>. The Search version shows impressions, pages, countries, devices and dates, with hourly to monthly granularity<sup class="cite"><a href="#src-1">[1]</a></sup>.</p>
+<p>The limits matter more than the features:</p>
+<ul>
+<li><strong>No clicks or CTR.</strong> The launch post lists impressions only, and says Google may add metrics over time<sup class="cite"><a href="#src-1">[1]</a></sup>.</li>
+<li><strong>No query dimension.</strong> The help page lists pages, countries, dates and devices. It does not list queries, so you can see which URL was shown but not for what<sup class="cite"><a href="#src-2">[2]</a></sup>.</li>
+<li><strong>AI Overviews and AI Mode are combined.</strong> The report covers both features, and the help page describes no filter to separate them<sup class="cite"><a href="#src-2">[2]</a></sup>.</li>
+<li><strong>Deduplicated totals.</strong> If two of your pages appear in the same AI feature, the chart counts one impression<sup class="cite"><a href="#src-2">[2]</a></sup>.</li>
+<li><strong>A volume floor.</strong> Sites with too few AI impressions do not see the report at all<sup class="cite"><a href="#src-2">[2]</a></sup>.</li>
+</ul>
+<p>Clicks do exist, just not there. A click on a link inside an AI Overview or AI Mode counts as a click in the normal Performance report, under the "Web" search type<sup class="cite"><a href="#src-3">[3]</a></sup>, where it is blended with every blue-link click. So Google gives you AI impressions on one screen and AI clicks mixed into another. A clean AI Overview CTR for your own site is not something Google reports today.</p>
+
+<h2>Which tracking methods exist, and how wrong can each one be?</h2>
+<p>Every method answers a narrower question than it appears to, so combine at least two. This is how we compare them.</p>
+<div class="table-wrap">
+<table>
+<caption>Five ways to track AI Overview and AI Mode visibility, what each one sees and where its error comes from (Google documentation checked October 2026).</caption>
+<thead><tr><th>Method</th><th>What it sees</th><th>Main error source</th><th>Best used for</th></tr></thead>
+<tbody>
+<tr><td><strong>Search Console, generative AI report</strong></td><td>Google's own impression log for your site, by page, country, device and date</td><td>No queries, no clicks, AI Overviews and AI Mode combined<sup class="cite"><a href="#src-2">[2]</a></sup></td><td>Which pages earn AI visibility, and the trend</td></tr>
+<tr><td><strong>Search Console, Performance report</strong></td><td>Clicks and impressions, AI features included<sup class="cite"><a href="#src-3">[3]</a></sup></td><td>AI clicks cannot be separated from blue-link clicks</td><td>Whether pages gaining AI impressions also gain or lose clicks</td></tr>
+<tr><td><strong>Rank tracker with an AI Overview flag</strong></td><td>A scheduled snapshot of the results page for your keywords</td><td>One location, one device, one moment, while AI answers change between runs<sup class="cite"><a href="#src-8">[8]</a></sup></td><td>Which keywords trigger an AI Overview and who it cites</td></tr>
+<tr><td><strong>AI visibility tracker</strong></td><td>Repeated runs of prompts you choose, across engines</td><td>Only as good as the prompt set and collection method</td><td>Citation rate over many runs, AI Mode included</td></tr>
+<tr><td><strong>Manual check in your browser</strong></td><td>One answer, for one person, once</td><td>A single sample from a system that rarely repeats itself<sup class="cite"><a href="#src-8">[8]</a></sup></td><td>Spotting a problem, never measuring one</td></tr>
+</tbody>
+</table>
+</div>
+<p>The variance is the part people underrate. SparkToro and Gumshoe had 600 volunteers run 12 prompts through ChatGPT, Claude and Google's AI Overviews (or AI Mode when no Overview showed) a combined 2,961 times. For ChatGPT and Google's AI, the chance of getting the same list of brands in any two responses was under 1 in 100<sup class="cite"><a href="#src-8">[8]</a></sup>. One screenshot of an AI Overview proves that you appeared once. It does not prove you appear.</p>
+<p>Even large studies carry this error. Seer Interactive, whose CTR data we use below, lists among its own limits that it "cannot track AIO in real time" and that its static label of whether a query shows an AI Overview is "a known limitation"<sup class="cite"><a href="#src-5">[5]</a></sup>. For a deeper look at how the paid trackers sample, see our <a href="/blog/ai-visibility-tools-compared/">comparison of AI visibility tools</a>.</p>
+
+<h2>Does being cited in an AI Overview increase clicks?</h2>
+<p>Yes compared with being left out, no compared with a results page that has no AI Overview at all. Seer Interactive's 2026 update covers 53 brands, 5.47 million tracked queries and 2.43 billion organic impressions, with full-year 2025 data plus early 2026<sup class="cite"><a href="#src-5">[5]</a></sup>.</p>
+<div class="table-wrap">
+<table>
+<caption>Informational queries, full-year 2025 average CTR by AI Overview citation status (Seer Interactive, published April 2026).</caption>
+<thead><tr><th>Status on the results page</th><th>Organic CTR</th><th>Paid CTR</th></tr></thead>
+<tbody>
+<tr><td>No AI Overview</td><td>3.35%</td><td>19.75%</td></tr>
+<tr><td>AI Overview, your brand cited</td><td>2.07%</td><td>15.74%</td></tr>
+<tr><td>AI Overview, your brand not cited</td><td>0.94%</td><td>11.19%</td></tr>
+</tbody>
+</table>
+</div>
+<p>Two caveats from Seer itself<sup class="cite"><a href="#src-5">[5]</a></sup>. First, one account made up 47% of the "not cited" impressions at a 0.20% CTR; without it, that row is roughly 1.61%. The gap between cited and uncited is real in this data but smaller than the headline. Second, Seer says it cannot claim causation, because higher-authority brands are also more likely to be cited. Some of the "citation effect" may simply be a strong-brand effect.</p>
+<details class="more"><summary>Read more</summary>
+<p>Seer also reports that organic CTR on queries with an AI Overview rose from a low of 1.3% in December 2025 to 2.4% in February 2026, after more than a year of decline<sup class="cite"><a href="#src-5">[5]</a></sup>. Two months is a short window and Seer's own forecast model had predicted further decline, so treat this as a direction to watch, not a recovery.</p>
+</details>
+
+<h2>How much do AI Overviews reduce clicks overall?</h2>
+<p>A lot, though the size depends on who measured, when and how. Ahrefs compared 300,000 keywords using aggregated Search Console desktop data. Average position 1 CTR on keywords that showed an AI Overview fell from 0.073 in December 2023 to 0.016 in December 2025, which Ahrefs estimates is about 58% lower than it would have been without the AI Overview. Its April 2025 run of the same method found 34.5%<sup class="cite"><a href="#src-6">[6]</a></sup>.</p>
+<p>Pew Research Center measured behaviour rather than CTR. Tracking the browsing of 900 US adults in March 2025, it found users clicked a traditional result on 8% of visits to a results page with an AI summary, against 15% without one. A link inside the summary was clicked on just 1% of those visits<sup class="cite"><a href="#src-7">[7]</a></sup>. That data is now 18 months old, so read it as the early baseline.</p>
+<p>Google's position is different. It says clicks from results pages with AI Overviews are "higher quality", meaning people spend more time on the site<sup class="cite"><a href="#src-4">[4]</a></sup>. Google has not published the data behind that claim, so we class it as unverified, not false.</p>
+<p>We have not found a public, large-sample study of click-through rates from AI Mode as of October 2026. Anyone quoting an AI Mode CTR should be able to name the sample.</p>
+
+<h2>How do you appear in AI Overviews?</h2>
+<p>By Google's account, with ordinary SEO: there are no extra requirements. A page must be indexed and eligible to show with a snippet, and Google says you do not need special schema, AI text files or new markup<sup class="cite"><a href="#src-4">[4]</a></sup>. The reverse also holds: nosnippet, data-nosnippet, max-snippet and noindex limit what can be shown<sup class="cite"><a href="#src-4">[4]</a></sup>, so check that a template has not quietly excluded you.</p>
+<p>Beyond that, separate what is evidenced from what is inferred. Evidenced: the fan-out searches subtopics, and Google says this surfaces a wider and more diverse set of links than a classic web search<sup class="cite"><a href="#src-4">[4]</a></sup>. Inferred, from our own work, not a published study: pages that answer a specific sub-question in their first sentence, and cover the comparisons a buyer would ask next, are easier to cite. We apply that method, but we have no controlled test that isolates its effect, and you should be wary of anyone who claims one. Our piece on <a href="/geo-vs-seo/">how GEO differs from SEO</a> covers where the two overlap.</p>
+
+<h2>What should an AI Overview tracking setup look like?</h2>
+<p>Start with Google's data, add sampling, and report rates with dates. This is the setup we use:</p>
+<ol>
+<li><strong>Export the generative AI report weekly</strong>, by page. It is the only first-party record of your AI impressions, and exports turn unavailable values into zeros<sup class="cite"><a href="#src-2">[2]</a></sup>, so note gaps.</li>
+<li><strong>Join it to the Performance report</strong> for the same pages. If AI impressions rise while clicks fall, you are probably being shown without being chosen.</li>
+<li><strong>Flag AI Overview presence on your keyword list</strong> in a rank tracker, and record the share of keywords where you are cited, not a yes or no.</li>
+<li><strong>Sample your priority prompts repeatedly</strong>, including in AI Mode, which Search Console does not split out. Our guide to <a href="/blog/what-is-ai-visibility/">measuring AI visibility</a> explains prompt sets and run counts.</li>
+<li><strong>Put the month on every number</strong> you report. The 34.5% and 58% figures above came from the same method a year apart.</li>
+</ol>
+<p>If you want a baseline before building this, our <a href="/free-ai-visibility-audit/">free AI visibility audit</a> checks where you are cited today.</p>
+
+    <h2>Frequently asked</h2>
+    <div class="faq-list">
+  <details class="faq-item">
+    <summary>Does Google Search Console show AI Overview data?</summary>
+    <div class="faq-a"><p>Yes. Since 31 August 2026 every site has access to a generative AI performance report showing impressions in AI Overviews and AI Mode by page, country, device and date. It does not show clicks, CTR or queries, and it combines the two features. Clicks from AI features are counted in the main Performance report, mixed in with ordinary blue-link clicks.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Is AI Mode tracked separately from AI Overviews?</summary>
+    <div class="faq-a"><p>Not in Search Console's generative AI report, which covers both together. The two also count differently: every link in an AI Overview shares one position, while AI Mode uses standard position rules and treats each follow-up question as a new query. To see AI Mode on its own, you need a third-party tracker that runs your prompts there repeatedly.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>What CTR can I expect if I am cited in an AI Overview?</summary>
+    <div class="faq-a"><p>In Seer Interactive's 2025 data for informational queries, cited brands averaged 2.07% organic CTR, uncited brands 0.94% and queries with no AI Overview 3.35%. Without one large account the uncited figure is about 1.61%. Seer says this is correlation, since stronger brands are cited more, so treat it as a range rather than a forecast for your site.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>How do I get my site into AI Overviews?</summary>
+    <div class="faq-a"><p>Google says there are no extra requirements beyond normal SEO: the page must be indexed and eligible to show a snippet, and no special schema or AI text file is needed. Check that nosnippet or noindex is not excluding key pages. Beyond that, clear answers to specific sub-questions help in our experience, though no public controlled study has proved it.</p></div>
+  </details>
+    </div>
+
+    <details class="sources">
+      <summary>Sources</summary>
+      <ol>
+        <li id="src-1">Google Search Central Blog, <a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports" rel="noopener">"Introducing Search Generative AI performance reports in Search Console"</a>, Hillel Maoz and Moshe Samet, 3 June 2026, with note on worldwide rollout as of 31 August 2026.</li>
+        <li id="src-2">Google Search Console Help, <a href="https://support.google.com/webmasters/answer/16984139" rel="noopener">"Generative AI performance report (Search)"</a>, checked October 2026.</li>
+        <li id="src-3">Google Search Console Help, <a href="https://support.google.com/webmasters/answer/7042828" rel="noopener">"Performance report data"</a>, methodology for AI Mode and AI Overviews, checked October 2026.</li>
+        <li id="src-4">Google Search Central, <a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">"AI features and your website"</a>, last updated 10 December 2025, checked October 2026.</li>
+        <li id="src-5">Seer Interactive, <a href="https://www.seerinteractive.com/insights/aio-impact-on-google-ctr-2026-update" rel="noopener">"AIO Impact on Google CTR: 2026 Update"</a>, Tracy McDonald, Hannah Cooley and Marketa Williams, 24 April 2026. 53 brands, 5.47M tracked queries, 2.43B organic impressions, January 2025 to February 2026.</li>
+        <li id="src-6">Ahrefs, <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update/" rel="noopener">"Update: AI Overviews Reduce Clicks by 58%"</a>, Ryan Law with Xibeijia Guan, 4 February 2026. 300,000 keywords, desktop Search Console data, December 2023 vs December 2025.</li>
+        <li id="src-7">Pew Research Center, <a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/" rel="noopener">"Google users are less likely to click on links when an AI summary appears in the results"</a>, 22 July 2025. Browsing data from 900 US adults, March 2025.</li>
+        <li id="src-8">SparkToro, <a href="https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/" rel="noopener">"NEW Research: AIs are highly inconsistent when recommending brands or products"</a>, Rand Fishkin with Patrick O'Donnell (Gumshoe), 28 January 2026. 600 volunteers, 12 prompts, 2,961 runs.</li>
+      </ol>
+    </details>
+
+    <div class="cta-panel">
+      <h2>Find out if AI recommends you.</h2>
+      <p>The free audit shows which engines mention you, which recommend competitors instead, and the exact pages behind those answers.</p>
+      <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free audit</a>
+      <p class="small">48 hours &middot; no call &middot; no mailing list</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div>
+        <a class="wordmark" href="/">redaccel<span class="dot">.</span></a>
+        <p style="margin-top:.8rem;max-width:22rem">Generative engine optimization agency. Built by Reddit-marketing veterans, focused on one metric: share of voice in AI answers.</p>
+      </div>
+      <div>
+        <h2>Answers</h2>
+        <ul>
+          <li><a href="/what-is-geo/">What is GEO?</a></li>
+          <li><a href="/geo-vs-seo/">GEO vs SEO</a></li>
+          <li><a href="/reddit-marketing-2026/">Reddit in 2026</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/pricing/">How much does GEO cost?</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/what-we-do/">What we do</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:contact@redaccel.com">contact@redaccel.com</a></li>
+          <li><a href="https://calendly.com/redaccel/30min" rel="noopener">Book 30 minutes</a></li>
+          <li><a href="https://t.me/chainarenn" rel="noopener">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Redaccel DA &middot; Org. 936133428 &middot; Oslo, Norway</span>
+      <span>Updated October 2026</span>
+      <span><a href="/llms.txt">/llms.txt</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

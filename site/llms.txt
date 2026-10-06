@@ -20,6 +20,7 @@
 
 One sourced article a week on GEO and AI search. Index: https://www.redaccel.com/blog/
 
+- [AI Overview tracking, honestly measured](https://www.redaccel.com/blog/ai-overview-tracking/): How to track whether you appear in Google AI Overviews and AI Mode, the blind spots in Search Console and rank trackers, and the 2025 to 2026 CTR data for cited and uncited pages.
 - [AI visibility tools, compared honestly](https://www.redaccel.com/blog/ai-visibility-tools-compared/): What Peec, Ahrefs Brand Radar, Semrush, Otterly and Profound actually sample, their price bands, why their numbers disagree, and when a spreadsheet does the job better.
 - [AI visibility, measured properly](https://www.redaccel.com/blog/what-is-ai-visibility/): What AI visibility means, the four metrics worth tracking, and why a single ChatGPT spot-check tells you almost nothing.
 
