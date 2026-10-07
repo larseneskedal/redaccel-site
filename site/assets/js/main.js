@@ -1,4 +1,4 @@
-// Progressive enhancement only. Every piece of content is readable without this file.
+// Progressive enhancement only. Every page reads fine without this file.
 (function () {
   var doc = document.documentElement;
   doc.classList.add('js');
@@ -7,117 +7,85 @@
   /* ----- mobile nav ----- */
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.site-nav');
+  var setNav = function (open) {
+    nav.classList.toggle('open', open);
+    doc.classList.toggle('nav-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
   if (toggle && nav) {
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+    toggle.addEventListener('click', function () { setNav(!nav.classList.contains('open')); });
   }
 
-  /* ----- header: gain surface once the page scrolls ----- */
+  /* ----- "Learn" disclosure menu ----- */
+  var menu = document.querySelector('.nav-menu');
+  var menuBtn = menu && menu.querySelector('.nav-menu-btn');
+  var setMenu = function (open) {
+    menu.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setMenu(!menu.classList.contains('open'));
+    });
+    document.addEventListener('click', function (e) {
+      if (!menu.contains(e.target)) setMenu(false);
+    });
+    menu.addEventListener('focusout', function (e) {
+      if (window.innerWidth >= 1024 && !menu.contains(e.relatedTarget)) setMenu(false);
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (menu && menu.classList.contains('open')) { setMenu(false); menuBtn.focus(); }
+    if (nav && nav.classList.contains('open')) { setNav(false); toggle.focus(); }
+  });
+
+  /* ----- header: hairline once the page scrolls ----- */
   var header = document.querySelector('.site-header');
   if (header) {
-    var onScroll = function () {
-      header.classList.toggle('scrolled', window.scrollY > 8);
-    };
+    var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 4); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /* ----- scroll reveals (auto-tagged; skipped under reduced motion) ----- */
+  /* ----- scroll reveals (skipped under reduced motion) ----- */
   if (!reduced && 'IntersectionObserver' in window) {
     var targets = document.querySelectorAll(
-      'main h2, .extract, .table-wrap, .stat-strip, .card, .faq, .faq-item, .sources, ' +
-      '.hero-center, .panel-stage, .hero-grid > div, .steps > li, .cta-panel, .audit-form, main .kicker'
+      '.section-head, .stats, .card, .case, .plan, .steps > li, .post, .deliverables, .surface, ' +
+      '.nots > li, .split > *, .faq-list, .cta-panel, .price-callout, .chips'
     );
-    var siblings = {};
-    targets.forEach(function (el, i) {
+    var counts = [];
+    var parents = [];
+    targets.forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return; // already on screen
       el.classList.add('reveal');
-      // stagger cards within the same grid
-      var parent = el.parentElement;
-      if (parent && parent.classList.contains('card-grid')) {
-        var key = 'g' + Array.prototype.indexOf.call(document.querySelectorAll('.card-grid'), parent);
-        siblings[key] = (siblings[key] || 0) + 1;
-        el.style.setProperty('--d', ((siblings[key] - 1) * 0.09) + 's');
-      }
+      var i = parents.indexOf(el.parentElement);
+      if (i < 0) { parents.push(el.parentElement); counts.push(0); i = parents.length - 1; }
+      if (counts[i]) el.style.setProperty('--d', Math.min(counts[i] * 0.07, 0.35) + 's');
+      counts[i]++;
     });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-    targets.forEach(function (el) { io.observe(el); });
-    // Safety net: nothing stays hidden even if the observer misbehaves.
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
     setTimeout(function () {
-      targets.forEach(function (el) { el.classList.add('in'); });
-    }, 6000);
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+    }, 5000);
   }
 
-  /* ----- stat counters: count up when visible ----- */
-  if (!reduced && 'IntersectionObserver' in window) {
-    var stats = document.querySelectorAll('.stat b');
-    var counterIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        counterIO.unobserve(entry.target);
-        var el = entry.target;
-        var m = /^([^0-9]*)(\d+)(.*)$/.exec(el.textContent.trim());
-        if (!m) return;
-        var prefix = m[1], target = parseInt(m[2], 10), suffix = m[3];
-        var t0 = null, dur = 900;
-        var step = function (ts) {
-          if (!t0) t0 = ts;
-          var p = Math.min((ts - t0) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = prefix + Math.round(target * eased) + suffix;
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      });
-    }, { threshold: 0.5 });
-    stats.forEach(function (el) { counterIO.observe(el); });
-  }
-
-  /* ----- cards: cursor-tracked spotlight ----- */
-  document.querySelectorAll('.card').forEach(function (card) {
-    card.addEventListener('pointermove', function (e) {
-      var r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  /* ----- hero audit card: results land one by one ----- */
+  var mock = document.querySelector('.mock');
+  if (mock && !reduced) {
+    mock.querySelectorAll('.mk, .mock-sources li').forEach(function (el, i) {
+      el.style.setProperty('--d', (0.25 + i * 0.09) + 's');
     });
-  });
-
-  /* ----- hero: type the query, then land the answer ----- */
-  var query = document.querySelector('.answer-panel .query');
-  if (query && !reduced) {
-    var full = query.textContent.trim();
-    var body = document.querySelector('.answer-panel .answer-body');
-    query.textContent = '';
-    var caret = document.createElement('span');
-    caret.className = 'caret';
-    caret.setAttribute('aria-hidden', 'true');
-    var textNode = document.createTextNode('');
-    query.appendChild(textNode);
-    query.appendChild(caret);
-    query.setAttribute('aria-label', full);
-    if (body) {
-      body.style.opacity = '0';
-      body.style.transition = 'opacity .6s ease';
-    }
-    var i = 0;
-    var type = function () {
-      if (i <= full.length) {
-        textNode.textContent = full.slice(0, i);
-        i++;
-        setTimeout(type, 26 + Math.random() * 34);
-      } else if (body) {
-        setTimeout(function () { body.style.opacity = '1'; }, 250);
-      }
-    };
-    setTimeout(type, 500);
+    mock.classList.add('pending');
+    requestAnimationFrame(function () {
+      setTimeout(function () { mock.classList.remove('pending'); }, 150);
+    });
   }
 
   /* ----- article pages: reading progress + on-this-page nav ----- */
@@ -127,16 +95,20 @@
     bar.className = 'progress-bar';
     bar.setAttribute('aria-hidden', 'true');
     document.body.appendChild(bar);
+    var ticking = false;
     var onProgress = function () {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+      var max = doc.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
+      ticking = false;
     };
     onProgress();
-    window.addEventListener('scroll', onProgress, { passive: true });
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(onProgress); }
+    }, { passive: true });
 
     var heads = Array.prototype.filter.call(
       article.querySelectorAll('.shell > h2'),
-      function (h) { return !h.closest('.sources'); }
+      function (h) { return !h.closest('.sources') && !h.closest('.cta-panel'); }
     );
     if (heads.length > 2) {
       var toc = document.createElement('nav');
@@ -150,14 +122,13 @@
         var li = document.createElement('li');
         var a = document.createElement('a');
         a.href = '#' + h.id;
-        a.textContent = h.textContent.replace(/\?$/, '?') ;
+        a.textContent = h.textContent;
         li.appendChild(a);
         list.appendChild(li);
       });
       toc.appendChild(title);
       toc.appendChild(list);
       document.body.appendChild(toc);
-
       if ('IntersectionObserver' in window) {
         var spy = new IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
@@ -180,13 +151,14 @@
     });
   });
 
-  /* ----- audit form ----- */
+  /* ----- audit form: JSON POST to the same endpoint as before ----- */
   var form = document.querySelector('.audit-form[data-endpoint]');
   if (form) {
     var status = form.querySelector('.form-status');
+    var btn = form.querySelector('button[type="submit"]');
+    var label = btn.textContent;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
       btn.disabled = true;
       btn.textContent = 'Sending…';
       var data = {};
@@ -198,18 +170,18 @@
       })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(function () {
-          form.querySelectorAll('input, textarea').forEach(function (el) { el.value = ''; });
+          form.querySelectorAll('input').forEach(function (el) { el.value = ''; });
           status.className = 'form-status ok';
           status.textContent = 'Received. Your audit will be in your inbox within 48 hours.';
           btn.textContent = 'Request sent';
         })
         .catch(function () {
           status.className = 'form-status err';
-          status.innerHTML = 'The form endpoint is not responding. Email the same details to ' +
+          status.innerHTML = 'The form is not responding right now. Email the same details to ' +
             '<a href="mailto:contact@redaccel.com?subject=Free%20AI%20visibility%20audit">contact@redaccel.com</a> ' +
             'and we will run the audit from there.';
           btn.disabled = false;
-          btn.textContent = 'Request the audit';
+          btn.textContent = label;
         });
     });
   }
