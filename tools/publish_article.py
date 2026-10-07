@@ -134,6 +134,7 @@ ARTICLE_TMPL = u"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{head_assets}
 <title>{title}</title>
 <meta name="description" content="{meta_description}">
 <link rel="canonical" href="{url}">
@@ -141,9 +142,8 @@ ARTICLE_TMPL = u"""<!DOCTYPE html>
 <meta property="og:description" content="{og_description}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="{url}">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
-<script defer src="/assets/js/main.js"></script>
+<meta property="og:image" content="{site}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {jsonld}
 </script>
@@ -153,9 +153,9 @@ ARTICLE_TMPL = u"""<!DOCTYPE html>
 
 <main id="main" class="article">
   <div class="shell">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / <a href="/blog/">blog</a> / {slug}</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/blog/">blog</a> <span aria-hidden="true">/</span> <span>{slug}</span></nav>
     <h1>{h1}</h1>
-    <span class="dateline"><span class="flag">{dateline_flag}</span> {read_minutes} min read</span>
+    <div class="dateline"><span class="flag">{dateline_flag}</span> <span>{read_minutes} min read</span> <span>By Redaccel</span></div>
 
     <div class="extract">
       <div class="extract-chip"><span class="tag">Extract</span> <span>{extract_chip}</span></div>
@@ -175,6 +175,8 @@ ARTICLE_TMPL = u"""<!DOCTYPE html>
 {sources_html}
       </ol>
     </details>
+
+    <div class="byline-box">{mark}<p>Written by Redaccel, a Reddit and AI visibility agency in Oslo. Every figure links to where it came from. Spotted something wrong? <a href="mailto:contact@redaccel.com">contact@redaccel.com</a></p></div>
 
 {cta}
   </div>
@@ -238,6 +240,9 @@ def render_article(a):
     for i, s in enumerate(a["sources"], 1):
         sources_html.append('        <li id="src-%d">%s</li>' % (i, s))
     return ARTICLE_TMPL.format(
+        head_assets=_parts.HEAD_ASSETS,
+        site=SITE,
+        mark=_parts._MARK % {"c": "#fff"},
         title=esc(a["title"]),
         meta_description=esc(a["meta_description"]),
         og_title=esc(a.get("og_title") or a["title"]),
@@ -264,6 +269,7 @@ HUB_TMPL = u"""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{head_assets}
 <title>GEO and AI search: field notes from Redaccel</title>
 <meta name="description" content="Weekly, sourced writing on generative engine optimization: how AI engines pick citations, how to measure AI visibility, and what actually moves share of voice. New article every Tuesday.">
 <link rel="canonical" href="{site}/blog/">
@@ -271,9 +277,8 @@ HUB_TMPL = u"""<!DOCTYPE html>
 <meta property="og:description" content="One sourced article a week on getting brands cited in AI answers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{site}/blog/">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
-<script defer src="/assets/js/main.js"></script>
+<meta property="og:image" content="{site}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {jsonld}
 </script>
@@ -281,23 +286,30 @@ HUB_TMPL = u"""<!DOCTYPE html>
 <body>
 {header}
 
-<main id="main" class="article">
-  <div class="shell">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / blog</nav>
-    <h1>Field notes on GEO</h1>
-    <span class="dateline"><span class="flag">New article every Tuesday</span> {count} published</span>
-
-    <div class="extract">
-      <div class="extract-chip"><span class="tag">What this is</span> <span>redaccel.com &middot; blog &middot; {updated}</span></div>
-      <p><mark>One sourced article a week on how AI engines choose what to cite, and what that means for your brand.</mark> No recycled SEO advice, no unsourced statistics. Every figure links to where it came from, and we say plainly when the honest answer is "nobody knows yet".</p>
+<main id="main" class="blog-hub">
+  <section class="page-hero">
+    <div class="shell">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <span>blog</span></nav>
+      <div class="hub-head">
+        <h1>Field notes on GEO</h1>
+        <p class="lede">One sourced article a week on how AI engines choose what to cite, and what that means for your brand.</p>
+        <div class="dateline"><span class="flag">New article every Tuesday</span> <span>{count} published</span></div>
+      </div>
+      <div class="extract pricing-extract">
+        <div class="extract-chip"><span class="tag">What this is</span> <span>redaccel.com &middot; blog &middot; {updated}</span></div>
+        <p><mark>One sourced article a week on how AI engines choose what to cite, and what that means for your brand.</mark> No recycled SEO advice, no unsourced statistics. Every figure links to where it came from, and we say plainly when the honest answer is "nobody knows yet".</p>
+      </div>
     </div>
+  </section>
 
-    <div class="card-grid">
+  <section class="section section-tight">
+    <div class="shell">
+      <div class="post-list">
 {cards}
-    </div>
-
+      </div>
 {cta}
-  </div>
+    </div>
+  </section>
 </main>
 
 {footer}
@@ -309,18 +321,17 @@ HUB_TMPL = u"""<!DOCTYPE html>
 def render_hub(articles):
     cards = []
     for i, a in enumerate(articles):
-        featured = ' card-featured' if i == 0 else ''
-        flag = ('      <div class="card-flag">Latest</div>\n' if i == 0 else '')
+        featured = " post-featured" if i == 0 else ""
+        flag = '        <span class="badge">Latest</span>\n' if i == 0 else ""
         cards.append(
-            '      <div class="card%s">\n%s'
-            '        <h3><a href="/blog/%s/">%s</a></h3>\n'
+            '      <article class="post%s">\n%s'
+            '        <h2><a href="/blog/%s/">%s</a></h2>\n'
             '        <p>%s</p>\n'
-            '        <p class="card-cta"><a href="/blog/%s/">Read &rarr;</a> '
-            '<span class="small">%s &middot; %s min</span></p>\n'
-            '      </div>' % (featured, flag, a["slug"], esc(a["card_title"]),
-                              esc(a["card_summary"]), a["slug"],
-                              pretty_date(a["date_published"]),
-                              a["read_minutes"]))
+            '        <p class="post-meta"><span>%s</span><span>%s min read</span></p>\n'
+            '      </article>' % (featured, flag, a["slug"], esc(a["card_title"]),
+                                  esc(a["card_summary"]),
+                                  pretty_date(a["date_published"]),
+                                  a["read_minutes"]))
     items = []
     for i, a in enumerate(articles, 1):
         items.append({"@type": "ListItem", "position": i,
@@ -336,7 +347,7 @@ def render_hub(articles):
             {"@type": "ItemList", "itemListElement": items},
         ]}, indent=2, ensure_ascii=False)
     updated = month_year(articles[0]["date_published"]) if articles else "August 2026"
-    return HUB_TMPL.format(site=SITE, header=_parts.header("/blog/"),
+    return HUB_TMPL.format(site=SITE, head_assets=_parts.HEAD_ASSETS, header=_parts.header("/blog/"),
                            jsonld=jsonld, cards="\n".join(cards),
                            count=("%d article%s" % (len(articles), "" if len(articles) == 1 else "s")),
                            updated=updated, cta=_parts.CTA,

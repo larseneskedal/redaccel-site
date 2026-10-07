@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css?v=20261007">
+<script defer src="/assets/js/main.js?v=20261007"></script>
 <title>AI visibility: what it is and how to measure it</title>
 <meta name="description" content="AI visibility is how often AI engines name your brand when buyers ask. The four metrics worth tracking, the sampling maths, and how to see AI traffic in GA4.">
 <link rel="canonical" href="https://www.redaccel.com/blog/what-is-ai-visibility/">
@@ -10,9 +17,8 @@
 <meta property="og:description" content="Only 12% of AI-cited URLs rank in Google's top 10. Your rankings do not tell you whether ChatGPT recommends you. Here is what does.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://www.redaccel.com/blog/what-is-ai-visibility/">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/css/main.css">
-<script defer src="/assets/js/main.js"></script>
+<meta property="og:image" content="https://www.redaccel.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -109,27 +115,39 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-  <div class="shell">
-    <a class="wordmark" href="/">redaccel<span class="dot">.</span></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav">menu</button>
+  <div class="shell header-row">
+    <a class="wordmark" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
     <nav class="site-nav" id="nav" aria-label="Main">
-      <a href="/what-we-do/">What we do</a>
-      <a href="/what-is-geo/">What is GEO?</a>
-      <a href="/geo-vs-seo/">GEO vs SEO</a>
-      <a href="/reddit-marketing-2026/">Reddit in 2026</a>
-      <a href="/blog/" aria-current="page">Blog</a>
-      <a href="/pricing/">Pricing</a>
-      <a href="/about/">About</a>
-      <a class="btn btn-primary" href="/free-ai-visibility-audit/">Free AI audit</a>
+      <div class="nav-links">
+        <a class="nav-link" href="/what-we-do/">What we do</a>
+        <a class="nav-link" href="/case-studies/">Case studies</a>
+        <a class="nav-link" href="/pricing/">Pricing</a>
+        <div class="nav-menu" data-current="true">
+          <button class="nav-link nav-menu-btn" type="button" aria-expanded="false" aria-controls="nav-learn">Learn</button>
+          <div class="nav-menu-panel" id="nav-learn">
+            <a href="/what-is-geo/"><b>What is GEO?</b><span>The plain definition, with sources</span></a>
+            <a href="/geo-vs-seo/"><b>GEO vs SEO</b><span>What changes and what carries over</span></a>
+            <a href="/reddit-marketing-2026/"><b>Reddit in 2026</b><span>Why engines cite Reddit, and what survives</span></a>
+            <a href="/geo-agencies-compared/"><b>GEO agencies compared</b><span>30 days of citation data</span></a>
+            <a href="/blog/" aria-current="page"><b>Blog</b><span>One sourced article every Tuesday</span></a>
+          </div>
+        </div>
+        <a class="nav-link" href="/about/">About</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="/contact/">Contact</a>
+        <a class="btn btn-primary btn-sm" href="/free-ai-visibility-audit/">Free AI audit</a>
+      </div>
     </nav>
   </div>
 </header>
 
 <main id="main" class="article">
   <div class="shell">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / <a href="/blog/">blog</a> / what-is-ai-visibility</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/blog/">blog</a> <span aria-hidden="true">/</span> <span>what-is-ai-visibility</span></nav>
     <h1>What is AI visibility, and how do you actually measure it?</h1>
-    <span class="dateline"><span class="flag">Updated August 2026</span> 6 min read</span>
+    <div class="dateline"><span class="flag">Updated August 2026</span> <span>6 min read</span> <span>By Redaccel</span></div>
 
     <div class="extract">
       <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com &middot; measurement &middot; August 2026</span></div>
@@ -247,54 +265,68 @@
       </ol>
     </details>
 
-    <div class="cta-panel">
+    <div class="byline-box"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><p>Written by Redaccel, a Reddit and AI visibility agency in Oslo. Every figure links to where it came from. Spotted something wrong? <a href="mailto:contact@redaccel.com">contact@redaccel.com</a></p></div>
+
+    <aside class="cta-panel" aria-label="Free AI visibility audit">
+      <p class="eyebrow">Free AI visibility audit</p>
       <h2>Find out if AI recommends you.</h2>
-      <p>The free audit shows which engines mention you, which recommend competitors instead, and the exact pages behind those answers.</p>
-      <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free audit</a>
-      <p class="small">48 hours &middot; no call &middot; no mailing list</p>
-    </div>
+      <p>Which engines mention you, which recommend competitors instead, and the exact pages behind those answers.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free audit</a>
+        <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+      </div>
+    </aside>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="shell">
-    <div class="footer-grid">
+    <div class="footer-cta">
       <div>
-        <a class="wordmark" href="/">redaccel<span class="dot">.</span></a>
-        <p style="margin-top:.8rem;max-width:22rem">Generative engine optimization agency. Built by Reddit-marketing veterans, focused on one metric: share of voice in AI answers.</p>
+        <p class="eyebrow">Free &middot; 48 hours &middot; no call</p>
+        <p class="footer-cta-line">See which AI engines recommend you, and which recommend your competitors instead.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI audit</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+        <p>Reddit and AI visibility agency. We measure which sources AI engines cite in your category, then earn you a place in them.</p>
       </div>
       <div>
-        <h2>Answers</h2>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/what-we-do/">What we do</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/case-studies/">Case studies</a></li>
+          <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Learn</h2>
         <ul>
           <li><a href="/what-is-geo/">What is GEO?</a></li>
           <li><a href="/geo-vs-seo/">GEO vs SEO</a></li>
           <li><a href="/reddit-marketing-2026/">Reddit in 2026</a></li>
+          <li><a href="/geo-agencies-compared/">GEO agencies compared</a></li>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/pricing/">How much does GEO cost?</a></li>
         </ul>
       </div>
       <div>
         <h2>Company</h2>
         <ul>
-          <li><a href="/what-we-do/">What we do</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="/contact/">Contact</a></li>
-          <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Contact</h2>
-        <ul>
           <li><a href="mailto:contact@redaccel.com">contact@redaccel.com</a></li>
           <li><a href="https://calendly.com/redaccel/30min" rel="noopener">Book 30 minutes</a></li>
-          <li><a href="https://t.me/chainarenn" rel="noopener">Telegram</a></li>
+          <li><a href="https://www.linkedin.com/company/redaccel" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-meta">
       <span>&copy; 2026 Redaccel DA &middot; Org. 936133428 &middot; Oslo, Norway</span>
       <span>Updated August 2026</span>
-      <span><a href="/llms.txt">/llms.txt</a></span>
+      <span><a href="/llms.txt">llms.txt</a> &middot; <a href="/sitemap.xml">Sitemap</a></span>
     </div>
   </div>
 </footer>
