@@ -57,8 +57,12 @@
     );
     var counts = [];
     var parents = [];
-    targets.forEach(function (el) {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return; // already on screen
+    // Read every position first, then write classes, so the browser lays out once.
+    var fold = window.innerHeight * 0.9;
+    var below = Array.prototype.filter.call(targets, function (el) {
+      return el.getBoundingClientRect().top >= fold; // skip what is already on screen
+    });
+    below.forEach(function (el) {
       el.classList.add('reveal');
       var i = parents.indexOf(el.parentElement);
       if (i < 0) { parents.push(el.parentElement); counts.push(0); i = parents.length - 1; }

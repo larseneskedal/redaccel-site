@@ -28,7 +28,7 @@ TAIL_ITEMS = [
 
 # Head assets every page carries, right after the viewport meta. Bump ASSET_VERSION
 # whenever main.css or main.js changes so Cloudflare and browsers fetch the new file.
-ASSET_VERSION = "20261007"
+ASSET_VERSION = "20261007b"
 HEAD_ASSETS = """<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
