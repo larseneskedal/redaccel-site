@@ -102,8 +102,10 @@
         "internal links where they fit: /what-is-geo/, /geo-vs-seo/, /pricing/, /geo-agencies-compared/",
         "no superlatives about Redaccel: never 'the best', 'guaranteed results', 'AI-proof', 'perfect visibility'"
       ],
-      "status": "queued",
-      "reason": "Moved to the front 2026-10-07, Johan approved on the deck: Peec VERY_HIGH content brief 01a0a5d1 (2026-09-15), how-to guide on evaluating and hiring a GEO agency, about 135 potential citations, an unbranded buyer question where Redaccel has 0.0% share of voice. Earlier draft: redaccel/os-v2/geo/content-draft-hiring-a-geo-agency.md."
+      "status": "published",
+      "reason": "Moved to the front 2026-10-07, Johan approved on the deck: Peec VERY_HIGH content brief 01a0a5d1 (2026-09-15), how-to guide on evaluating and hiring a GEO agency, about 135 potential citations, an unbranded buyer question where Redaccel has 0.0% share of voice. Earlier draft: redaccel/os-v2/geo/content-draft-hiring-a-geo-agency.md.",
+      "published": "2026-10-07",
+      "url": "https://www.redaccel.com/blog/choosing-a-geo-agency/"
     },
     {
       "slug": "aeo-vs-geo-vs-seo",

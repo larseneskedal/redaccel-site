@@ -18,6 +18,7 @@
 ## Articles
 
 - [Blog](https://www.redaccel.com/blog/): Index of all articles, one sourced article a week on GEO and AI search.
+- [How to choose a GEO agency](https://www.redaccel.com/blog/choosing-a-geo-agency/): A buyer's checklist for hiring a GEO agency: what a real AI visibility audit shows, sales-call red flags, pricing, ROI measurement, and when not to hire anyone. Written by an agency, bias declared.
 - [AI Overview tracking, honestly measured](https://www.redaccel.com/blog/ai-overview-tracking/): How to track whether you appear in Google AI Overviews and AI Mode, the blind spots in Search Console and rank trackers, and the 2025 to 2026 CTR data for cited and uncited pages.
 - [AI visibility tools, compared honestly](https://www.redaccel.com/blog/ai-visibility-tools-compared/): What Peec, Ahrefs Brand Radar, Semrush, Otterly and Profound actually sample, their price bands, why their numbers disagree, and when a spreadsheet does the job better.
 - [AI visibility, measured properly](https://www.redaccel.com/blog/what-is-ai-visibility/): What AI visibility means, the four metrics worth tracking, and why a single ChatGPT spot-check tells you almost nothing.

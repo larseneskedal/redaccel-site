@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "choosing-a-geo-agency",
+      "keyword": "geo agency",
+      "card_title": "How to choose a GEO agency",
+      "card_summary": "A buyer's checklist for hiring a GEO agency: what a real AI visibility audit shows, sales-call red flags, pricing, ROI measurement, and when not to hire anyone. Written by an agency, bias declared.",
+      "date_published": "2026-10-07",
+      "date_modified": "2026-10-07",
+      "read_minutes": 7
+    },
+    {
       "slug": "ai-overview-tracking",
       "keyword": "ai overview tracking",
       "card_title": "AI Overview tracking, honestly measured",
