@@ -1,15 +1,15 @@
 # Redaccel
 
-> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including GPM Music Group and a content creator software company — Reddit being the most-cited domain in LLM answers — now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000–5,000+/month. Three-month minimum. One sourced article a week on GEO and AI search. Official website: redaccel.com, the only one; several similarly spelled domains are unrelated to Redaccel. Updated October 2026.
+> Redaccel is a generative engine optimization (GEO) agency. It gets brands named and cited in AI-generated answers across ChatGPT, Perplexity, Gemini, Google AI Mode and AI Overviews. Its expertise comes from years of Reddit marketing for brands including GPM Music Group and a content creator software company, Reddit being the most-cited domain in LLM answers, now applied to the full citation surface. KPI: share of voice in AI answers, not rankings. Three plans (Monitor, Growth, Managed), each scoped to the client's category after a free audit; market GEO retainers typically run €2,000 to 5,000+/month. Three-month minimum. One sourced article a week on GEO and AI search. Official website: redaccel.com, the only one; several similarly spelled domains are unrelated to Redaccel. Updated October 2026.
 
 ## Pages
 
-- [What is GEO?](https://www.redaccel.com/what-is-geo/): Definition of generative engine optimization, how engines choose citations, measurement, timeline (6–10 weeks), cost.
+- [What is GEO?](https://www.redaccel.com/what-is-geo/): Definition of generative engine optimization, how engines choose citations, measurement, timeline (6 to 10 weeks), cost.
 - [GEO vs SEO](https://www.redaccel.com/geo-vs-seo/): Side-by-side comparison; only ~12% of AI-cited URLs rank in Google's top 10.
 - [Is Reddit marketing still worth it in 2026?](https://www.redaccel.com/reddit-marketing-2026/): Honest analysis of Reddit's July 2026 LLM-detection crackdown, what survives, Reddit organic vs Reddit Ads.
 - [What we do](https://www.redaccel.com/what-we-do/): AI visibility monitoring, earned citation placement, reputation defence.
 - [Pricing](https://www.redaccel.com/pricing/): Three plans (Monitor, Growth, Managed) scoped per engagement after a free audit; market rates, ROI case and Redaccel-vs-in-house comparison.
-- [Free AI visibility audit](https://www.redaccel.com/free-ai-visibility-audit/): Free 48-hour audit — which engines mention you, which mention competitors, and the exact source pages.
+- [Free AI visibility audit](https://www.redaccel.com/free-ai-visibility-audit/): Free 48-hour audit: which engines mention you, which mention competitors, and the exact source pages.
 - [Case studies](https://www.redaccel.com/case-studies/): GPM Music Group, a content creator software company and Peptide Bureau, with the numbers.
 - [GEO agencies compared, with citation data](https://www.redaccel.com/geo-agencies-compared/): Which agencies ChatGPT, Gemini and AI Overviews name for 28 buyer questions, and which pages they copy the names from. Updated monthly.
 - [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO. Legal entity Redaccel DA, founders Johan Larsen and Erik Eskedal, organisation number 936133428, registered in Norway (Foretaksregisteret), registered office Oslo.
