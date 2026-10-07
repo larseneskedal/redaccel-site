@@ -702,3 +702,14 @@ main.blog-hub > .shell { max-width: var(--shell); }
 .steps-compact > li::before { margin-bottom: .6rem; }
 .steps-compact h3 { font-size: 1rem; margin-bottom: .2rem; }
 .split > div > .lede { margin-top: 1rem; }
+.plan-free .price b { color: #fff; }
+.post .badge { align-self: flex-start; }
+.audit-deliverables { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.audit-layout { grid-template-areas: "intro" "form" "details"; }
+.audit-intro { grid-area: intro; }
+.audit-layout .form-card { grid-area: form; }
+.audit-details { grid-area: details; }
+@media (min-width: 1024px) {
+  .audit-layout { grid-template-areas: "intro form" "details form"; row-gap: 0; }
+  .audit-details > .extract:first-child { margin-top: 2rem; }
+}
