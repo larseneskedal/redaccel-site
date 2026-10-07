@@ -93,13 +93,13 @@ CASES = [
         "slug": "peptide-bureau",
         "name": "Peptide Bureau",
         "short": "Peptide Bureau",
-        "category": "Our own brand, client zero: a peptide education site with an affiliate model",
+        "category": "A peptide education site with an affiliate model",
         "period": "August to September 2026, ongoing",
-        "deliverables": "More than 100 Reddit comment placements across 60 subreddits, run through our own delivery platform",
+        "deliverables": "More than 100 Reddit comment placements across 60 subreddits, each logged and survival-checked",
         "title": "Case study: Peptide Bureau, from zero to a 300 percent rise in AI visibility, built on Reddit",
-        "meta": "Peptide Bureau is Redaccel's own brand and client zero. It was built from nothing with Reddit as the lead channel, and its AI visibility for buyer questions rose more than 300 percent once the campaign started.",
+        "meta": "Peptide Bureau is a peptide education site with an affiliate model. It was built from nothing with Reddit as the lead channel, and its AI visibility for buyer questions rose more than 300 percent once the campaign started.",
         "stats": [("300%+", "rise in AI visibility since the campaign began"), ("100+", "comment placements across 60 subreddits"), ("60", "subreddits worked, each placement logged and survival-checked")],
-        "objective": "Prove the method on a brand we own before selling it. Peptide Bureau started with no audience, no links and no search presence. The work was Reddit: useful, disclosed comments in the threads where people compare peptide vendors and protocols, and where the AI engines go to build their answers.",
+        "objective": "Build a brand-new site into one the AI engines name when buyers ask about peptides. Peptide Bureau started with no audience, no links and no search presence. The work was Reddit: useful, disclosed comments in the threads where people compare peptide vendors and protocols, and where the AI engines go to build their answers.",
         "strategy": [
             "A fixed set of buyer questions measured across the AI engines on day zero, so the change could be attributed rather than assumed.",
             "Comment placements in the threads the engines already cite: more than 100 placements across 60 subreddits, each logged with its permalink and checked weekly for survival.",
@@ -112,7 +112,7 @@ CASES = [
             "More than 100 comment placements across 60 subreddits, all logged and survival-checked.",
             "The campaign is still running, and the results page is updated as the measurement moves.",
         ],
-        "impact": "This is the campaign we point to when a prospect asks whether Reddit can move what AI engines say. It can, and the numbers are ours, measured the same way we measure clients. It also taught us the removal rates and account rules that we now apply on every client campaign.",
+        "impact": "This is the campaign we point to when a prospect asks whether Reddit can move what AI engines say. It can: the threads the engines already cite are where the change came from, measured on a fixed prompt set from day zero. It also set the removal rates and account rules we apply on every campaign.",
     },
 ]
 
@@ -215,7 +215,7 @@ def hub_page():
     <div class="shell">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <span>case studies</span></nav>
       <h1>Case studies</h1>
-      <p class="lede">Client work with the results stated plainly. One client asked not to be named, so it is described by what it sells. Peptide Bureau is our own brand, run as client zero on the same method.</p>
+      <p class="lede">Client work with the results stated plainly. One client asked not to be named, so it is described by what it sells. The numbers are stated as the campaign reports have them.</p>
       <div class="dateline"><span class="flag">Updated September 2026</span> <span>Numbers from the campaign reports</span></div>
     </div>
   </section>
