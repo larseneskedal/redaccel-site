@@ -4,10 +4,16 @@
 Johan's decision (2026-09-24): name GPM Music Group, describe FanPro anonymously as a content
 creator software company, add Peptide Bureau, and drop Kalshi and Roobet from the site.
 Run from the repo root: python3 tools/build_case_studies.py
-Idempotent: re-running rewrites the same files.
+Idempotent: re-running rewrites the same files. Redesign 2026-10: pages now use the shared
+head, header, footer and CTA from tools/_parts.py. The one-off 2026-09-24 patches to about,
+home, the Reddit page, llms files, sitemap and redaccel_app.py were applied then and are in
+git history; they are no longer re-run, so this script only writes the four case-study pages.
 """
 import os
-import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _parts  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
@@ -26,12 +32,8 @@ def write(p, s):
         f.write(s)
 
 
-about = read("site/about/index.html")
-HEAD_END = about.index("<title>")
-HEADER = about[about.index("<body>"):about.index("<main")]
-HEADER = HEADER.replace('<a href="/about/" aria-current="page">About</a>', '<a href="/about/">About</a>')
-FOOTER = about[about.index("<footer"):]
-STYLES = about[about.index('<link rel="preconnect"'):about.index('<script type="application/ld+json">')]
+HEADER = "<body>\n" + _parts.header("/case-studies/") + "\n\n"
+FOOTER = "\n" + _parts.FOOTER.format(updated="September 2026") + "\n</body>\n</html>\n"
 
 CASES = [
     {
@@ -116,11 +118,10 @@ CASES = [
 
 
 def case_page(c):
-    stats = "".join('<div class="stat"><b>%s</b><span>%s</span></div>' % (b, s) for b, s in c["stats"])
-    strategy = "".join("<li>%s</li>" % s for s in c["strategy"])
-    results = "".join("<li>%s</li>" % s for s in c["results"])
-    ld = """<script type="application/ld+json">
-{
+    stats = "".join('<div class="stat"><b>%s</b><span>%s</span></div>' % (b, t) for b, t in c["stats"])
+    strategy = "".join("<li>%s</li>" % x for x in c["strategy"])
+    results = "".join("<li>%s</li>" % x for x in c["results"])
+    ld = """{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -141,22 +142,18 @@ def case_page(c):
       "mainEntityOfPage": "https://www.redaccel.com/case-studies/%(slug)s/"
     }
   ]
-}
-</script>""" % {"name": c["name"], "slug": c["slug"], "title": c["title"].replace('"', '\\"'), "today": TODAY}
-    head = about[:HEAD_END] + "<title>%s | Redaccel</title>\n" % c["title"] + \
-        '<meta name="description" content="%s">\n' % c["meta"].replace('"', "&quot;") + \
-        '<link rel="canonical" href="https://www.redaccel.com/case-studies/%s/">\n' % c["slug"] + \
-        '<meta property="og:title" content="%s">\n<meta property="og:description" content="%s">\n<meta property="og:type" content="article">\n<meta property="og:url" content="https://www.redaccel.com/case-studies/%s/">\n' % (
-            c["title"].replace('"', "&quot;"), c["meta"].replace('"', "&quot;"), c["slug"]) + \
-        STYLES + ld + "\n</head>\n"
+}""" % {"name": c["name"], "slug": c["slug"], "title": c["title"].replace('"', '\\"'), "today": TODAY}
+    head = _parts.head(c["title"] + " | Redaccel", c["meta"],
+                       "https://www.redaccel.com/case-studies/%s/" % c["slug"], og_type="article",
+                       og_title=c["title"], jsonld=ld) + "\n"
     body = HEADER + """<main id="main" class="article">
   <div class="shell">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / <a href="/case-studies/">case studies</a> / %(short_l)s</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/case-studies/">case studies</a> <span aria-hidden="true">/</span> <span>%(short_l)s</span></nav>
     <h1>%(title)s</h1>
-    <span class="dateline"><span class="flag">Reddit campaign</span> · %(period)s · %(category)s</span>
+    <div class="dateline"><span class="flag">Reddit campaign</span> <span>%(period)s</span> <span>%(category)s</span></div>
 
     <div class="extract">
-      <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com · case study · %(short)s</span></div>
+      <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com &middot; case study &middot; %(short)s</span></div>
       <p><mark>%(extract)s</mark></p>
     </div>
 
@@ -177,10 +174,15 @@ def case_page(c):
 
     <p class="small">Numbers are the client's own campaign report figures at the end of the period stated. Reddit views are the totals shown on the posts. Google positions were checked from a logged-out US browser at the time. References available on request through <a href="/contact/">contact</a>.</p>
 
-    <div class="cta-panel">
+    <aside class="cta-panel" aria-label="Free AI visibility audit">
+      <p class="eyebrow">Free AI visibility audit</p>
       <h2>Find out where you stand</h2>
-      <p>We run the same measurement for you first, free: which AI engines and which Reddit threads name your competitors and not you. <a class="btn btn-primary" href="/free-ai-visibility-audit/">Get the free AI visibility audit</a></p>
-    </div>
+      <p>We run the same measurement for you first, free: which AI engines and which Reddit threads name your competitors and not you.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI visibility audit</a>
+        <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+      </div>
+    </aside>
   </div>
 </main>
 """ % {
@@ -192,34 +194,56 @@ def case_page(c):
 
 
 def hub_page():
-    cards = "".join(
+    rows = "".join(
         '<tr><td><a href="/case-studies/%s/">%s</a></td><td>%s</td><td>%s</td></tr>' % (
-            c["slug"], c["name"], c["category"].split(" (")[0], "; ".join(b + " " + s for b, s in c["stats"][:2]))
+            c["slug"], c["name"], c["category"].split(" (")[0], "; ".join(b + " " + t for b, t in c["stats"][:2]))
         for c in CASES)
-    head = about[:HEAD_END] + "<title>Redaccel case studies: Reddit campaigns with the numbers</title>\n" + \
-        '<meta name="description" content="Redaccel client work with the results stated plainly: GPM Music Group, a content creator software company, and Peptide Bureau. Views, Google positions and leads, per campaign.">\n' + \
-        '<link rel="canonical" href="https://www.redaccel.com/case-studies/">\n' + STYLES + "</head>\n"
-    body = HEADER + """<main id="main" class="article">
-  <div class="shell">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / case studies</nav>
-    <h1>Case studies</h1>
-    <span class="dateline"><span class="flag">Updated September 2026</span> · Numbers from the campaign reports</span>
-    <p>Client work with the results stated plainly. One of the clients asked not to be named, so it is described by what it sells. Peptide Bureau is our own brand and is run as client zero on the same method.</p>
-    <div class="table-wrap">
-      <table>
-        <caption>Selected campaigns</caption>
-        <thead><tr><th>Client</th><th>Category</th><th>Headline result</th></tr></thead>
-        <tbody>%s</tbody>
-      </table>
+    cards = "".join(
+        """
+        <article class="case">
+          <span class="case-kicker">%s</span>
+          <h3><a href="/case-studies/%s/">%s</a></h3>
+          <p>%s</p>
+          <div class="case-metric"><b>%s</b><span>%s</span></div>
+        </article>""" % (c["period"], c["slug"], c["name"], c["category"].split(" (")[0], c["stats"][0][0], c["stats"][0][1])
+        for c in CASES)
+    head = _parts.head("Redaccel case studies: Reddit campaigns with the numbers",
+                       "Redaccel client work with the results stated plainly: GPM Music Group, a content creator software company, and Peptide Bureau. Views, Google positions and leads, per campaign.",
+                       "https://www.redaccel.com/case-studies/") + "\n"
+    body = HEADER + """<main id="main">
+  <section class="page-hero">
+    <div class="shell">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <span>case studies</span></nav>
+      <h1>Case studies</h1>
+      <p class="lede">Client work with the results stated plainly. One client asked not to be named, so it is described by what it sells. Peptide Bureau is our own brand, run as client zero on the same method.</p>
+      <div class="dateline"><span class="flag">Updated September 2026</span> <span>Numbers from the campaign reports</span></div>
     </div>
-    <p class="small">References available on request through <a href="/contact/">contact</a>.</p>
-    <div class="cta-panel">
-      <h2>Start with the audit</h2>
-      <p>Before any contract we measure which sources the AI engines cite in your category and whether you are on them. <a class="btn btn-primary" href="/free-ai-visibility-audit/">Get the free AI visibility audit</a></p>
+  </section>
+  <section class="section">
+    <div class="shell">
+      <div class="grid grid-3">%(cards)s
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Selected campaigns</caption>
+          <thead><tr><th scope="col">Client</th><th scope="col">Category</th><th scope="col">Headline result</th></tr></thead>
+          <tbody>%(rows)s</tbody>
+        </table>
+      </div>
+      <p class="small">References available on request through <a href="/contact/">contact</a>.</p>
+      <aside class="cta-panel" aria-label="Free AI visibility audit">
+        <p class="eyebrow">Start with the audit</p>
+        <h2>See what the engines say about your category</h2>
+        <p>Before any contract we measure which sources the AI engines cite in your category and whether you are on them.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI visibility audit</a>
+          <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+        </div>
+      </aside>
     </div>
-  </div>
+  </section>
 </main>
-""" % cards + FOOTER
+""" % {"cards": cards, "rows": rows} + FOOTER
     return head + body
 
 
@@ -227,79 +251,4 @@ for c in CASES:
     write("site/case-studies/%s/index.html" % c["slug"], case_page(c))
 write("site/case-studies/index.html", hub_page())
 
-# ---- about page
-a = about
-a = a.replace(
-    "built on years of Reddit marketing for brands like Kalshi and Roobet.",
-    "built on years of Reddit marketing for brands like GPM Music Group and a content creator software company.")
-a = re.sub(
-    r"We ran campaigns for <strong>Kalshi</strong>.*?among others\.",
-    "We ran campaigns for <strong>GPM Music Group</strong> in music promotion, where our threads became the number 2 Google result for the brand name; for a <strong>content creator software company</strong> that took the number 1 Google result for its own name and closed sales from Reddit DMs; and for our own brand <strong>Peptide Bureau</strong>, which we run as client zero on the same method. The numbers are in the <a href=\"/case-studies/\">case studies</a>.",
-    a, count=1, flags=re.S)
-a = re.sub(
-    r"<caption>Selected client work.*?</tbody>",
-    """<caption>Selected client work, with the results</caption>
-        <thead>
-          <tr><th>Client</th><th>Category</th><th>Result</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><a href="/case-studies/gpm-music-group/">GPM Music Group</a></td><td>Music promotion</td><td>150,000 views in 30 days; the top 4 Reddit results and the number 2 Google result for the brand name</td></tr>
-          <tr><td><a href="/case-studies/content-creator-software/">Content creator software company</a></td><td>High-ticket software for creator businesses</td><td>300,000 Reddit views in 30 days; the number 1 Google result for the brand name; confirmed sales from Reddit DMs</td></tr>
-          <tr><td><a href="/case-studies/peptide-bureau/">Peptide Bureau</a></td><td>Our own brand, client zero</td><td>Built from zero on Reddit; AI visibility up more than 300 percent since the campaign began</td></tr>
-        </tbody>""",
-    a, count=1, flags=re.S)
-a = a.replace('<span class="flag">Updated July 2026</span>', '<span class="flag">Updated September 2026</span>', 1)
-a = a.replace('"dateModified": "2026-07-29"', '"dateModified": "%s"' % TODAY)
-write("site/about/index.html", a)
-
-# ---- home
-h = read("site/index.html")
-h = h.replace(
-    """Some of the brands we've worked with: Kalshi, Roobet, GPM Music Group — <a href="/about/#track-record">case studies</a>""",
-    """Some of the brands we've worked with: GPM Music Group, a content creator software company, Peptide Bureau. <a href="/case-studies/">The case studies, with numbers</a>""")
-write("site/index.html", h)
-
-# ---- reddit page
-r = read("site/reddit-marketing-2026/index.html")
-r = r.replace("for clients including Kalshi, Roobet and GPM Music Group,",
-              "for clients including GPM Music Group and a content creator software company,")
-write("site/reddit-marketing-2026/index.html", r)
-
-# ---- llms files
-lf = read("site/llms-full.txt")
-lf = lf.replace(
-    "earned-visibility campaigns for paying clients including Kalshi (regulated prediction markets), Roobet (online gaming), GPM Music Group (music licensing) and a creator-management platform.",
-    "earned-visibility campaigns for paying clients including GPM Music Group (music promotion: 150,000 Reddit views in 30 days, number 2 Google result for the brand name) and a content creator software company (300,000 Reddit views in 30 days, number 1 Google result for the brand name, confirmed sales from Reddit DMs), plus Redaccel's own brand Peptide Bureau, run as client zero (built from zero on Reddit, AI visibility up more than 300 percent since the campaign began). Case studies: https://www.redaccel.com/case-studies/")
-write("site/llms-full.txt", lf)
-l = read("site/llms.txt")
-l = l.replace("Reddit marketing for brands including Kalshi, Roobet and GPM Music Group",
-              "Reddit marketing for brands including GPM Music Group and a content creator software company")
-if "/case-studies/" not in l:
-    l = l.replace("- [About](https://www.redaccel.com/about/)",
-                  "- [Case studies](https://www.redaccel.com/case-studies/): GPM Music Group, a content creator software company and Peptide Bureau, with the numbers.\n- [About](https://www.redaccel.com/about/)")
-write("site/llms.txt", l)
-
-# ---- sitemap
-s = read("site/sitemap.xml")
-s = s.replace("<url><loc>https://www.redaccel.com/about/</loc><lastmod>2026-07-29</lastmod></url>",
-              "<url><loc>https://www.redaccel.com/about/</loc><lastmod>%s</lastmod></url>" % TODAY)
-for u in ["case-studies/", "case-studies/gpm-music-group/", "case-studies/content-creator-software/", "case-studies/peptide-bureau/"]:
-    line = "  <url><loc>https://www.redaccel.com/%s</loc><lastmod>%s</lastmod></url>\n" % (u, TODAY)
-    if u not in s:
-        s = s.replace("</urlset>", line + "</urlset>")
-write("site/sitemap.xml", s)
-
-# ---- flask legacy redirects: the case-study URLs are real pages again
-app = read("redaccel_app.py")
-app = app.replace('    "/case-studies/gpm-music-group": "/about/",\n', "")
-app = app.replace('    "/case-studies/creator-management-platform": "/about/",',
-                  '    "/case-studies/creator-management-platform": "/case-studies/content-creator-software/",')
-write("redaccel_app.py", app)
-
-left = []
-for p in ["site/about/index.html", "site/index.html", "site/reddit-marketing-2026/index.html", "site/llms-full.txt", "site/llms.txt"]:
-    t = read(p)
-    for w in ("Kalshi", "Roobet"):
-        if w in t:
-            left.append((p, w))
-print("built 4 pages, patched 7 files; Kalshi/Roobet left in:", left or "none")
+print("built 4 case-study pages")

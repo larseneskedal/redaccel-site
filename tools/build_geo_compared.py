@@ -5,13 +5,13 @@ which pages they copy the names from. Numbers from Peec project or_38dcd2ac-765e
 Run from the repo root: python3 tools/build_geo_compared.py. Re-run monthly with fresh numbers.
 """
 import os
+import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-about = open(os.path.join(ROOT, "site/about/index.html")).read()
-HEAD_END = about.index("<title>")
-HEADER = about[about.index("<body>"):about.index("<main")].replace('<a href="/about/" aria-current="page">About</a>', '<a href="/about/">About</a>')
-FOOTER = about[about.index("<footer"):]
-STYLES = about[about.index('<link rel="preconnect"'):about.index('<script type="application/ld+json">')]
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+import _parts  # noqa: E402
+
+HEADER = "<body>\n" + _parts.header("/geo-agencies-compared/") + "\n\n"
 WINDOW = "25 August to 24 September 2026"
 PUBLISHED = "2026-09-25"
 
@@ -32,8 +32,7 @@ sources = [
     ("beomniscient.com and nogood.io", "the agencies' own blogs", "112 and 108", "Both publish their own best GEO agencies lists, and the engines cite them."),
 ]
 
-ld = """<script type="application/ld+json">
-{
+ld = """{
   "@context": "https://schema.org",
   "@graph": [
     { "@type": "BreadcrumbList", "itemListElement": [
@@ -45,24 +44,21 @@ ld = """<script type="application/ld+json">
       "mainEntityOfPage": "https://www.redaccel.com/geo-agencies-compared/",
       "about": "Which generative engine optimization agencies AI engines name, measured on a fixed prompt set" }
   ]
-}
-</script>""" % {"title": title, "pub": PUBLISHED}
+}""" % {"title": title, "pub": PUBLISHED}
 ld = ld.replace("'", '"')
 
-head = about[:HEAD_END] + "<title>%s | Redaccel</title>\n" % title + \
-    '<meta name="description" content="%s">\n' % meta + \
-    '<link rel="canonical" href="https://www.redaccel.com/geo-agencies-compared/">\n' + \
-    '<meta property="og:title" content="%s">\n<meta property="og:description" content="%s">\n<meta property="og:type" content="article">\n<meta property="og:url" content="https://www.redaccel.com/geo-agencies-compared/">\n' % (title, meta) + \
-    STYLES + ld + "\n</head>\n"
+head = _parts.head("%s | Redaccel" % title, meta, "https://www.redaccel.com/geo-agencies-compared/",
+                   og_type="article", og_title=title, jsonld=ld) + "\n"
+FOOTER = "\n" + _parts.FOOTER.format(updated="September 2026") + "\n</body>\n</html>\n"
 
 named_rows = "".join("<tr><td>%s%s%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % ("<strong>" if n == "Redaccel" else "", n, "</strong>" if n == "Redaccel" else "", a, b, c) for n, a, b, c in named)
 source_rows = "".join("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % r for r in sources)
 
 body = HEADER + """<main id="main" class="article">
   <div class="shell">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / geo agencies compared</nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <span>geo agencies compared</span></nav>
     <h1>Which GEO agencies do AI engines actually recommend? 30 days of citation data</h1>
-    <span class="dateline"><span class="flag">Data: %(window)s</span> · 2,594 answers · updated monthly</span>
+    <div class="dateline"><span class="flag">Data: %(window)s</span> <span>2,594 answers</span> <span>Updated monthly</span></div>
 
     <div class="extract">
       <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com · measurement · September 2026</span></div>
@@ -80,7 +76,7 @@ body = HEADER + """<main id="main" class="article">
     <div class="table-wrap">
       <table>
         <caption>Agencies named in unbranded answers, %(window)s</caption>
-        <thead><tr><th>Agency</th><th>Share of answers naming them</th><th>Share of all agency mentions</th><th>Average position when named</th></tr></thead>
+        <thead><tr><th scope="col">Agency</th><th scope="col">Share of answers naming them</th><th scope="col">Share of all agency mentions</th><th scope="col">Average position when named</th></tr></thead>
         <tbody>%(named)s</tbody>
       </table>
     </div>
@@ -91,7 +87,7 @@ body = HEADER + """<main id="main" class="article">
     <div class="table-wrap">
       <table>
         <caption>Most cited sources, unbranded prompts, %(window)s</caption>
-        <thead><tr><th>Source</th><th>Type</th><th>Citations in 30 days</th><th>What it means</th></tr></thead>
+        <thead><tr><th scope="col">Source</th><th scope="col">Type</th><th scope="col">Citations in 30 days</th><th scope="col">What it means</th></tr></thead>
         <tbody>%(sources)s</tbody>
       </table>
     </div>
@@ -111,10 +107,15 @@ body = HEADER + """<main id="main" class="article">
     <h2>About this data</h2>
     <p>Collected with Peec AI, a brand-visibility tracker, on a fixed prompt set. Counts are citations, not clicks or traffic. Answers vary between runs, which is why we run daily and report 30-day totals. We update this page monthly with the same prompt set so the numbers stay comparable. Questions about the method: <a href="mailto:contact@redaccel.com">contact@redaccel.com</a>.</p>
 
-    <div class="cta-panel">
+    <aside class="cta-panel" aria-label="Free AI visibility audit">
+      <p class="eyebrow">Free AI visibility audit</p>
       <h2>See the same measurement for your own category</h2>
-      <p>We run it for you first, free, on your own buyer questions: which engines and which pages name your competitors and not you. <a class="btn btn-primary" href="/free-ai-visibility-audit/">Get the free AI visibility audit</a></p>
-    </div>
+      <p>We run it for you first, free, on your own buyer questions: which engines and which pages name your competitors and not you.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI visibility audit</a>
+        <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+      </div>
+    </aside>
   </div>
 </main>
 """ % {"window": WINDOW, "named": named_rows, "sources": source_rows} + FOOTER
