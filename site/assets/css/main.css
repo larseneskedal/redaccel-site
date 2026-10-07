@@ -593,7 +593,7 @@ main.blog-hub > .shell { max-width: var(--shell); }
   padding: .75rem .95rem; min-height: 48px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--paper);
   transition: border-color .15s, box-shadow .15s;
 }
-.audit-form input::placeholder { color: #80858F; }
+.audit-form input::placeholder { color: #6B717E; }
 .audit-form input:hover { border-color: #BEBFB9; }
 .audit-form input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px rgba(10, 11, 15, .08); }
 .audit-form button { width: 100%; margin-top: .3rem; }
