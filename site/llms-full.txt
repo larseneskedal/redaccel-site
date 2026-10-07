@@ -15,18 +15,21 @@ Redaccel's expertise comes from years of Reddit marketing: earned-visibility cam
 
 Differentiator: most GEO agencies are ex-SEO consultants who have never had a post removed. Redaccel spent years operating inside the hardest-moderated platform on the internet and knows what content survives scrutiny, by human moderators and by the LLM-based detection platforms now run (source: TechCrunch, July 6, 2026). That judgment is earned, not purchasable, and it decides which content AI engines can safely cite.
 
-## Services and pricing (monthly retainer, three-month minimum)
+## How Redaccel works: audit first, then two options
 
-1. Monitor
-   AI visibility tracking across five engines (ChatGPT, Perplexity, Gemini, Google AI Mode, AI Overviews), competitor benchmark, monthly share-of-voice report including the exact pages each engine cites.
+Method: Redaccel only works the pages AI engines already cite when buyers in a niche ask what to choose. No guessing which sites might matter; the audit finds the cited pages and every placement goes onto them.
 
-2. Growth
-   Everything in Monitor, plus 6 to 10 earned placements per month across the citation surface (Reddit, G2, Trustpilot, Capterra, YouTube, LinkedIn, niche forums, listicles, trade press), plus owned-content optimization so engines can extract and quote the client's own site.
+1. Free AI visibility audit (always first, before any campaign)
+   Which engines (ChatGPT, Perplexity, Gemini, Google AI Mode, AI Overviews) name the brand and which name its competitors, the exact pages behind each answer, a place-by-place plan, and two tailored options with prices.
 
-3. Managed
-   Everything in Growth, plus PR and trade-press outreach, plus reputation defence: tracing wrong or damaging claims that AI engines repeat back to their source pages and correcting them there.
+2. Two options built from the audit
+   Focused: the most cited sources first, at a lower monthly cost, with a monthly share-of-voice report.
+   Full: every cited source type at once, more placements each month, the brand's own pages rebuilt for AI, and fixing wrong claims AI engines repeat about the brand.
+   The contents of each option vary by campaign and are set in the audit.
 
-Pricing: each engagement is scoped to the client's category and competitive landscape after the free AI visibility audit. For market context, credible GEO retainers in 2026 typically run $2,000 to $6,000+ per month depending on scope. Redaccel engagements typically start around $2,000 a month, depending on the niche; each free audit includes the specific offer.
+Channels: Reddit threads, best-of lists and listicles, comparison pages, review sites (G2, Trustpilot, Capterra, Clutch), YouTube, articles and PR placements, forums and communities, directories, and the brand's own pages.
+
+Pricing: each engagement is priced for the client's niche, and what its placements cost, in the free AI visibility audit. For market context, credible GEO retainers in 2026 typically run $2,000 to $6,000+ per month depending on scope. Redaccel engagements typically start around $2,000 a month, depending on the niche; each free audit includes the specific offer.
 
 Terms: three-month minimum (GEO takes 6 to 10 weeks to show measurable movement), month-to-month afterwards. No setup fee. One brand per buyer-prompt set (category exclusivity). Not offered: paid ads management, link-building retainers, technical SEO, social media management.
 

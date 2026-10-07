@@ -713,3 +713,18 @@ main.blog-hub > .shell { max-width: var(--shell); }
   .audit-layout { grid-template-areas: "intro form" "details form"; row-gap: 0; }
   .audit-details > .extract:first-child { margin-top: 2rem; }
 }
+
+/* v2: audit-first offer, difference block */
+.plans-3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+.plan .badge { align-self: flex-start; margin-bottom: .9rem; }
+.badge-night { background: rgba(255, 107, 87, .16); color: #FFB4A8; }
+.plan > ul:last-child { margin-bottom: 0; }
+.plan-free > .btn { margin-top: auto; padding-top: .8rem; }
+.plan-free > ul { margin-bottom: 1.4rem; }
+.chip-label { font-size: .8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: .9rem; }
+.chips-plain li::before { content: none; }
+.chips-plain li { font-weight: 500; }
+.chip-note { margin-top: 1rem; }
+.diff .split { align-items: start; }
+.diff h2 { margin-top: .9rem; }
+.option-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
