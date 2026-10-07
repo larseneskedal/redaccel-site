@@ -680,3 +680,25 @@ main.blog-hub > .shell { max-width: var(--shell); }
 .card-mist > p:last-child { margin-top: 1.25rem; }
 .faq-title { margin-top: .9rem; }
 .faq-sub { margin-top: 1rem; }
+.pricing-extract { max-width: 48rem; margin-top: 2.25rem; }
+.callout-h { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.75rem); margin-bottom: .6rem; }
+.why-grid { margin-top: 1.25rem; }
+.table-after { margin-top: 1.25rem; max-width: 48rem; }
+.section-head-sub { margin-top: clamp(3rem, 2rem + 3vw, 5rem); margin-bottom: 0; }
+.section .table-wrap { margin-top: 1.5rem; }
+.audit-engines { margin-top: 1.5rem; }
+.audit-h2 { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.75rem); margin: 2.5rem 0 1.1rem; }
+.audit-deliverables .card h3 { margin-top: .7rem; }
+.audit-small { margin-top: 1.1rem; }
+.audit-layout .ticks { margin-top: 1.1rem; }
+.page-hero .ticks { margin-top: 1.1rem; }
+.founders { margin-top: 1.75rem; }
+.founders .card p.small { margin-top: -.2rem; margin-bottom: .6rem; }
+.contact-note { margin-top: 1.5rem; }
+.card details.more { margin-top: 1rem; }
+.card-mist .checks { margin-top: 1rem; }
+.steps-compact { grid-template-columns: 1fr; gap: .75rem; margin-top: 1rem; }
+.steps-compact > li { padding: 1.1rem 1.2rem; }
+.steps-compact > li::before { margin-bottom: .6rem; }
+.steps-compact h3 { font-size: 1rem; margin-bottom: .2rem; }
+.split > div > .lede { margin-top: 1rem; }
