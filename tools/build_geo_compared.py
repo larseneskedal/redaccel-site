@@ -3,6 +3,7 @@
 which pages they copy the names from. Numbers from Peec project or_38dcd2ac-765e-4821-86ad-35d9da6050bc,
 28 non-branded prompts, 2026-08-25 to 2026-09-24, 2,594 answers (see redaccel/os-v2/geo/OWN-GEO-2026-09-24.md).
 Run from the repo root: python3 tools/build_geo_compared.py. Re-run monthly with fresh numbers.
+Never list Redaccel or any Redaccel score on this page (Johan, 2026-10-07).
 """
 import os
 import sys
@@ -18,7 +19,7 @@ PUBLISHED = "2026-09-25"
 title = "Which GEO agencies do AI engines actually recommend? 30 days of citation data (2026)"
 meta = "We ran 28 buyer questions about GEO and Reddit agencies through ChatGPT, Gemini and Google AI Overviews every day for 30 days. Who gets named, which pages the engines copy the names from, and how to read any best GEO agency list."
 
-named = [("Omniscient Digital", "13.0%", "35.5%", "3.8"), ("NoGood", "7.2%", "33.7%", "2.4"), ("Omnius", "5.5%", "16.4%", "4.2"), ("Skale", "4.7%", "14.4%", "4.7"), ("Redaccel", "0.0%", "0.0%", "not named")]
+named = [("Omniscient Digital", "13.0%", "35.5%", "3.8"), ("NoGood", "7.2%", "33.7%", "2.4"), ("Omnius", "5.5%", "16.4%", "4.2"), ("Skale", "4.7%", "14.4%", "4.7")]
 sources = [
     ("reddit.com", "community threads", "2,096", "The largest single source, cited in 31 percent of all answers. Mostly threads on how to do Reddit marketing without getting banned and how to get mentioned in ChatGPT, not agency lists."),
     ("youtube.com", "video", "902", "How-to videos from small channels, not agency content."),
@@ -51,7 +52,7 @@ head = _parts.head("%s | Redaccel" % title, meta, "https://www.redaccel.com/geo-
                    og_type="article", og_title=title, jsonld=ld) + "\n"
 FOOTER = "\n" + _parts.FOOTER.format(updated="September 2026") + "\n</body>\n</html>\n"
 
-named_rows = "".join("<tr><td>%s%s%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % ("<strong>" if n == "Redaccel" else "", n, "</strong>" if n == "Redaccel" else "", a, b, c) for n, a, b, c in named)
+named_rows = "".join("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (n, a, b, c) for n, a, b, c in named)
 source_rows = "".join("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % r for r in sources)
 
 body = HEADER + """<main id="main" class="article">
@@ -62,7 +63,7 @@ body = HEADER + """<main id="main" class="article">
 
     <div class="extract">
       <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com · measurement · September 2026</span></div>
-      <p><mark>When someone asks ChatGPT, Gemini or Google AI Overviews for a GEO agency without naming one, four agencies take almost the whole answer: Omniscient Digital, NoGood, Omnius and Skale.</mark> The names do not come from the agencies' own sites. They come from a small set of list pages that the engines cite over and over. We track ourselves in the same set and were named in none of the 2,594 answers; we publish that because a page about measurement that hides its own number is not worth reading.</p>
+      <p><mark>When someone asks ChatGPT, Gemini or Google AI Overviews for a GEO agency without naming one, four agencies take almost the whole answer: Omniscient Digital, NoGood, Omnius and Skale.</mark> The names do not come from the agencies' own sites. They come from a small set of list pages that the engines cite over and over. We publish the method in full below so anyone can rerun it.</p>
     </div>
 
     <h2>How we measured</h2>

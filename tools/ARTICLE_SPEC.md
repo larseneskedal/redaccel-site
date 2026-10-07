@@ -36,7 +36,7 @@ Non-negotiable:
 - Second person for the reader ("you"), first person plural for us ("we").
 - Confident but never salesy in the body. The CTA panel does the selling and
   it is appended automatically.
-- Numbers as numerals. Currency in euros to match the rest of the site.
+- Numbers as numerals. Currency in US dollars to match the rest of the site (Johan, 2026-10-07). Never state Redaccel prices beyond "typically start around $2,000 a month", and never publish our own share of voice.
 - Front-load the answer. The first 60 words of the extract should be liftable
   as a standalone answer, because that is what gets quoted.
 
