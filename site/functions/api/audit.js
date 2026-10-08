@@ -15,7 +15,7 @@ export async function onRequestPost({ request, env }) {
   }
 
   const brand = clean(data.brand);
-  const website = clean(data.website);
+  const website = normaliseSite(clean(data.website));
   const category = clean(data.category);
   const competitors = clean(data.competitors);
   const email = clean(data.email);
@@ -70,4 +70,15 @@ function json(obj, status = 200) {
     status,
     headers: { 'Content-Type': 'application/json' },
   });
+}
+
+function normaliseSite(raw) {
+  let v = (raw || '').trim();
+  if (!v || /\s/.test(v)) return '';
+  if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(v)) v = 'https://' + v.replace(/^\/+/, '');
+  const m = v.match(/^(https?):\/\/([^\/?#]+)([\s\S]*)$/i);
+  if (!m) return '';
+  const host = m[2].toLowerCase().replace(/:\d+$/, '');
+  if (!/^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9-]{2,}$/.test(host)) return '';
+  return m[1].toLowerCase() + '://' + host + m[3];
 }

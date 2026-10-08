@@ -155,6 +155,18 @@
     });
   });
 
+  /* ----- website field: accept a bare domain, return a full https URL or '' ----- */
+  function normaliseSite(raw) {
+    var v = String(raw || '').trim();
+    if (!v || /\s/.test(v)) return '';
+    if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(v)) v = 'https://' + v.replace(/^\/+/, '');
+    var m = v.match(/^(https?):\/\/([^\/?#]+)([^]*)$/i);
+    if (!m) return '';
+    var host = m[2].toLowerCase().replace(/:\d+$/, '');
+    if (!/^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9-]{2,}$/.test(host)) return '';
+    return m[1].toLowerCase() + '://' + host + m[3];
+  }
+
   /* ----- audit form: JSON POST to the same endpoint as before ----- */
   var form = document.querySelector('.audit-form[data-endpoint]');
   if (form) {
@@ -167,6 +179,18 @@
       btn.textContent = 'Sending…';
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = v; });
+      var web = form.querySelector('[name="website"]');
+      if (web) {
+        var norm = normaliseSite(web.value);
+        if (!norm) {
+          status.className = 'form-status err';
+          status.textContent = 'Enter your website like yourcompany.com';
+          web.focus();
+          return;
+        }
+        web.value = norm;
+        data.website = norm;
+      }
       fetch(form.getAttribute('data-endpoint'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -138,6 +138,22 @@ def site_page(path: str):
     return _serve_site_path(path)
 
 
+def normalise_website(raw: str) -> str:
+    """Bare domain or URL in, full https URL out; empty string when it is not a domain."""
+    v = (raw or "").strip()
+    if not v or re.search(r"\s", v):
+        return ""
+    if not re.match(r"^[a-z][a-z0-9+.-]*://", v, re.I):
+        v = "https://" + v.lstrip("/")
+    m = re.match(r"^(https?)://([^/?#]+)(.*)$", v, re.I | re.S)
+    if not m:
+        return ""
+    host = re.sub(r":\d+$", "", m.group(2).lower())
+    if not re.match(r"^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9-]{2,}$", host):
+        return ""
+    return m.group(1).lower() + "://" + host + m.group(3)
+
+
 @app.route("/api/audit", methods=["POST"])
 def audit_request():
     """Handle free AI visibility audit requests from the new site's form."""
@@ -148,13 +164,13 @@ def audit_request():
         return value.strip()[:500] if isinstance(value, str) else ""
 
     brand = clean("brand")
-    website = clean("website")
+    website = normalise_website(clean("website"))
     category = clean("category")
     competitors = clean("competitors")
     email = clean("email")
 
     if not all([brand, website, category, competitors, email]) or "@" not in email:
-        return jsonify({"error": "All fields are required"}), 400
+        return jsonify({"error": "All fields are required (website must look like yourcompany.com)"}), 400
 
     body = "\n".join([
         "New free AI visibility audit request",
