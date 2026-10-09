@@ -5,6 +5,7 @@
 ## Pages
 
 - [What is GEO?](https://www.redaccel.com/what-is-geo/): Definition of generative engine optimization, how engines choose citations, measurement, timeline (6 to 10 weeks), cost.
+- [AI Visibility Audit Checklist](https://www.redaccel.com/ai-visibility-checklist/): The twelve checks to run before trusting an AI visibility score: measurement, where answers come from (engine split, source layer), sentiment and scam-checker sources.
 - [GEO vs SEO](https://www.redaccel.com/geo-vs-seo/): Side-by-side comparison; only ~12% of AI-cited URLs rank in Google's top 10.
 - [Is Reddit marketing still worth it in 2026?](https://www.redaccel.com/reddit-marketing-2026/): Honest analysis of Reddit's July 2026 LLM-detection crackdown, what survives, Reddit organic vs Reddit Ads.
 - [What we do](https://www.redaccel.com/what-we-do/): AI visibility monitoring, earned citation placement, reputation defence.
