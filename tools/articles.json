@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "aeo-vs-geo-vs-seo",
+      "keyword": "aeo vs seo",
+      "card_title": "AEO vs SEO vs GEO, untangled",
+      "card_summary": "Where AEO, GEO and SEO came from, the one place the work genuinely splits (Google's AI features versus standalone assistants like ChatGPT), and what to budget for in 2026.",
+      "date_published": "2026-10-13",
+      "date_modified": "2026-10-13",
+      "read_minutes": 6
+    },
+    {
       "slug": "choosing-a-geo-agency",
       "keyword": "geo agency",
       "card_title": "How to choose a GEO agency",

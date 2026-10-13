@@ -125,7 +125,9 @@
         "where the work genuinely differs",
         "which one to budget for"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-10-13",
+      "url": "https://www.redaccel.com/blog/aeo-vs-geo-vs-seo/"
     },
     {
       "slug": "llm-seo",
