@@ -148,7 +148,9 @@
         "content structure that gets extracted",
         "what does not work"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-10-20",
+      "url": "https://www.redaccel.com/blog/llm-seo/"
     },
     {
       "slug": "reddit-and-ai-search",

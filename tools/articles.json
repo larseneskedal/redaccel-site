@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "llm-seo",
+      "keyword": "llm seo",
+      "card_title": "LLM SEO: the practical playbook",
+      "card_summary": "A sourced playbook for LLM SEO in 2026: how ChatGPT rewrites queries and picks sources, the citation surface beyond your own site, the page structures that get extracted, and the tactics with no evidence behind them.",
+      "date_published": "2026-10-20",
+      "date_modified": "2026-10-20",
+      "read_minutes": 6
+    },
+    {
       "slug": "aeo-vs-geo-vs-seo",
       "keyword": "aeo vs seo",
       "card_title": "AEO vs SEO vs GEO, untangled",

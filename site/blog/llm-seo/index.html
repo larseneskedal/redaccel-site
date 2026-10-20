@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css?v=20261007b">
+<script defer src="/assets/js/main.js?v=20261007b"></script>
+<title>LLM SEO: a practical playbook for getting cited in 2026</title>
+<meta name="description" content="LLM SEO explained with 2026 data: what changes from classic SEO, where ChatGPT finds its sources, which page structures get quoted, and what does not work.">
+<link rel="canonical" href="https://www.redaccel.com/blog/llm-seo/">
+<meta property="og:title" content="LLM SEO, with the evidence labels left on">
+<meta property="og:description" content="ChatGPT never searched the user's exact words in a 2026 study of 3,200 runs. Here is what that means for how you write, structure and earn citations.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.redaccel.com/blog/llm-seo/">
+<meta property="og:image" content="https://www.redaccel.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "LLM SEO: what changes from classic SEO, where citations come from, and what does not work",
+      "description": "LLM SEO explained with 2026 data: what changes from classic SEO, where ChatGPT finds its sources, which page structures get quoted, and what does not work.",
+      "author": {
+        "@type": "Organization",
+        "name": "Redaccel",
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "publisher": {
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "datePublished": "2026-10-20",
+      "dateModified": "2026-10-20",
+      "mainEntityOfPage": "https://www.redaccel.com/blog/llm-seo/",
+      "about": "llm seo"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redaccel.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.redaccel.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LLM SEO: what changes from classic SEO, where citations come from, and what does not work",
+          "item": "https://www.redaccel.com/blog/llm-seo/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is LLM SEO the same as GEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mostly, yes. LLM SEO, LLM optimization, GEO and ChatGPT SEO all describe getting your brand retrieved and cited in AI-generated answers. GEO is the academic term, from a 2023 paper accepted at KDD 2024. LLM SEO is the term SEOs tend to search. The work is the same: crawlable pages, extractable answers, and mentions on the third-party sites the models already cite."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an llms.txt file for LLM SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Google says you do not need AI text files or special markup to appear in AI Overviews or AI Mode. As of October 2026 we have not found a public study showing that llms.txt increases citations in ChatGPT, Perplexity or Gemini either. It costs little to add one, but treat it as optional housekeeping, not a ranking factor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does ranking on Google get me cited by ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It helps, but less than you might expect. In Ahrefs' 2025 study of 15,000 queries, only 8.0% of ChatGPT's in-text citations ranked in Google's top 10 for the same prompt. An October 2026 preprint found Google's organic results contained under 10% of the exact URLs ChatGPT cited. Good rankings are a foundation, not a guarantee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does LLM SEO take to show results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nobody has published reliable timelines yet, so be wary of anyone who promises one. Crawler access fixes can apply within days, since OpenAI says robots.txt changes take about 24 hours for search. Content and third-party mention work is slower and depends on recrawling. Measure monthly with repeated prompt runs, not single checks, so you can tell real movement from noise."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-row">
+    <a class="wordmark" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="site-nav" id="nav" aria-label="Main">
+      <div class="nav-links">
+        <a class="nav-link" href="/what-we-do/">What we do</a>
+        <a class="nav-link" href="/case-studies/">Case studies</a>
+        <a class="nav-link" href="/pricing/">Pricing</a>
+        <div class="nav-menu" data-current="true">
+          <button class="nav-link nav-menu-btn" type="button" aria-expanded="false" aria-controls="nav-learn">Learn</button>
+          <div class="nav-menu-panel" id="nav-learn">
+            <a href="/what-is-geo/"><b>What is GEO?</b><span>The plain definition, with sources</span></a>
+            <a href="/geo-vs-seo/"><b>GEO vs SEO</b><span>What changes and what carries over</span></a>
+            <a href="/reddit-marketing-2026/"><b>Reddit in 2026</b><span>Why engines cite Reddit, and what survives</span></a>
+            <a href="/geo-agencies-compared/"><b>GEO agencies compared</b><span>30 days of citation data</span></a>
+            <a href="/blog/" aria-current="page"><b>Blog</b><span>One sourced article every Tuesday</span></a>
+          </div>
+        </div>
+        <a class="nav-link" href="/about/">About</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="/contact/">Contact</a>
+        <a class="btn btn-primary btn-sm" href="/free-ai-visibility-audit/">Free AI audit</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="shell">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/blog/">blog</a> <span aria-hidden="true">/</span> <span>llm-seo</span></nav>
+    <h1>LLM SEO: what changes from classic SEO, where citations come from, and what does not work</h1>
+    <div class="dateline"><span class="flag">Updated October 2026</span> <span>6 min read</span> <span>By Redaccel</span></div>
+
+    <div class="extract">
+      <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com &middot; strategy &middot; October 2026</span></div>
+<p><mark>LLM SEO is the work of getting your pages retrieved and cited when ChatGPT, Gemini, Perplexity or Google's AI features answer a question, and it differs from classic SEO mainly in what you optimise for: the rewritten sub-queries the model actually searches, not the words your customer typed.</mark> In an October 2026 study of 3,200 ChatGPT runs, the model used the user's exact wording as a search query in none of them, and Google plus OpenAI's own API recovered only 28.3% and 26.2% of the URLs it cited<sup class="cite"><a href="#src-1">[1]</a></sup>. Ranking well still helps. It is no longer the whole job.</p>
+    </div>
+
+<h2>What is LLM SEO, and is it different from SEO?</h2>
+<p>LLM SEO is classic SEO plus three extra jobs: being retrievable for queries you never see, being worth quoting once retrieved, and being mentioned on the sites the models already trust. The foundations do not change. Google says there are "no additional requirements" to appear in AI Overviews or AI Mode, and no special schema to add<sup class="cite"><a href="#src-5">[5]</a></sup>. If a page cannot be crawled, indexed and shown with a snippet, nothing below will rescue it.</p>
+<p>What changes is the distance between a ranking and a citation. Ahrefs ran 15,000 long-tail queries through Google, Bing and four AI assistants in mid-2025 and found that on average only 11.9% of assistant citations also ranked in Google's top 10 for the same prompt. For ChatGPT's in-text citations the figure was 8.0%<sup class="cite"><a href="#src-2">[2]</a></sup>. Our piece on <a href="/geo-vs-seo/">how GEO differs from SEO</a> covers the strategic split; this one is the working checklist. People also search for this as LLM optimization, SEO for LLMs or ChatGPT SEO. They describe the same work.</p>
+
+<h2>What actually changes compared with classic SEO?</h2>
+<p>The query, the unit of competition and the measurement all change. The clearest evidence so far comes from a preprint published on 11 October 2026 by researchers at the National University of Singapore and Xi'an Jiaotong University, who ran 80 questions 20 times each through two production ChatGPT models<sup class="cite"><a href="#src-1">[1]</a></sup>. Three findings matter for practitioners:</p>
+<ul>
+<li><strong>The model rewrites your customer's question.</strong> An exact match to the user's query appeared in 5.5% of GPT-5.2 Instant runs and in none of the GPT-5.3 Instant or GPT-5.5 Instant runs<sup class="cite"><a href="#src-1">[1]</a></sup>. You are ranking for the model's sub-queries, not the prompt.</li>
+<li><strong>Google rankings are a weak proxy.</strong> Google's organic results alone contained only 9.4% and 6.4% of the exact URLs ChatGPT cited, depending on the model<sup class="cite"><a href="#src-1">[1]</a></sup>.</li>
+<li><strong>The candidate pool is unstable.</strong> 40.8% and 44.5% of the URLs ChatGPT retrieved as candidates appeared in only one of 20 runs<sup class="cite"><a href="#src-1">[1]</a></sup>. A single spot-check tells you almost nothing.</li>
+</ul>
+<p>The table below is how we summarise the shift, with an honest label on each row.</p>
+<div class="table-wrap">
+<table>
+<caption>Classic SEO vs LLM SEO: what changes, and how strong the evidence is (sources checked October 2026).</caption>
+<thead><tr><th>Dimension</th><th>Classic SEO</th><th>LLM SEO</th><th>Evidence</th></tr></thead>
+<tbody>
+<tr><td><strong>Target query</strong></td><td>The keyword the user types</td><td>The sub-queries the model writes for itself</td><td>Evidenced: 0% exact-match queries in GPT-5.3 and GPT-5.5 Instant runs<sup class="cite"><a href="#src-1">[1]</a></sup></td></tr>
+<tr><td><strong>Unit that wins</strong></td><td>A ranking page</td><td>A passage the model can quote</td><td>Inferred from how answers are assembled; no controlled study isolates it</td></tr>
+<tr><td><strong>Where you compete</strong></td><td>Your own domain</td><td>Your domain plus Reddit, Wikipedia, reviews and press</td><td>Evidenced: Reddit led ChatGPT's top cited domains in September 2026<sup class="cite"><a href="#src-3">[3]</a></sup></td></tr>
+<tr><td><strong>Ranking to citation link</strong></td><td>Direct</td><td>Loose for assistants, tighter for Google AI Overviews</td><td>Evidenced: 8.0% of ChatGPT in-text citations in Google's top 10 in 2025<sup class="cite"><a href="#src-2">[2]</a></sup></td></tr>
+<tr><td><strong>Crawler access</strong></td><td>Googlebot, Bingbot</td><td>Also OAI-SearchBot and other AI search crawlers</td><td>Evidenced: OpenAI documentation<sup class="cite"><a href="#src-6">[6]</a></sup></td></tr>
+<tr><td><strong>Measurement</strong></td><td>Position, clicks</td><td>Mention and citation rates across repeated runs</td><td>Evidenced: high run-to-run variation<sup class="cite"><a href="#src-1">[1]</a></sup></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Where do LLMs find the sources they cite?</h2>
+<p>From a live search index for anything current, and the sources they prefer are often not yours. That is the citation surface: every page a model might retrieve when your category comes up, including forums, encyclopaedias, review sites and the press.</p>
+<p>Ahrefs' Brand Radar data for ChatGPT in the US, September 2026, puts reddit.com first with 16.8% of citations among the top cited domains, followed by en.wikipedia.org at 7.0%, consumerreports.org at 3.7% and forbes.com at 3.1%<sup class="cite"><a href="#src-3">[3]</a></sup>. Read those shares carefully: they are percentages of the citations going to the top sources, not of all ChatGPT citations<sup class="cite"><a href="#src-3">[3]</a></sup>.</p>
+<p>The practical consequence is that LLM SEO has an off-site half. If the threads, list articles and comparison pages a model retrieves for your category never mention you, a perfect page on your own domain still loses. We map that surface before writing anything: run the category prompts, log every cited URL, and sort them into ones you can influence (your site, partner pages, honest community participation) and ones you cannot.</p>
+<details class="more"><summary>Read more: what about ChatGPT's training data?</summary>
+<p>OpenAI separates its crawlers. GPTBot collects data to improve its models, while OAI-SearchBot is used to surface websites in ChatGPT's search features, and sites that opt out of OAI-SearchBot "will not be shown in ChatGPT search answers", though they can still appear as navigational links<sup class="cite"><a href="#src-6">[6]</a></sup>. Blocking GPTBot is a training decision; blocking OAI-SearchBot is a visibility decision. A firewall or bot-protection rule can block a crawler that robots.txt allows, so check your server logs too.</p>
+</details>
+
+<h2>What content structure gets extracted and cited?</h2>
+<p>Pages that answer one specific question per section, in the first sentence, with a number and a named source, are the easiest for a model to lift. The strongest controlled evidence is still the GEO paper by Aggarwal and colleagues, accepted at KDD 2024. On a 10,000-query benchmark, adding quotations raised a source's position-adjusted word count in the answer from a baseline of 19.5 to 27.8, and adding statistics raised it to 25.9<sup class="cite"><a href="#src-4">[4]</a></sup>. The authors report gains of up to 40% in visibility overall<sup class="cite"><a href="#src-4">[4]</a></sup>.</p>
+<p>Two caveats. The test engine was the authors' own setup built on gpt-3.5-turbo, not today's ChatGPT, and the work predates the query rewriting described above. Treat it as directional. With that in mind, this is the structure we use:</p>
+<ol>
+<li><strong>Question-shaped headings.</strong> Phrase each h2 as a question someone would ask, because the model searches subtopics, and a heading that matches one is easier to retrieve. That is our inference, not a tested result.</li>
+<li><strong>Answer first.</strong> The first sentence under each heading should stand alone as a quotable answer.</li>
+<li><strong>Numbers with a year and a source.</strong> Statistics and citations scored well in the GEO tests<sup class="cite"><a href="#src-4">[4]</a></sup>, and an undated number is useless to a model answering a current question.</li>
+<li><strong>Tables for comparisons.</strong> Comparisons are a common follow-up, and a table puts the answer in one place.</li>
+<li><strong>Cover the fan-out.</strong> Google says AI Overviews and AI Mode may issue "multiple related searches across subtopics"<sup class="cite"><a href="#src-5">[5]</a></sup>. Answer the next three questions a buyer would ask on the same page, or on pages linked from it.</li>
+</ol>
+<p>The October 2026 preprint adds a modest signal: cited candidates tended to have longer retrieval snippets, and higher retrieval position was the clearest citation signal among page attributes. Recency was weak, with confidence intervals that included no effect<sup class="cite"><a href="#src-1">[1]</a></sup>. Updating a date on an unchanged page is not a strategy.</p>
+
+<h2>What does not work for LLM SEO?</h2>
+<p>Keyword stuffing, special AI files and one-off checks have no evidence behind them, and some evidence against. In the GEO tests, keyword stuffing lowered position-adjusted word count to 17.8 against the 19.5 baseline, and the authors write that such methods "offer little to no improvement"<sup class="cite"><a href="#src-4">[4]</a></sup>.</p>
+<ul>
+<li><strong>llms.txt and other AI-only files, for Google.</strong> Google states you don't need to create "AI text files, or markup" to appear in its AI features<sup class="cite"><a href="#src-5">[5]</a></sup>. We have not found a public study showing an llms.txt file increases citations in any engine as of October 2026. It is cheap, so add one if you like, but do not report it as a win.</li>
+<li><strong>Special schema for AI.</strong> Google says there is no special structured data required<sup class="cite"><a href="#src-5">[5]</a></sup>. Normal schema still helps ordinary search features.</li>
+<li><strong>Writing for the exact prompt.</strong> If the model never searches the user's wording<sup class="cite"><a href="#src-1">[1]</a></sup>, a page built around one long prompt string targets a query that is not run.</li>
+<li><strong>Judging success from one chat.</strong> With 40% or more of candidate URLs appearing in only one of 20 runs<sup class="cite"><a href="#src-1">[1]</a></sup>, a single screenshot is noise. Our guide to <a href="/blog/what-is-ai-visibility/">measuring AI visibility</a> explains sampling.</li>
+<li><strong>Blocking AI search crawlers by default.</strong> A blanket bot block removes you from ChatGPT search answers<sup class="cite"><a href="#src-6">[6]</a></sup>. Decide crawler by crawler.</li>
+</ul>
+
+<h2>How should you start LLM SEO this quarter?</h2>
+<p>Fix access, map the citation surface, rewrite your highest-value pages for extraction, then measure with repeated runs. In order:</p>
+<ol>
+<li><strong>Audit access.</strong> Check robots.txt and firewall rules for OAI-SearchBot and the other AI search crawlers, and confirm nothing important carries nosnippet or noindex<sup class="cite"><a href="#src-5">[5]</a></sup>.</li>
+<li><strong>Write 30 to 50 category prompts</strong> a buyer would ask, and run each several times across the engines that matter to you.</li>
+<li><strong>Log every cited URL</strong> and sort the list into your pages, competitor pages and third-party pages.</li>
+<li><strong>Rewrite five pages</strong> using the structure above, and track them against five you leave alone. That is not a controlled trial, but it is better than a before and after with no comparison.</li>
+<li><strong>Work the third-party half:</strong> earn honest mentions in the threads, reviews and lists the models already cite.</li>
+</ol>
+<p>If you would rather see the starting position first, our <a href="/free-ai-visibility-audit/">free AI visibility audit</a> shows where you are cited today and which sources you are missing from.</p>
+
+    <h2>Frequently asked</h2>
+    <div class="faq-list">
+  <details class="faq-item">
+    <summary>Is LLM SEO the same as GEO?</summary>
+    <div class="faq-a"><p>Mostly, yes. LLM SEO, LLM optimization, GEO and ChatGPT SEO all describe getting your brand retrieved and cited in AI-generated answers. GEO is the academic term, from a 2023 paper accepted at KDD 2024. LLM SEO is the term SEOs tend to search. The work is the same: crawlable pages, extractable answers, and mentions on the third-party sites the models already cite.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Do I need an llms.txt file for LLM SEO?</summary>
+    <div class="faq-a"><p>No. Google says you do not need AI text files or special markup to appear in AI Overviews or AI Mode. As of October 2026 we have not found a public study showing that llms.txt increases citations in ChatGPT, Perplexity or Gemini either. It costs little to add one, but treat it as optional housekeeping, not a ranking factor.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Does ranking on Google get me cited by ChatGPT?</summary>
+    <div class="faq-a"><p>It helps, but less than you might expect. In Ahrefs' 2025 study of 15,000 queries, only 8.0% of ChatGPT's in-text citations ranked in Google's top 10 for the same prompt. An October 2026 preprint found Google's organic results contained under 10% of the exact URLs ChatGPT cited. Good rankings are a foundation, not a guarantee.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>How long does LLM SEO take to show results?</summary>
+    <div class="faq-a"><p>Nobody has published reliable timelines yet, so be wary of anyone who promises one. Crawler access fixes can apply within days, since OpenAI says robots.txt changes take about 24 hours for search. Content and third-party mention work is slower and depends on recrawling. Measure monthly with repeated prompt runs, not single checks, so you can tell real movement from noise.</p></div>
+  </details>
+    </div>
+
+    <details class="sources">
+      <summary>Sources</summary>
+      <ol>
+        <li id="src-1">Jiang, Zhang, Xing, Chang and Xiao (National University of Singapore and Xi'an Jiaotong University), <a href="https://arxiv.org/abs/2610.15382" rel="noopener">"Understanding ChatGPT Citations: Evidence from Production Web Search Across Model Generations"</a>, arXiv preprint, 11 October 2026. 80 queries, 20 runs each, 1,600 runs per model for GPT-5.3 Instant and GPT-5.5 Instant. Not peer reviewed.</li>
+        <li id="src-2">Ahrefs, <a href="https://ahrefs.com/blog/ai-search-overlap/" rel="noopener">"Only 12% of AI Cited URLs Rank in Google's Top 10 for the Original Prompt"</a>, Louise Linehan with Xibeijia Guan, 11 August 2025. 15,000 long-tail queries across Google, Bing, ChatGPT, Gemini, Copilot and Perplexity.</li>
+        <li id="src-3">Ahrefs, <a href="https://ahrefs.com/blog/most-cited-domains-in-chatgpt/" rel="noopener">"The 50 Most-Cited Websites in ChatGPT"</a>, Si Quan Ong, updated 2 September 2026. Brand Radar data, broad US queries, September 2026. Shares are of citations to the top sources only.</li>
+        <li id="src-4">Aggarwal, Murahari, Rajpurohit, Kalyan, Narasimhan and Deshpande, <a href="https://arxiv.org/abs/2311.09735" rel="noopener">"GEO: Generative Engine Optimization"</a>, KDD 2024, arXiv v3 28 June 2024. GEO-bench, 10,000 queries; results from the 1,000-query test split on a gpt-3.5-turbo engine.</li>
+        <li id="src-5">Google Search Central, <a href="https://developers.google.com/search/docs/appearance/ai-features" rel="noopener">"AI features and your website"</a>, last updated 10 December 2025, checked October 2026.</li>
+        <li id="src-6">OpenAI, <a href="https://developers.openai.com/docs/gptbot" rel="noopener">crawler documentation (OAI-SearchBot, GPTBot, ChatGPT-User)</a>, OpenAI developer documentation, checked October 2026.</li>
+      </ol>
+    </details>
+
+    <div class="byline-box"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><p>Written by Redaccel, a Reddit and AI visibility agency in Oslo. Every figure links to where it came from. Spotted something wrong? <a href="mailto:contact@redaccel.com">contact@redaccel.com</a></p></div>
+
+    <aside class="cta-panel" aria-label="Free AI visibility audit">
+      <p class="eyebrow">Free AI visibility audit</p>
+      <h2>Find out if AI recommends you.</h2>
+      <p>Which engines mention you, which recommend competitors instead, and the exact pages behind those answers.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free audit</a>
+        <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-cta">
+      <div>
+        <p class="eyebrow">Free &middot; 48 hours &middot; no call</p>
+        <p class="footer-cta-line">See which AI engines recommend you, and which recommend your competitors instead.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI audit</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+        <p>Reddit and AI visibility agency. We measure which sources AI engines cite in your category, then earn you a place in them.</p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/what-we-do/">What we do</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/case-studies/">Case studies</a></li>
+          <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="/what-is-geo/">What is GEO?</a></li>
+          <li><a href="/geo-vs-seo/">GEO vs SEO</a></li>
+          <li><a href="/reddit-marketing-2026/">Reddit in 2026</a></li>
+          <li><a href="/geo-agencies-compared/">GEO agencies compared</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="mailto:contact@redaccel.com">contact@redaccel.com</a></li>
+          <li><a href="https://calendly.com/redaccel/30min" rel="noopener">Book 30 minutes</a></li>
+          <li><a href="https://www.linkedin.com/company/redaccel" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.designrush.com/agency/search-engine-optimization" rel="noopener">Listed on DesignRush</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Redaccel DA &middot; Org. 936133428 &middot; Oslo, Norway</span>
+      <span>Updated October 2026</span>
+      <span><a href="/llms.txt">llms.txt</a> &middot; <a href="/sitemap.xml">Sitemap</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

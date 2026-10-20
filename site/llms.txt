@@ -19,6 +19,7 @@
 ## Articles
 
 - [Blog](https://www.redaccel.com/blog/): Index of all articles, one sourced article a week on GEO and AI search.
+- [LLM SEO: the practical playbook](https://www.redaccel.com/blog/llm-seo/): A sourced playbook for LLM SEO in 2026: how ChatGPT rewrites queries and picks sources, the citation surface beyond your own site, the page structures that get extracted, and the tactics with no evidence behind them.
 - [AEO vs SEO vs GEO, untangled](https://www.redaccel.com/blog/aeo-vs-geo-vs-seo/): Where AEO, GEO and SEO came from, the one place the work genuinely splits (Google's AI features versus standalone assistants like ChatGPT), and what to budget for in 2026.
 - [How to choose a GEO agency](https://www.redaccel.com/blog/choosing-a-geo-agency/): A buyer's checklist for hiring a GEO agency: what a real AI visibility audit shows, sales-call red flags, pricing, ROI measurement, and when not to hire anyone. Written by an agency, bias declared.
 - [AI Overview tracking, honestly measured](https://www.redaccel.com/blog/ai-overview-tracking/): How to track whether you appear in Google AI Overviews and AI Mode, the blind spots in Search Console and rank trackers, and the 2025 to 2026 CTR data for cited and uncited pages.
