@@ -22,7 +22,7 @@ import _parts  # noqa: E402
 ASSET_LINE = re.compile(
     r'^\s*(<link rel="icon"|<link rel="apple-touch-icon"|<link rel="preconnect" href="https://fonts\.gstatic\.com"'
     r'|<link rel="stylesheet" href="/assets/css/|<script defer src="/assets/js/main\.js'
-    r'|<meta name="theme-color"|<link rel="preload" href="/assets/fonts/)[^\n]*\n', re.M)
+    r'|<meta name="theme-color"|<meta name="google-site-verification"|<link rel="preload" href="/assets/fonts/)[^\n]*\n', re.M)
 HEADER_RE = re.compile(r'<a class="skip-link".*?</header>', re.S)
 FOOTER_RE = re.compile(r'<footer class="site-footer">.*?</footer>', re.S)
 UPDATED_RE = re.compile(r'<span>Updated ([A-Z][a-z]+ \d{4})</span>')
