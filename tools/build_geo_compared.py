@@ -58,6 +58,7 @@ source_rows = "".join("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % 
 body = HEADER + """<main id="main" class="article">
   <div class="shell">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <span>geo agencies compared</span></nav>
+    <article>
     <h1>Which GEO agencies do AI engines actually recommend? 30 days of citation data</h1>
     <div class="dateline"><span class="flag">Data: %(window)s</span> <span>2,594 answers</span> <span>Updated monthly</span></div>
 
@@ -107,6 +108,7 @@ body = HEADER + """<main id="main" class="article">
 
     <h2>About this data</h2>
     <p>Collected with Peec AI, a brand-visibility tracker, on a fixed prompt set. Counts are citations, not clicks or traffic. Answers vary between runs, which is why we run daily and report 30-day totals. We update this page monthly with the same prompt set so the numbers stay comparable. Questions about the method: <a href="mailto:contact@redaccel.com">contact@redaccel.com</a>.</p>
+    </article>
 
     <aside class="cta-panel" aria-label="Free AI visibility audit">
       <p class="eyebrow">Free AI visibility audit</p>

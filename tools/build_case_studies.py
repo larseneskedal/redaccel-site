@@ -149,6 +149,7 @@ def case_page(c):
     body = HEADER + """<main id="main" class="article">
   <div class="shell">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/case-studies/">case studies</a> <span aria-hidden="true">/</span> <span>%(short_l)s</span></nav>
+    <article>
     <h1>%(title)s</h1>
     <div class="dateline"><span class="flag">Reddit campaign</span> <span>%(period)s</span> <span>%(category)s</span></div>
 
@@ -173,6 +174,7 @@ def case_page(c):
     <p>%(impact)s</p>
 
     <p class="small">Numbers are the client's own campaign report figures at the end of the period stated. Reddit views are the totals shown on the posts. Google positions were checked from a logged-out US browser at the time. References available on request through <a href="/contact/">contact</a>.</p>
+    </article>
 
     <aside class="cta-panel" aria-label="Free AI visibility audit">
       <p class="eyebrow">Free AI visibility audit</p>

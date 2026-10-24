@@ -147,7 +147,8 @@ def build():
         _parts.header(""),
         '<main id="main" class="article">',
         '  <div class="shell">',
-        '    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> / ai-visibility-checklist</nav>',
+        '    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <span>ai-visibility-checklist</span></nav>',
+        "    <article>",
         "    <h1>The AI Visibility Audit Checklist</h1>",
         '    <span class="dateline"><span class="flag">Updated October 2026</span> · 12 checks · about 3 hours end to end</span>',
         "    <p>The twelve checks we run on a brand before we will quote them. Most take under an hour. "
@@ -156,6 +157,7 @@ def build():
         "    <h2>How to read your results</h2>",
         reading,
         '    <p class="dateline">%s</p>' % e(METHOD),
+        "    </article>",
         CTA,
         "  </div>",
         "</main>",
@@ -164,7 +166,6 @@ def build():
         "</html>",
     ]) + "\n"
     # The live pages load main.js?v=20261008a while _parts still says 20261007b; match the live pages.
-    html = html.replace("/assets/js/main.js?v=%s" % _parts.ASSET_VERSION, "/assets/js/main.js?v=20261008a")
     for ch in ("—", "–"):
         assert ch not in html, "em or en dash in the page"
     out = os.path.join(ROOT, "site", SLUG, "index.html")

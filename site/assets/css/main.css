@@ -494,13 +494,13 @@ main.article h1 { margin-top: 1.1rem; font-size: clamp(2.05rem, 1.5rem + 2.3vw, 
 .dateline .flag { display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; color: var(--ink); background: var(--mist); border: 1px solid var(--line); padding: .25rem .65rem; border-radius: 999px; font-size: .8125rem; }
 .dateline .flag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 
-main.article .shell > h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.875rem); margin: 3.25rem 0 1rem; letter-spacing: -.024em; }
-main.article .shell > h3 { margin: 2rem 0 .6rem; }
-main.article .shell > p, main.article .shell > ul, main.article .shell > ol, main.article .shell > details.more, main.article .shell > blockquote { margin-top: 1.1rem; }
-main.article .shell > ul, main.article .shell > ol, .faq-a ul, .faq-a ol, details.more ul, details.more ol { padding-left: 1.3rem; }
-main.article .shell > ul li, main.article .shell > ol li { margin-top: .55rem; padding-left: .2rem; }
-main.article .shell > ul li::marker { color: var(--red); }
-main.article .shell > ol li::marker { color: var(--muted); font-size: .9em; }
+main.article :is(.shell, .shell > article) > h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.875rem); margin: 3.25rem 0 1rem; letter-spacing: -.024em; }
+main.article :is(.shell, .shell > article) > h3 { margin: 2rem 0 .6rem; }
+main.article :is(.shell, .shell > article) > p, main.article :is(.shell, .shell > article) > ul, main.article :is(.shell, .shell > article) > ol, main.article :is(.shell, .shell > article) > details.more, main.article :is(.shell, .shell > article) > blockquote { margin-top: 1.1rem; }
+main.article :is(.shell, .shell > article) > ul, main.article :is(.shell, .shell > article) > ol, .faq-a ul, .faq-a ol, details.more ul, details.more ol { padding-left: 1.3rem; }
+main.article :is(.shell, .shell > article) > ul li, main.article :is(.shell, .shell > article) > ol li { margin-top: .55rem; padding-left: .2rem; }
+main.article :is(.shell, .shell > article) > ul li::marker { color: var(--red); }
+main.article :is(.shell, .shell > article) > ol li::marker { color: var(--muted); font-size: .9em; }
 main.article blockquote { border-left: 3px solid var(--red); padding: .25rem 0 .25rem 1.25rem; color: var(--ink); font-size: 1.125rem; }
 mark { background: linear-gradient(transparent 60%, #FBD5D0 60%); color: var(--ink); padding: 0 .05em; }
 
@@ -728,3 +728,15 @@ main.blog-hub > .shell { max-width: var(--shell); }
 .diff .split { align-items: start; }
 .diff h2 { margin-top: .9rem; }
 .option-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+
+/* site search (tools/build_search.py) */
+.search-form { margin-top: 1.75rem; max-width: 40rem; }
+.search-status { margin-top: 1.25rem; }
+.search-results { list-style: none; padding: 0; margin-top: 1rem; display: grid; gap: 1rem; }
+.search-results li { padding: 1.1rem 1.25rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper); }
+.search-results li a { text-decoration: none; color: var(--ink); }
+.search-results li a:hover b { text-decoration: underline; }
+.search-results li p { margin-top: .4rem; color: var(--slate); font-size: .95rem; }
+.search-results li .small { display: block; margin-top: .3rem; }
+.search-results .badge { margin-right: .5rem; }
+main.article .search-results li { margin-top: 0; padding-left: 1.25rem; }

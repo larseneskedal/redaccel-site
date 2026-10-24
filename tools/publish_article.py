@@ -154,6 +154,7 @@ ARTICLE_TMPL = u"""<!DOCTYPE html>
 <main id="main" class="article">
   <div class="shell">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/blog/">blog</a> <span aria-hidden="true">/</span> <span>{slug}</span></nav>
+    <article>
     <h1>{h1}</h1>
     <div class="dateline"><span class="flag">{dateline_flag}</span> <span>{read_minutes} min read</span> <span>By Redaccel</span></div>
 
@@ -175,6 +176,7 @@ ARTICLE_TMPL = u"""<!DOCTYPE html>
 {sources_html}
       </ol>
     </details>
+    </article>
 
     <div class="byline-box">{mark}<p>Written by Redaccel, a Reddit and AI visibility agency in Oslo. Every figure links to where it came from. Spotted something wrong? <a href="mailto:contact@redaccel.com">contact@redaccel.com</a></p></div>
 
@@ -359,17 +361,11 @@ def render_hub(articles):
 # --------------------------------------------------------------------------
 
 def update_sitemap(articles):
-    path = os.path.join(SITE_DIR, "sitemap.xml")
-    xml = read(path)
-    body = re.sub(r"\s*<url><loc>%s/blog/[^<]*</loc>[^<]*</url>" % re.escape(SITE),
-                  "", xml)
-    rows = ["  <url><loc>%s/blog/</loc><lastmod>%s</lastmod></url>"
-            % (SITE, articles[0]["date_published"] if articles else "2026-08-20")]
-    for a in articles:
-        rows.append("  <url><loc>%s/blog/%s/</loc><lastmod>%s</lastmod></url>"
-                    % (SITE, a["slug"], a["date_modified"]))
-    body = body.replace("</urlset>", "\n".join(rows) + "\n</urlset>")
-    write(path, body)
+    """Rebuild the sitemap index and the per-type sitemaps (tools/build_sitemap.py)."""
+    import build_sitemap
+    import build_search
+    build_sitemap.build()
+    build_search.build()
 
 
 def update_llms(articles):
@@ -464,7 +460,7 @@ def main(argv):
 
     if "--no-git" not in flags:
         # only this article's files, never whatever else is lying in the tree
-        git("add", "--", os.path.relpath(path, ROOT), "site/blog", "site/sitemap.xml",
+        git("add", "--", os.path.relpath(path, ROOT), "site/blog", "site/sitemap.xml", "site/sitemap-*.xml", "site/search-index.json",
             "site/llms.txt", "tools/articles.json", "tools/topic_queue.json")
         git("commit", "-m", "Publish: %s" % a["card_title"])
     return 0
