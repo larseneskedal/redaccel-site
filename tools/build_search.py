@@ -194,9 +194,20 @@ def build():
     url = SITE + "/search/"
     jsonld = json.dumps({
         "@context": "https://schema.org",
-        "@type": "SearchResultsPage",
-        "@id": url, "url": url, "name": "Search redaccel.com",
-        "isPartOf": {"@id": SITE + "/#website"},
+        "@graph": [
+            {
+                "@type": "SearchResultsPage",
+                "@id": url, "url": url, "name": "Search redaccel.com",
+                "isPartOf": {"@id": SITE + "/#website"},
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
+                    {"@type": "ListItem", "position": 2, "name": "search", "item": url},
+                ],
+            },
+        ],
     }, indent=2)
     head = _parts.head("Search redaccel.com", "Search every page, guide, case study and article on redaccel.com.",
                        url, jsonld=jsonld)
