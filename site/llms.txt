@@ -16,6 +16,13 @@
 - [About](https://www.redaccel.com/about/): The story: from Reddit-only agency to full-surface GEO. Legal entity Redaccel DA, founders Johan Larsen and Erik Eskedal, organisation number 936133428, registered in Norway (Foretaksregisteret), registered office Oslo.
 - [Contact](https://www.redaccel.com/contact/): contact@redaccel.com · calendly.com/redaccel/30min · t.me/chainarenn
 
+## Guides and answers
+
+- [All guides](https://www.redaccel.com/guides/): Index of the guides and the straight answers below.
+- [Why doesn't ChatGPT recommend my company?](https://www.redaccel.com/why-chatgpt-doesnt-recommend-you/): The five causes, how to check which one is yours in an hour, and what actually moves an AI recommendation.
+- [What sources does ChatGPT cite for product recommendations?](https://www.redaccel.com/what-chatgpt-cites/): The page types behind AI buying answers, with counts from our own tracking, and why the mix differs by engine.
+- [GEO agency vs doing GEO in house: is it worth hiring one?](https://www.redaccel.com/geo-agency-vs-in-house/): What each route costs, what each is good at, and the three cases where you should not hire anyone. Written by an agency, bias declared.
+
 ## Articles
 
 - [Blog](https://www.redaccel.com/blog/): Index of all articles, one sourced article a week on GEO and AI search.
