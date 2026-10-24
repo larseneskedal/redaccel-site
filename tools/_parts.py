@@ -20,6 +20,7 @@ LEARN_ITEMS = [
     ("/geo-vs-seo/", "GEO vs SEO", "What changes and what carries over"),
     ("/reddit-marketing-2026/", "Reddit in 2026", "Why engines cite Reddit, and what survives"),
     ("/geo-agencies-compared/", "GEO agencies compared", "30 days of citation data"),
+    ("/guides/", "All guides", "Straight answers to the questions buyers ask AI"),
     ("/blog/", "Blog", "One sourced article every Tuesday"),
 ]
 TAIL_ITEMS = [
@@ -105,6 +106,7 @@ FOOTER = """<footer class="site-footer">
         <h2>Services</h2>
         <ul>
           <li><a href="/what-we-do/">What we do</a></li>
+          <li><a href="/reddit-marketing-agency/">Reddit marketing</a></li>
           <li><a href="/pricing/">Pricing</a></li>
           <li><a href="/case-studies/">Case studies</a></li>
           <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
@@ -117,6 +119,7 @@ FOOTER = """<footer class="site-footer">
           <li><a href="/geo-vs-seo/">GEO vs SEO</a></li>
           <li><a href="/reddit-marketing-2026/">Reddit in 2026</a></li>
           <li><a href="/geo-agencies-compared/">GEO agencies compared</a></li>
+          <li><a href="/guides/">All guides</a></li>
           <li><a href="/blog/">Blog</a></li>
         </ul>
       </div>

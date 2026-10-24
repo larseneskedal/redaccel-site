@@ -361,9 +361,13 @@ def render_hub(articles):
 # --------------------------------------------------------------------------
 
 def update_sitemap(articles):
-    """Rebuild the sitemap index and the per-type sitemaps (tools/build_sitemap.py)."""
+    """Rebuild the sitemap index and the per-type sitemaps (tools/build_sitemap.py),
+    the search index, and re-apply the schema nodes (FAQPage, BreadcrumbList, dates)
+    that tools/schema_sync.py adds to pages the templates do not emit them on."""
     import build_sitemap
     import build_search
+    import schema_sync
+    schema_sync.main([])
     build_sitemap.build()
     build_search.build()
 

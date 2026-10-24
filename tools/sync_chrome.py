@@ -33,6 +33,9 @@ def active_for(rel):
     parts = rel.replace(os.sep, "/").split("/")
     if len(parts) < 2:
         return ""
+    # Answer pages (tools/build_answers.py) sit at the root but belong to /guides/.
+    if os.path.exists(os.path.join(SITE_DIR, parts[0], ".answer")):
+        return "/guides/"
     return "/%s/" % parts[0]
 
 
