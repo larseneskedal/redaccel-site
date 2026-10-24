@@ -139,12 +139,18 @@ def sync(html, rel, date):
     p.feed(html)
 
     changed = []
-    # 1. FAQPage from the visible FAQ
-    if p.faq and not nodes_of(graph, "FAQPage"):
-        graph.append({"@type": "FAQPage", "mainEntity": [
-            {"@type": "Question", "name": q,
-             "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in p.faq]})
-        changed.append("FAQPage")
+    # 1. FAQPage from the visible FAQ: added when missing, and rewritten when the
+    #    visible questions or answers no longer match what the node says.
+    if p.faq:
+        want = [{"@type": "Question", "name": q,
+                 "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in p.faq]
+        have = nodes_of(graph, "FAQPage")
+        if not have:
+            graph.append({"@type": "FAQPage", "mainEntity": want})
+            changed.append("FAQPage")
+        elif _faq_pairs(have[0]) != [(_norm(q), _norm(a)) for q, a in p.faq]:
+            have[0]["mainEntity"] = want
+            changed.append("FAQPage.mainEntity")
 
     # 2. dateModified on commercial nodes
     stamp = date or updated_date(html)
@@ -205,6 +211,18 @@ def sync(html, rel, date):
     else:
         out = html.replace("</head>", block + "\n</head>", 1)
     return out, sorted(set(changed))
+
+
+def _faq_pairs(node):
+    out = []
+    for q in node.get("mainEntity", []) or []:
+        a = q.get("acceptedAnswer") or {}
+        out.append((_norm(q.get("name", "")), _norm(a.get("text", ""))))
+    return out
+
+
+def _norm(s):
+    return " ".join(str(s).split())
 
 
 def _needs(node, stamp, explicit):
