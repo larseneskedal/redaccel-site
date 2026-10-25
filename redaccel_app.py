@@ -106,6 +106,13 @@ LEGACY_REDIRECTS = {
 }
 
 
+# Pages taken down for good. 410 Gone (not a redirect) tells search engines and AI crawlers
+# to drop the URL. 2026-10-25: a former client asked to be removed from the site.
+GONE_PATHS = {
+    "/case-studies/gpm-music-group",
+}
+
+
 def _serve_site_path(path: str):
     """Serve a file or directory index from the static site build in `site/`."""
     clean = (path or "").strip("/")
@@ -132,6 +139,8 @@ def index():
 
 @app.route("/<path:path>")
 def site_page(path: str):
+    if "/" + path.strip("/").lower() in GONE_PATHS:
+        return send_from_directory(SITE_DIR, "404.html"), 410, {"X-Robots-Tag": "noindex"}
     target = LEGACY_REDIRECTS.get("/" + path.strip("/"))
     if target:
         return redirect(target, code=301)

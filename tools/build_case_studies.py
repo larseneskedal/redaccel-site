@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Build the case-study pages and patch the client-name passages, 2026-09-24.
 
-Johan's decision (2026-09-24): name GPM Music Group, describe FanPro anonymously as a content
-creator software company, add Peptide Bureau, and drop Kalshi and Roobet from the site.
+Johan's decision (2026-09-24): describe FanPro anonymously as a content creator software
+company, add Peptide Bureau, and drop Kalshi and Roobet from the site. 2026-10-25: one former
+client asked to be removed; it is gone from the site and must never be added back.
 Run from the repo root: python3 tools/build_case_studies.py
 Idempotent: re-running rewrites the same files. Redesign 2026-10: pages now use the shared
 head, header, footer and CTA from tools/_parts.py. The one-off 2026-09-24 patches to about,
 home, the Reddit page, llms files, sitemap and redaccel_app.py were applied then and are in
-git history; they are no longer re-run, so this script only writes the four case-study pages.
+git history; they are no longer re-run, so this script only writes the case-study pages and the hub.
 """
 import os
 import sys
@@ -36,32 +37,6 @@ HEADER = "<body>\n" + _parts.header("/case-studies/") + "\n\n"
 FOOTER = "\n" + _parts.FOOTER.format(updated="September 2026") + "\n</body>\n</html>\n"
 
 CASES = [
-    {
-        "slug": "gpm-music-group",
-        "name": "GPM Music Group",
-        "short": "GPM Music Group",
-        "category": "Music promotion and Spotify playlisting",
-        "period": "Autumn 2025, 30 days",
-        "deliverables": "4 posts and 60 or more comments on Reddit",
-        "title": "Case study: GPM Music Group, 150,000 Reddit views and the number 2 Google result in 30 days",
-        "meta": "How Redaccel built GPM Music Group's reputation on Reddit: 4 posts, 60 comments, 150,000 views in 30 days, the top 4 Reddit results and the number 2 Google result for the brand name.",
-        "stats": [("150K+", "views on our posts in 30 days"), ("#2", "Google result for \"GPM music group\", after the official site"), ("4 of 4", "posts still live")],
-        "objective": "Build GPM's reputation as a serious music promotion and Spotify playlisting service, and make sure that when an artist searches the name, on Google or on Reddit, what they find is a real conversation rather than silence.",
-        "strategy": [
-            "Posts in the subreddits where artists actually compare services: r/MusicPromotion, r/musicmarketing, r/WeAreTheMusicMakers, r/musicindustry.",
-            "Comments from aged accounts with history in those communities, most of them general and useful, some of them recommending GPM where it fit the question.",
-            "Threads written around the questions people type: \"has anyone used GPM Music Group\", \"Spotify playlisting that is not bots\", \"ranking the promo services I have tried\".",
-            "Timing, early engagement and upvotes to hold top positions inside each subreddit.",
-        ],
-        "results": [
-            "All 4 posts live at the end of the campaign and still live today.",
-            "One post became the number 2 Google result for \"GPM music group\", directly under the official site.",
-            "The top 4 Reddit results for the brand name were our 4 posts.",
-            "More than 150,000 views on the posts during the 30 days, still climbing after the campaign ended.",
-            "60 or more comments placed by us, including top comments in other relevant threads worth over 5,000 dollars a month in equivalent search traffic.",
-        ],
-        "impact": "Anyone researching GPM now lands on community discussion that answers their questions and recommends the service in the words artists use. The posts keep ranking, so the social proof compounds instead of expiring like an ad. The same threads are the kind of source AI engines cite when asked about music promotion services.",
-    },
     {
         "slug": "content-creator-software",
         "name": "Content creator software company",
@@ -210,7 +185,7 @@ def hub_page():
         </article>""" % (c["period"], c["slug"], c["name"], c["category"].split(" (")[0], c["stats"][0][0], c["stats"][0][1])
         for c in CASES)
     head = _parts.head("Redaccel case studies: Reddit campaigns with the numbers",
-                       "Redaccel client work with the results stated plainly: GPM Music Group, a content creator software company, and Peptide Bureau. Views, Google positions and leads, per campaign.",
+                       "Redaccel client work with the results stated plainly: a content creator software company and Peptide Bureau. Views, Google positions, leads and AI visibility, per campaign.",
                        "https://www.redaccel.com/case-studies/") + "\n"
     body = HEADER + """<main id="main">
   <section class="page-hero">
@@ -223,7 +198,7 @@ def hub_page():
   </section>
   <section class="section">
     <div class="shell">
-      <div class="grid grid-3">%(cards)s
+      <div class="grid grid-2">%(cards)s
       </div>
       <div class="table-wrap">
         <table>
@@ -253,4 +228,4 @@ for c in CASES:
     write("site/case-studies/%s/index.html" % c["slug"], case_page(c))
 write("site/case-studies/index.html", hub_page())
 
-print("built 4 case-study pages")
+print("built %d case-study pages and the hub" % len(CASES))
