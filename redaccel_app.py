@@ -111,6 +111,17 @@ LEGACY_REDIRECTS = {
 GONE_PATHS = {
     "/case-studies/gpm-music-group",
 }
+GONE_PREFIXES = (
+    "/static/img/case-studies/gpm/",
+)
+
+
+@app.before_request
+def gone_pages():
+    path = "/" + (request.path or "/").strip("/").lower()
+    if path in GONE_PATHS or (path + "/").startswith(GONE_PREFIXES):
+        return send_from_directory(SITE_DIR, "404.html"), 410, {"X-Robots-Tag": "noindex"}
+    return None
 
 
 def _serve_site_path(path: str):
@@ -139,8 +150,6 @@ def index():
 
 @app.route("/<path:path>")
 def site_page(path: str):
-    if "/" + path.strip("/").lower() in GONE_PATHS:
-        return send_from_directory(SITE_DIR, "404.html"), 410, {"X-Robots-Tag": "noindex"}
     target = LEGACY_REDIRECTS.get("/" + path.strip("/"))
     if target:
         return redirect(target, code=301)
