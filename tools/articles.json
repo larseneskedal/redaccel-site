@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "reddit-and-ai-search",
+      "keyword": "reddit seo",
+      "card_title": "Reddit SEO for AI search",
+      "card_summary": "Why Reddit sits at or near the top of AI citation rankings in 2026, how its LLM-based spam crackdown works, what kind of participation survives moderation, and why buying accounts is the fastest way to lose your Reddit presence.",
+      "date_published": "2026-10-27",
+      "date_modified": "2026-10-27",
+      "read_minutes": 7
+    },
+    {
       "slug": "llm-seo",
       "keyword": "llm seo",
       "card_title": "LLM SEO: the practical playbook",
