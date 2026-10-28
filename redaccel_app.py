@@ -4,6 +4,7 @@ Flask web application for the Redaccel marketing website.
 from flask import Flask, render_template, request, jsonify, abort, redirect, send_from_directory
 import socket
 import os
+import re
 import smtplib
 import requests
 from typing import Optional
