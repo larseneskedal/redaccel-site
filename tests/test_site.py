@@ -295,6 +295,13 @@ def test_probe_dry_still_validates(client, smtp, probe_secret):
     r = client.post("/api/audit", json={**VALID, "website": "nope"},
                     headers={"X-Redaccel-Probe": probe_secret})
     assert r.status_code == 400
+    assert r.get_json()["probe"] == "dry"  # the probe checks its secret this way, mail-free
+    assert smtp.sent == []
+
+
+def test_validation_error_does_not_mention_probe_without_secret(client, smtp, probe_secret):
+    r = client.post("/api/audit", json={}, headers={"X-Redaccel-Probe": "wrong"})
+    assert r.status_code == 400 and "probe" not in r.get_json()
 
 
 def test_probe_dry_reports_missing_mail_config(client, smtp, probe_secret, monkeypatch):

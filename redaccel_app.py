@@ -212,7 +212,10 @@ def audit_request():
     email = clean("email")
 
     if not all([brand, website, category, competitors, email]) or "@" not in email:
-        return jsonify({"error": "All fields are required (website must look like yourcompany.com)"}), 400
+        answer = {"error": "All fields are required (website must look like yourcompany.com)"}
+        if probe:
+            answer["probe"] = probe  # lets the probe confirm its secret before it sends anything
+        return jsonify(answer), 400
 
     body = "\n".join([
         "New free AI visibility audit request",
