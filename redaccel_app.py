@@ -1,7 +1,7 @@
 """
 Flask web application for the Redaccel marketing website.
 """
-from flask import Flask, render_template, request, jsonify, abort, redirect, send_from_directory
+from flask import Flask, render_template, request, jsonify, abort, redirect, send_from_directory, make_response
 import socket
 import os
 import re
@@ -146,6 +146,19 @@ def _serve_site_path(path: str):
     return send_from_directory(SITE_DIR, "404.html"), 404
 
 
+# Render's health check (service setting healthCheckPath). A deploy whose app cannot start
+# or lost the built site never answers 200 here, so Render keeps the old version live.
+HEALTH_FILES = ("index.html", "404.html", "free-ai-visibility-audit/index.html")
+
+
+@app.route("/healthz")
+def healthz():
+    missing = [f for f in HEALTH_FILES if not os.path.isfile(os.path.join(SITE_DIR, f))]
+    body, code = ("missing: " + ", ".join(missing), 503) if missing else ("ok", 200)
+    return body, code, {"Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store",
+                        "X-Robots-Tag": "noindex"}
+
+
 @app.route("/")
 def index():
     return _serve_site_path("")
@@ -191,10 +204,50 @@ def _probe_mode() -> Optional[str]:
     return "send" if request.headers.get("X-Redaccel-Probe-Mode") == "send" else "dry"
 
 
+FORM_MIMETYPES = ("application/x-www-form-urlencoded", "multipart/form-data")
+
+# What a visitor without JavaScript sees after the plain form post. Same wording as the
+# page's own script (site/assets/js/main.js) so both paths say the same thing.
+_FORM_PAGES = {
+    200: ("Request received", "Received. Your audit will be in your inbox within 48 hours.",
+          '<a class="btn btn-primary btn-lg" href="/">Home</a>'),
+    400: ("Check the form", "All fields are required (website must look like yourcompany.com).",
+          '<a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/#request">Back to the form</a>'),
+    503: ("The form is not responding right now",
+          'Email the same details to <a href="mailto:contact@redaccel.com?subject=Free%20AI%20visibility%20audit">'
+          'contact@redaccel.com</a> and we will run the audit from there.',
+          '<a class="btn btn-primary btn-lg" href="mailto:contact@redaccel.com?subject=Free%20AI%20visibility%20audit">'
+          'Email contact@redaccel.com</a>'),
+}
+
+
+def _form_result_page(status: int):
+    """A full site page (the 404 page's shell) answering a no-JavaScript form post."""
+    title, lede, action = _FORM_PAGES[status]
+    with open(os.path.join(SITE_DIR, "404.html"), encoding="utf-8") as f:
+        shell = f.read()
+    main = ('<main id="main">\n  <section class="notfound">\n    <div class="shell">\n'
+            f'      <h1>{title}</h1>\n      <p class="lede">{lede}</p>\n'
+            f'      <div class="hero-actions">\n        {action}\n      </div>\n'
+            '    </div>\n  </section>\n</main>')
+    shell = re.sub(r'<main id="main">.*?</main>', lambda _m: main, shell, count=1, flags=re.S)
+    shell = re.sub(r"<title>.*?</title>", lambda _m: f"<title>{title} | Redaccel</title>", shell, count=1, flags=re.S)
+    resp = make_response(shell, status)
+    resp.headers["Content-Type"] = "text/html; charset=utf-8"
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
+
+
 @app.route("/api/audit", methods=["POST"])
 def audit_request():
-    """Handle free AI visibility audit requests from the new site's form."""
-    data = request.get_json(silent=True) or {}
+    """Handle free AI visibility audit requests from the new site's form.
+
+    The page's script posts JSON and gets JSON back. Without JavaScript the browser posts the
+    form itself (urlencoded or multipart) and gets a full HTML page back, same outcome."""
+    as_form = request.mimetype in FORM_MIMETYPES
+    data = request.form.to_dict() if as_form else (request.get_json(silent=True) or {})
+    if not isinstance(data, dict):
+        data = {}
     probe = _probe_mode()
     if not probe:
         # Written before anything can fail, so a lead is still in the Render logs if the
@@ -212,6 +265,8 @@ def audit_request():
     email = clean("email")
 
     if not all([brand, website, category, competitors, email]) or "@" not in email:
+        if as_form and not probe:
+            return _form_result_page(400)
         answer = {"error": "All fields are required (website must look like yourcompany.com)"}
         if probe:
             answer["probe"] = probe  # lets the probe confirm its secret before it sends anything
@@ -237,6 +292,8 @@ def audit_request():
     if probe == "send":
         subject = "[TEST] " + subject
     ok, error = send_email(email, subject, body)
+    if as_form and not probe:
+        return _form_result_page(200 if ok else 503)
     if not ok:
         # 503 makes the site's JS show the mailto fallback, so no lead is lost.
         return jsonify({"error": error or "Email delivery not configured"}), 503

@@ -21,3 +21,11 @@ Four layers, each catches what the one before can miss:
    once a day sends one real `[TEST]` audit mail to contact@redaccel.com.
 4. `/api/audit` prints every submission to the logs (`AUDIT_SUBMISSION ...`) before
    doing anything else, so a crash can no longer lose the lead's details.
+
+## No-JavaScript form posts and the health check (2026-10-28)
+
+- `/api/audit` also takes the browser's own form post (urlencoded or multipart). It answers
+  with a full site page (the 404 page's shell, wording from `main.js`): 200 received, 400
+  check the form, 503 with the mailto fallback. The JSON path is unchanged.
+- `/healthz` returns `ok` when the built site's key files exist. Render's `healthCheckPath`
+  on `redaccel-site` points at it, so a deploy that cannot start never replaces the live site.

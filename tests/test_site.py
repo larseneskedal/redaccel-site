@@ -240,6 +240,56 @@ def test_audit_bad_body_is_400_not_500(client, smtp, kwargs):
     assert smtp.sent == []
 
 
+# Without JavaScript the browser posts the form itself (2026-10-28). It must get a real page
+# back, never raw JSON, and the lead must arrive exactly like the JSON path.
+@pytest.mark.parametrize("encoding", ["urlencoded", "multipart"])
+def test_audit_plain_form_post_sends_one_mail_and_shows_a_page(client, smtp, encoding):
+    if encoding == "urlencoded":
+        r = client.post("/api/audit", data=VALID, content_type="application/x-www-form-urlencoded")
+    else:
+        r = client.post("/api/audit", data=VALID, content_type="multipart/form-data")
+    assert r.status_code == 200, r.data
+    assert r.mimetype == "text/html"
+    html = r.get_data(as_text=True)
+    assert "<title>Request received | Redaccel</title>" in html
+    assert "within 48 hours" in html and 'class="site-header"' in html
+    assert "This page does not exist" not in html
+    assert len(smtp.sent) == 1
+    assert "Subject: Audit request: Pearle (Plant-based caviar)" in smtp.sent[0]["text"]
+    assert "Reply-To: ash@example.com" in smtp.sent[0]["text"]
+
+
+def test_audit_plain_form_post_missing_field_is_a_400_page(client, smtp):
+    r = client.post("/api/audit", data={**VALID, "website": "pearle"})
+    assert r.status_code == 400
+    assert r.mimetype == "text/html"
+    assert "/free-ai-visibility-audit/#request" in r.get_data(as_text=True)
+    assert smtp.sent == []
+
+
+def test_audit_plain_form_post_smtp_failure_is_a_503_page_with_mailto(client, smtp):
+    smtp.fail_with = OSError("connection refused")
+    r = client.post("/api/audit", data=VALID)
+    assert r.status_code == 503
+    assert r.mimetype == "text/html"
+    assert "mailto:contact@redaccel.com" in r.get_data(as_text=True)
+
+
+def test_audit_form_page_tags_match(client):
+    html = client.get("/free-ai-visibility-audit/").get_data(as_text=True)
+    assert 'method="post" action="/api/audit"' in html
+
+
+def test_healthz_is_200_and_not_redirected(client):
+    r = client.get("/healthz")
+    assert r.status_code == 200 and r.get_data(as_text=True) == "ok"
+
+
+def test_healthz_is_503_when_the_built_site_is_missing(client, monkeypatch):
+    monkeypatch.setattr(redaccel_app, "HEALTH_FILES", ("does-not-exist.html",))
+    assert client.get("/healthz").status_code == 503
+
+
 def test_audit_smtp_failure_is_503_so_the_page_shows_the_mailto_fallback(client, smtp):
     smtp.fail_with = OSError("connection refused")
     r = client.post("/api/audit", json=VALID)
