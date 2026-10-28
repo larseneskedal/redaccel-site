@@ -1,0 +1,4 @@
+# Test tools for tools/ci/check.sh and .github/workflows/checks.yml. Render installs only requirements.txt.
+-r requirements.txt
+pytest==9.2.0
+ruff==0.17.3

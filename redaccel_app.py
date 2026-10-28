@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, jsonify, abort, redirect, sen
 import socket
 import os
 import re
+import hmac
+import json
 import smtplib
 import requests
 from typing import Optional
@@ -173,10 +175,31 @@ def normalise_website(raw: str) -> str:
     return m.group(1).lower() + "://" + host + m.group(3)
 
 
+def _probe_mode() -> Optional[str]:
+    """
+    "dry" or "send" when the request carries the monitoring probe's secret header, else None.
+
+    The mini's site probe (redaccel/agents/ops/health/site_probe.py) uses this to run the
+    audit form end to end every 15 minutes without mailing anyone: "dry" runs validation and
+    builds the mail but skips SMTP, "send" really sends it to contact@redaccel.com with
+    [TEST] in the subject. The secret lives in the PROBE_SECRET env var on Render only.
+    """
+    secret = os.getenv("PROBE_SECRET", "")
+    given = request.headers.get("X-Redaccel-Probe", "")
+    if not secret or not given or not hmac.compare_digest(secret, given):
+        return None
+    return "send" if request.headers.get("X-Redaccel-Probe-Mode") == "send" else "dry"
+
+
 @app.route("/api/audit", methods=["POST"])
 def audit_request():
     """Handle free AI visibility audit requests from the new site's form."""
     data = request.get_json(silent=True) or {}
+    probe = _probe_mode()
+    if not probe:
+        # Written before anything can fail, so a lead is still in the Render logs if the
+        # rest of this handler ever crashes again (8 to 28 Oct 2026 every submission did).
+        print("AUDIT_SUBMISSION " + json.dumps({k: str(v)[:300] for k, v in data.items()}), flush=True)
 
     def clean(key: str) -> str:
         value = data.get(key)
@@ -202,39 +225,67 @@ def audit_request():
         "",
         "The 48-hour clock starts now.",
     ])
-    ok, error = send_email(email, f"Audit request: {brand} ({category})", body)
+    subject = f"Audit request: {brand} ({category})"
+    if probe == "dry":
+        build_message(email, subject, body)
+        if not _mail_config()["password"]:
+            return jsonify({"error": "Email delivery not configured"}), 503
+        return jsonify({"ok": True, "probe": "dry"})
+    if probe == "send":
+        subject = "[TEST] " + subject
+    ok, error = send_email(email, subject, body)
     if not ok:
         # 503 makes the site's JS show the mailto fallback, so no lead is lost.
         return jsonify({"error": error or "Email delivery not configured"}), 503
-    return jsonify({"ok": True})
+    return jsonify({"ok": True, "probe": probe} if probe else {"ok": True})
+
+
+RECIPIENT_EMAIL = 'contact@redaccel.com'
+
+
+def _mail_config() -> dict:
+    """Email configuration from the environment (defaults to Hostinger SMTP)."""
+    username = os.getenv('MAIL_USERNAME', 'contact@redaccel.com')
+    return {
+        "server": os.getenv('MAIL_SERVER', 'smtp.hostinger.com'),
+        "port": int(os.getenv('MAIL_PORT', 465)),
+        "username": username,
+        "password": os.getenv('MAIL_PASSWORD', ''),
+        "sender": os.getenv('MAIL_DEFAULT_SENDER', username or 'contact@redaccel.com'),
+    }
+
+
+def build_message(reply_to_email: str, subject: str, email_body: str) -> MIMEMultipart:
+    """The mail every form sends to contact@redaccel.com."""
+    msg = MIMEMultipart()
+    msg['From'] = _mail_config()["sender"]
+    msg['To'] = RECIPIENT_EMAIL
+    if reply_to_email:
+        msg['Reply-To'] = reply_to_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(email_body, 'plain'))
+    return msg
+
 
 def send_email(reply_to_email: str, subject: str, email_body: str):
     """Send email using SMTP."""
     try:
-        # Get email configuration from environment (defaults to Hostinger SMTP)
-        smtp_server = os.getenv('MAIL_SERVER', 'smtp.hostinger.com')
-        smtp_port = int(os.getenv('MAIL_PORT', 465))
-        smtp_username = os.getenv('MAIL_USERNAME', 'contact@redaccel.com')
-        smtp_password = os.getenv('MAIL_PASSWORD', '')
-        sender_email = os.getenv('MAIL_DEFAULT_SENDER', smtp_username or 'contact@redaccel.com')
-        recipient_email = 'contact@redaccel.com'
-        
+        cfg = _mail_config()
+        smtp_server = cfg["server"]
+        smtp_port = cfg["port"]
+        smtp_username = cfg["username"]
+        smtp_password = cfg["password"]
+        sender_email = cfg["sender"]
+        recipient_email = RECIPIENT_EMAIL
+
         # Hostinger requires authentication
         if not smtp_username or not smtp_password:
             error_msg = "Email credentials not configured. Please set MAIL_USERNAME and MAIL_PASSWORD as environment variables (in .env file for local, or in Render dashboard for production)."
             print(f"Error: {error_msg}")
             return False, error_msg
-        
-        # Create message
-        msg = MIMEMultipart()
-        msg['From'] = sender_email
-        msg['To'] = recipient_email
-        if reply_to_email:
-            msg['Reply-To'] = reply_to_email
-        msg['Subject'] = subject
-        
-        msg.attach(MIMEText(email_body, 'plain'))
-        
+
+        msg = build_message(reply_to_email, subject, email_body)
+
         # Connect to server and send email
         if smtp_port == 465:
             # SSL connection
