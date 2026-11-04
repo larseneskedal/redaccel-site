@@ -194,7 +194,9 @@
         "tables and lists",
         "what the extraction studies show"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-11-04",
+      "url": "https://www.redaccel.com/blog/llm-optimization/"
     },
     {
       "slug": "llms-txt-explained",

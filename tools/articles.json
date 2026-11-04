@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "llm-optimization",
+      "keyword": "llm optimization",
+      "card_title": "LLM optimization: page-level mechanics",
+      "card_summary": "How to write and structure a page so an AI engine can lift an answer from it: front-loading, chunk-level retrieval, tables and lists, schema, and a confidence rating on each extraction study.",
+      "date_published": "2026-11-04",
+      "date_modified": "2026-11-04",
+      "read_minutes": 8
+    },
+    {
       "slug": "reddit-and-ai-search",
       "keyword": "reddit seo",
       "card_title": "Reddit SEO for AI search",
