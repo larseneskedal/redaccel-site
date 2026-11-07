@@ -28,6 +28,11 @@
 - [GEO agency for SaaS companies](https://www.redaccel.com/geo-agency-for-saas/): Directory profiles, best-of lists, alternatives pages and the SaaS subreddits: the pages that decide software answers, and how we work them.
 - [AI visibility agency for ecommerce brands](https://www.redaccel.com/geo-agency-for-ecommerce/): Reddit threads, YouTube reviews, buying guides and retailer pages: the pages behind AI product answers, and how we work them for a store.
 - [GEO agency for B2B service businesses](https://www.redaccel.com/geo-agency-for-b2b-services/): Directories, best-of lists, Reddit threads and trade press: the pages behind AI recommendations for service firms, with the audit we ran on ourselves.
+- [How much does a GEO agency cost?](https://www.redaccel.com/how-much-does-geo-cost/): What a GEO agency charges for, how retainer, per-placement and performance pricing differ, what tracking tools cost on their own, and what to ask before you sign.
+- [How can I track what AI search engines say about my brand?](https://www.redaccel.com/track-what-ai-says-about-your-brand/): Three ways to see what ChatGPT, Gemini and Google AI Overviews say about you: manual sampling, Search Console's AI report, and trackers. What to measure and how often.
+- [GEO vs SEO: which should I invest in for 2026?](https://www.redaccel.com/geo-vs-seo-where-to-invest/): Both, in a ratio set by where your buyers ask. How to split the budget, what each one moves, and the four cases where the answer is clearly one or the other.
+- [What should I look for when hiring a GEO agency?](https://www.redaccel.com/what-to-look-for-in-a-geo-agency/): Seven things to check before you sign: the audit, cited pages, a frozen prompt set, who posts on Reddit, counts per month, an exit point, and what they will not promise.
+- [Is Reddit marketing still worth it in 2026?](https://www.redaccel.com/is-reddit-marketing-worth-it-2026/): Yes for brands whose buyers research on Reddit or ask AI engines, since the engines cite Reddit in about a third of answers. No for volume plays, which Reddit now removes.
 
 ## Articles
 
