@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "llms-txt-explained",
+      "keyword": "llms.txt",
+      "card_title": "llms.txt, explained with evidence",
+      "card_summary": "What the llms.txt proposal specifies, which AI engines and agents actually fetch the file according to 2026 log data, what the citation studies found, and our own file as a worked example.",
+      "date_published": "2026-11-10",
+      "date_modified": "2026-11-10",
+      "read_minutes": 8
+    },
+    {
       "slug": "llm-optimization",
       "keyword": "llm optimization",
       "card_title": "LLM optimization: page-level mechanics",

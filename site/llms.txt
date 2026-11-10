@@ -37,6 +37,7 @@
 ## Articles
 
 - [Blog](https://www.redaccel.com/blog/): Index of all articles, one sourced article a week on GEO and AI search.
+- [llms.txt, explained with evidence](https://www.redaccel.com/blog/llms-txt-explained/): What the llms.txt proposal specifies, which AI engines and agents actually fetch the file according to 2026 log data, what the citation studies found, and our own file as a worked example.
 - [LLM optimization: page-level mechanics](https://www.redaccel.com/blog/llm-optimization/): How to write and structure a page so an AI engine can lift an answer from it: front-loading, chunk-level retrieval, tables and lists, schema, and a confidence rating on each extraction study.
 - [Reddit SEO for AI search](https://www.redaccel.com/blog/reddit-and-ai-search/): Why Reddit sits at or near the top of AI citation rankings in 2026, how its LLM-based spam crackdown works, what kind of participation survives moderation, and why buying accounts is the fastest way to lose your Reddit presence.
 - [LLM SEO: the practical playbook](https://www.redaccel.com/blog/llm-seo/): A sourced playbook for LLM SEO in 2026: how ChatGPT rewrites queries and picks sources, the citation surface beyond your own site, the page structures that get extracted, and the tactics with no evidence behind them.

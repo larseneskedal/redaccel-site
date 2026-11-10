@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="vw6Man9T2eUz1uEUmdFGjCx_DjkAYjhS49LDgpfVWIA">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css?v=20261024b">
+<script defer src="/assets/js/main.js?v=20261024b"></script>
+<title>llms.txt explained: who reads it, and does it work?</title>
+<meta name="description" content="What llms.txt is, which AI engines read it, and the 2026 evidence: 97% of files got no requests in May. A sourced verdict, with our own file as the example.">
+<link rel="canonical" href="https://www.redaccel.com/blog/llms-txt-explained/">
+<meta property="og:title" content="llms.txt: 97% of files got zero requests. Is it worth ten minutes?">
+<meta property="og:description" content="The spec, what OpenAI, Anthropic, Google and Perplexity have actually said, the May 2026 log data, and our own file picked apart.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.redaccel.com/blog/llms-txt-explained/">
+<meta property="og:image" content="https://www.redaccel.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "llms.txt explained: what it is, who actually reads it, and whether it is worth ten minutes",
+      "description": "What llms.txt is, which AI engines read it, and the 2026 evidence: 97% of files got no requests in May. A sourced verdict, with our own file as the example.",
+      "author": {
+        "@type": "Organization",
+        "name": "Redaccel",
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "publisher": {
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "mainEntityOfPage": "https://www.redaccel.com/blog/llms-txt-explained/",
+      "about": "llms.txt"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redaccel.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.redaccel.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "llms.txt explained: what it is, who actually reads it, and whether it is worth ten minutes",
+          "item": "https://www.redaccel.com/blog/llms-txt-explained/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does llms.txt work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As a way to earn AI citations, there is no evidence that it does. SISTRIX found no measurable effect across 96,418 URLs in Q2 2026, and Ahrefs found 97% of about 38,000 files received no requests in May 2026. It does get read by some coding agents, so it can help on developer documentation. Nobody has published a controlled before-and-after test yet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Google use llms.txt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google Search does not. Its guide to generative AI features lists llms.txt among things you can ignore and says Google Search itself doesn't use such files, which covers AI Overviews and AI Mode. Chrome's Lighthouse tool does audit the file in its Agentic Browsing category, but that is a developer check, and a missing file simply scores as not applicable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is llms.txt the same as robots.txt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. robots.txt tells crawlers what they may access, and OpenAI, Anthropic and Perplexity all document it as the way to manage their bots. llms.txt is a suggested reading list with no access rules in its format. Adding rate limits or denials to it has no defined meaning, even though Common Crawl found that kind of language in 6.59% of files in July 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I create an llms.txt file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Write a Markdown file with your site name as an H1, a short blockquote summary, and H2 sections listing your key pages as links with brief notes. Save it as llms.txt at your site's root and serve it as plain text. A generator can produce a first draft, but edit it by hand, because Common Crawl found 22.56% of files had no links in July 2026."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-row">
+    <a class="wordmark" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="site-nav" id="nav" aria-label="Main">
+      <div class="nav-links">
+        <a class="nav-link" href="/what-we-do/">What we do</a>
+        <a class="nav-link" href="/case-studies/">Case studies</a>
+        <a class="nav-link" href="/pricing/">Pricing</a>
+        <div class="nav-menu" data-current="true">
+          <button class="nav-link nav-menu-btn" type="button" aria-expanded="false" aria-controls="nav-learn">Learn</button>
+          <div class="nav-menu-panel" id="nav-learn">
+            <a href="/what-is-geo/"><b>What is GEO?</b><span>The plain definition, with sources</span></a>
+            <a href="/geo-vs-seo/"><b>GEO vs SEO</b><span>What changes and what carries over</span></a>
+            <a href="/reddit-marketing-2026/"><b>Reddit in 2026</b><span>Why engines cite Reddit, and what survives</span></a>
+            <a href="/geo-agencies-compared/"><b>GEO agencies compared</b><span>30 days of citation data</span></a>
+            <a href="/guides/"><b>All guides</b><span>Straight answers to the questions buyers ask AI</span></a>
+            <a href="/blog/" aria-current="page"><b>Blog</b><span>One sourced article every Tuesday</span></a>
+          </div>
+        </div>
+        <a class="nav-link" href="/about/">About</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="/contact/">Contact</a>
+        <a class="btn btn-primary btn-sm" href="/free-ai-visibility-audit/">Free AI audit</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="shell">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/blog/">blog</a> <span aria-hidden="true">/</span> <span>llms-txt-explained</span></nav>
+    <article>
+    <h1>llms.txt explained: what it is, who actually reads it, and whether it is worth ten minutes</h1>
+    <div class="dateline"><span class="flag">Updated November 2026</span> <span>8 min read</span> <span>By Redaccel</span></div>
+
+    <div class="extract">
+      <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com &middot; explainer &middot; November 2026</span></div>
+<p><mark>llms.txt is a proposed Markdown file at your site's root that lists your key pages for AI agents, and the best 2026 evidence says it does not earn AI citations.</mark> SISTRIX's study of 96,418 URLs from Q2 2026 found "no measurable effect"<sup class="cite"><a href="#src-3">[3]</a></sup>, and Ahrefs found that 97% of about 38,000 files received no requests at all in May 2026<sup class="cite"><a href="#src-2">[2]</a></sup>. It has a real use for developer documentation read by coding agents. For most marketing sites it is optional.</p>
+    </div>
+
+<h2>What is llms.txt?</h2>
+<p>It is a Markdown file served at <code>/llms.txt</code> that gives AI agents a short, curated map of a website. Jeremy Howard proposed it on 3 September 2024<sup class="cite"><a href="#src-1">[1]</a></sup>. It is a proposal, now labelled v2, not a ratified standard, and Google's Chrome documentation calls it an "emerging convention"<sup class="cite"><a href="#src-8">[8]</a></sup>.</p>
+<p>The format has a fixed order<sup class="cite"><a href="#src-1">[1]</a></sup>:</p>
+<ol>
+<li><strong>An H1</strong> with the name of the site or project. This is the only required part.</li>
+<li><strong>A blockquote</strong> with a short summary.</li>
+<li><strong>Optional Markdown</strong> of any kind except headings, for extra detail.</li>
+<li><strong>H2 sections of links,</strong> each entry a list item in the form <code>[name](url)</code>, with an optional colon and note.</li>
+<li><strong>A section called "Optional",</strong> by convention, for links an agent can skip when it needs less context.</li>
+</ol>
+<p>The proposal also asks sites to offer clean Markdown copies of pages, at the same URL with <code>.md</code> added<sup class="cite"><a href="#src-1">[1]</a></sup>. Howard's stated expectation was that the file would "mainly be useful for inference rather than training"<sup class="cite"><a href="#src-1">[1]</a></sup>, meaning an agent reads it while helping someone. That detail matters for the verdict below.</p>
+<p>It controls nothing. <code>robots.txt</code> is what OpenAI, Anthropic and Perplexity document for managing their crawlers<sup class="cite"><a href="#src-10">[10]</a></sup><sup class="cite"><a href="#src-11">[11]</a></sup><sup class="cite"><a href="#src-12">[12]</a></sup>. An llms.txt file is a suggested reading list.</p>
+
+<h2>Does llms.txt help you get cited by AI engines?</h2>
+<p>No study we could verify has found that it does. The two largest analyses point the same way, and neither is a controlled test.</p>
+<ul>
+<li><strong>SISTRIX, published 22 October 2026.</strong> The study covers 96,418 URLs from 17,380 domains, using citations from ChatGPT, AI Mode and AI Overviews in Germany, Austria and Switzerland in Q2 2026. Because the file applies to a whole domain, the authors compared domains on this question: 11.7% of cited URLs came from domains with an llms.txt, against 14.0% of all domains. Their words: "As things stand, there is no measurable effect on AI citations"<sup class="cite"><a href="#src-3">[3]</a></sup>. Perplexity, Claude and the Gemini chat app were not included, and the domains differ in other ways<sup class="cite"><a href="#src-3">[3]</a></sup>.</li>
+<li><strong>SE Ranking, reported by Search Engine Journal on 20 November 2025.</strong> Across about 300,000 domains, 10.13% had the file. SE Ranking found no correlation with citation frequency, and removing the variable from its XGBoost model improved accuracy<sup class="cite"><a href="#src-4">[4]</a></sup><sup class="cite"><a href="#src-5">[5]</a></sup>. The write-up names neither the AI engines nor the time window, and gives no accuracy figures<sup class="cite"><a href="#src-4">[4]</a></sup>, so read it as supporting evidence only.</li>
+</ul>
+<p>What nobody has published, as far as we could find in November 2026, is a before-and-after test with matched controls, like the one Ahrefs ran on schema that we cover in our notes on <a href="/blog/llm-optimization/">page-level LLM optimization</a>. So the honest label is: no evidence of benefit from large correlation studies, and no causal test either way.</p>
+
+<h2>Which AI engines actually respect llms.txt?</h2>
+<p>None of the major engines has committed to using it. Ahrefs' June 2026 study puts it flatly: "no major AI platform has ever committed to reading it"<sup class="cite"><a href="#src-2">[2]</a></sup>. Google's John Mueller said much the same in April 2025<sup class="cite"><a href="#src-14">[14]</a></sup>. The table sets each operator's public position beside what logs showed in May 2026.</p>
+<div class="table-wrap">
+<table>
+<caption>What AI operators say about llms.txt against Ahrefs' May 2026 log data (checked November 2026). Percentages are Ahrefs' chart shares. Its post is not fully consistent about the denominator, so compare them only with each other.</caption>
+<thead><tr><th>Operator</th><th>Public position</th><th>Logs, May 2026<sup class="cite"><a href="#src-2">[2]</a></sup></th><th>Our read</th></tr></thead>
+<tbody>
+<tr><td><strong>Google Search, AI Overviews, AI Mode</strong></td><td>Lists it under things to ignore: "Google Search itself doesn't use them"<sup class="cite"><a href="#src-6">[6]</a></sup></td><td>Googlebot made about 900 fetches, which Ahrefs attributes to normal indexing</td><td>Evidenced: not used</td></tr>
+<tr><td><strong>Chrome Lighthouse</strong></td><td>Audits the file in its Agentic Browsing category. A missing file scores N/A<sup class="cite"><a href="#src-8">[8]</a></sup></td><td>22 requests</td><td>A developer check, not a Search signal</td></tr>
+<tr><td><strong>OpenAI</strong></td><td>Crawler docs cover robots.txt. llms.txt appears only as a pointer to its own docs index<sup class="cite"><a href="#src-10">[10]</a></sup></td><td>GPTBot 4.51%, OAI-SearchBot 0.74%</td><td>Some fetching, no evidence of use in answers</td></tr>
+<tr><td><strong>Anthropic</strong></td><td>Crawler help page cites robots.txt and does not mention llms.txt<sup class="cite"><a href="#src-11">[11]</a></sup></td><td>ClaudeBot 0.8%. Claude-Code out-fetched every AI retrieval bot</td><td>Clearest agent use, no commitment</td></tr>
+<tr><td><strong>Perplexity</strong></td><td>Crawler docs cover robots.txt. llms.txt appears only as a pointer to its own docs index<sup class="cite"><a href="#src-12">[12]</a></sup></td><td>PerplexityBot and Claude's search crawler made "a couple of hundred fetches" between them. Slackbot fetched more than PerplexityBot</td><td>Negligible</td></tr>
+<tr><td><strong>Gemini app</strong></td><td>We found no statement covering it</td><td>Ahrefs says there is no separate Gemini crawler to observe</td><td>Unknown</td></tr>
+</tbody>
+</table>
+</div>
+<p>Google's signals look mixed but are not. Its Search team says to ignore the file, while Lighthouse audits it, which Search Engine Journal documented in May 2026<sup class="cite"><a href="#src-7">[7]</a></sup>. Asked in January 2026 whether an llms.txt on one of Google's own developer sites was an endorsement, Mueller replied "no"<sup class="cite"><a href="#src-13">[13]</a></sup>. The same goes for AI companies: OpenAI, Anthropic and Perplexity all serve llms.txt files on their documentation sites<sup class="cite"><a href="#src-10">[10]</a></sup><sup class="cite"><a href="#src-12">[12]</a></sup><sup class="cite"><a href="#src-16">[16]</a></sup>. Publishing one tells you nothing about whether their engines read yours.</p>
+
+<h2>Who is fetching llms.txt files, then?</h2>
+<p>Mostly SEO tools and other crawlers, with AI agents ahead of AI search bots. Ahrefs studied 137,210 domains on its analytics product. About 38,000 (28%) had a valid file, and "97% of those files received zero traffic in May 2026"<sup class="cite"><a href="#src-2">[2]</a></sup>. The remaining 3% or so received about 22,000 requests in total, split like this<sup class="cite"><a href="#src-2">[2]</a></sup>:</p>
+<ul>
+<li>SEO audit tools: 4,776 requests (21.7%).</li>
+<li>AI agents and agentic infrastructure: 2,302 (10.5%).</li>
+<li>AI training crawlers: 1,179 (5.3%).</li>
+<li>AI assistants: 559 (2.5%).</li>
+<li>AI retrieval bots: 233 (1.1%).</li>
+</ul>
+<p>Retrieval bots are the category most directly tied to live AI answers, and they are the smallest in that list. Ahrefs' reading is that "Agents fetch llms.txt when directed, not speculatively"<sup class="cite"><a href="#src-2">[2]</a></sup>. Mueller has called the file a "temporary crutch, perhaps to save some tokens", according to the same report<sup class="cite"><a href="#src-2">[2]</a></sup>.</p>
+<p>Keep the limits in view. Ahrefs' customers skew technical, so it calls 28% adoption "an upper bound", and a fetch is not proof anyone used the content<sup class="cite"><a href="#src-2">[2]</a></sup>. It is also one month of data.</p>
+<details class="more"><summary>Read more: the one dataset that looks more positive</summary>
+<p>In June 2025 Mintlify, which sells llms.txt generation, published CDN data collected by Profound from 25 companies over 7 days. The median company saw 14 visits to llms.txt and 79 to llms-full.txt<sup class="cite"><a href="#src-15">[15]</a></sup>. The sample is small, unnamed, older than the Ahrefs data and comes from an interested party, and visits are not usage. Treat it as a sign that some files get regular fetches, not as evidence that they change AI answers.</p>
+</details>
+
+<h2>Should you use an llms.txt generator?</h2>
+<p>Use one for a first draft, then edit it by hand. Most files on the web already come from templates. Common Crawl analysed 584,107 files from its July 2026 crawl and found 68.27% were template-generated, with Wix alone behind 41.34%<sup class="cite"><a href="#src-9">[9]</a></sup>. Quality shows it: only 49.90% had the full structure of H1, summary and link sections, and 22.56% contained no links at all<sup class="cite"><a href="#src-9">[9]</a></sup>.</p>
+<p>Three checks are worth doing on any generated file:</p>
+<ul>
+<li><strong>Curate the links.</strong> A dump of your sitemap defeats the purpose. List the pages you would send a new colleague to.</li>
+<li><strong>Remove rules.</strong> Common Crawl found policy language the proposal does not define in 6.59% of files, such as rate limits<sup class="cite"><a href="#src-9">[9]</a></sup>. Access rules belong in robots.txt.</li>
+<li><strong>Treat it like code.</strong> Ahrefs advises version control and restricted editing because of prompt injection risk<sup class="cite"><a href="#src-2">[2]</a></sup>. Common Crawl flagged 3,793 files with mild steering and 102 promotional ones, as lower bounds from keyword matching<sup class="cite"><a href="#src-9">[9]</a></sup>.</li>
+</ul>
+
+<h2>What does our own llms.txt look like?</h2>
+<p>It follows the proposal loosely, and we can show you where it falls short. <a href="/llms.txt">Our llms.txt file</a> has been in our site's code since 29 July 2026. Our publishing script rewrites its Articles section each time a post goes out, so that part needs no manual upkeep. The homepage footer links to it, which is the routing Ahrefs recommends<sup class="cite"><a href="#src-2">[2]</a></sup>. These measurements are ours, taken on 10 November 2026, before this article's own entry was added.</p>
+<div class="table-wrap">
+<table>
+<caption>redaccel.com/llms.txt checked against the llms.txt proposal, 10 November 2026: 9,649 bytes, 59 lines, 41 links.</caption>
+<thead><tr><th>Proposal element</th><th>Our file</th><th>Assessment</th></tr></thead>
+<tbody>
+<tr><td><strong>H1 with site name</strong></td><td>"Redaccel"</td><td>Meets it</td></tr>
+<tr><td><strong>Short blockquote summary</strong></td><td>About 150 words, including a note that similarly spelled domains are not ours</td><td>Useful, but not short</td></tr>
+<tr><td><strong>H2 link sections</strong></td><td>5: Pages, Guides and answers, Articles, Profiles, Full detail</td><td>Meets it</td></tr>
+<tr><td><strong>Notes on links</strong></td><td>On every link, and no loose prose inside sections</td><td>Meets it</td></tr>
+<tr><td><strong>"Optional" section</strong></td><td>None</td><td>Missing. Profiles would fit there</td></tr>
+<tr><td><strong>Markdown page copies</strong></td><td>None. Our test URL returned 404</td><td>Missing</td></tr>
+<tr><td><strong>Served correctly</strong></td><td>HTTP 200, text/plain, UTF-8</td><td>Meets it</td></tr>
+</tbody>
+</table>
+</div>
+<p>We would make two fixes if we were starting again: cut the summary to two sentences, and remove a pair of entries that share a title, which makes the list harder to choose from.</p>
+<p>We cannot tell you the file has done anything. This article has no request count for it, because we did not pull one we could verify, and we have no citation result to attribute to it. We keep it because the upkeep is small, and it gives any agent that does look a clean list of pages and our one official domain.</p>
+
+<h2>Is llms.txt worth the ten minutes?</h2>
+<p>Only if you know what you are buying, and for most marketing sites it should not be a priority. SISTRIX reached the same view: "It shouldn't be a priority"<sup class="cite"><a href="#src-3">[3]</a></sup>. Ahrefs' author concluded "the cons outweigh the pros right now"<sup class="cite"><a href="#src-2">[2]</a></sup>. Our verdict, which is judgement and not measurement, depends on who reads your site:</p>
+<ul>
+<li><strong>API, developer tool or documentation site: yes.</strong> Coding agents are the one group with visible appetite. Link the file from your docs so agents can find it.</li>
+<li><strong>Your CMS generates one automatically: leave it on,</strong> check it has real links, and spend no more time on it.</li>
+<li><strong>Marketing, service or ecommerce site: optional.</strong> It costs little and carries a small upkeep and security burden. Do it last.</li>
+<li><strong>Anyone expecting more AI citations from it: no.</strong> Nothing published supports that, and Google says Search does not use it<sup class="cite"><a href="#src-6">[6]</a></sup>.</li>
+</ul>
+<p>Before deciding, look in your own CDN or server logs for requests to <code>/llms.txt</code>, as Ahrefs suggests<sup class="cite"><a href="#src-2">[2]</a></sup>. Check IP ranges as well as user agents, because Perplexity, for one, recommends matching both<sup class="cite"><a href="#src-12">[12]</a></sup>. If your file gets no requests from the bots you care about, you have your answer.</p>
+<p>The work that does change AI answers sits elsewhere: the pages engines already cite for your buyers' questions, which is the core of <a href="/what-is-geo/">generative engine optimization</a>. A <a href="/free-ai-visibility-audit/">free AI visibility audit</a> shows which pages those are.</p>
+
+    <h2>Frequently asked</h2>
+    <div class="faq-list">
+  <details class="faq-item">
+    <summary>Does llms.txt work?</summary>
+    <div class="faq-a"><p>As a way to earn AI citations, there is no evidence that it does. SISTRIX found no measurable effect across 96,418 URLs in Q2 2026, and Ahrefs found 97% of about 38,000 files received no requests in May 2026. It does get read by some coding agents, so it can help on developer documentation. Nobody has published a controlled before-and-after test yet.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Does Google use llms.txt?</summary>
+    <div class="faq-a"><p>Google Search does not. Its guide to generative AI features lists llms.txt among things you can ignore and says Google Search itself doesn't use such files, which covers AI Overviews and AI Mode. Chrome's Lighthouse tool does audit the file in its Agentic Browsing category, but that is a developer check, and a missing file simply scores as not applicable.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Is llms.txt the same as robots.txt?</summary>
+    <div class="faq-a"><p>No. robots.txt tells crawlers what they may access, and OpenAI, Anthropic and Perplexity all document it as the way to manage their bots. llms.txt is a suggested reading list with no access rules in its format. Adding rate limits or denials to it has no defined meaning, even though Common Crawl found that kind of language in 6.59% of files in July 2026.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>How do I create an llms.txt file?</summary>
+    <div class="faq-a"><p>Write a Markdown file with your site name as an H1, a short blockquote summary, and H2 sections listing your key pages as links with brief notes. Save it as llms.txt at your site's root and serve it as plain text. A generator can produce a first draft, but edit it by hand, because Common Crawl found 22.56% of files had no links in July 2026.</p></div>
+  </details>
+    </div>
+
+    <details class="sources">
+      <summary>Sources</summary>
+      <ol>
+        <li id="src-1">Jeremy Howard, <a href="https://llmstxt.org/" rel="noopener">"The /llms.txt file, v2"</a>, llmstxt.org, dated 3 September 2024, current text checked November 2026.</li>
+        <li id="src-2">Ahrefs, <a href="https://ahrefs.com/blog/llmstxt-study/" rel="noopener">"We Analyzed 137K Sites: 97% of llms.txt Files Never Get Read"</a>, Louise Linehan, 15 June 2026. 137,210 domains, traffic from May 2026, about 22,000 requests analysed.</li>
+        <li id="src-3">SISTRIX, <a href="https://www.sistrix.com/blog/citation-worthiness-study/" rel="noopener">"Citation Worthiness: Which GEO Tactics Hold Up Across 96,418 URLs"</a>, Johannes Beus, Julia Weissbach and the SISTRIX Content Team, 22 October 2026. Germany, Austria and Switzerland, Q2 2026. Correlational.</li>
+        <li id="src-4">SE Ranking, <a href="https://seranking.com/blog/llms-txt/" rel="noopener">"Does LLMs.txt impact your AI visibility and citations? No, according to research"</a>, Yulia Deda, page dated 15 October 2026, checked November 2026. About 300,000 domains. AI engines and time window not stated.</li>
+        <li id="src-5">Search Engine Journal, <a href="https://www.searchenginejournal.com/llms-txt-shows-no-clear-effect-on-ai-citations-based-on-300k-domains/561542/" rel="noopener">"LLMs.txt Shows No Clear Effect On AI Citations, Based On 300k Domains"</a>, Matt G. Southern, 20 November 2025.</li>
+        <li id="src-6">Google Search Central, <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">"Optimizing your website for generative AI features on Google Search"</a>, no date shown on the page, checked November 2026.</li>
+        <li id="src-7">Search Engine Journal, <a href="https://www.searchenginejournal.com/googles-llms-txt-guidance-depends-on-which-product-you-ask/575431/" rel="noopener">"Google's llms.txt Guidance Depends On Which Product You Ask"</a>, Matt G. Southern, 20 May 2026.</li>
+        <li id="src-8">Chrome for Developers, <a href="https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt" rel="noopener">Lighthouse Agentic Browsing audit: llms.txt</a>, no date shown on the page, checked November 2026.</li>
+        <li id="src-9">Common Crawl, <a href="https://commoncrawl.org/blog/a-content-analysis-of-llms-txt-files-from-the-july-2026-crawl-archive" rel="noopener">"A Content Analysis of llms.txt Files from the July 2026 Crawl Archive"</a>, Malte Ostendorff, 31 August 2026. 584,107 files from one crawl.</li>
+        <li id="src-10">OpenAI, <a href="https://developers.openai.com/api/docs/bots" rel="noopener">crawler documentation</a>, no date shown on the page, checked November 2026. Its docs site served an llms.txt file when checked on 10 November 2026.</li>
+        <li id="src-11">Anthropic, <a href="https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler" rel="noopener">"Does Anthropic crawl data from the web, and how can site owners block the crawler?"</a>, checked November 2026.</li>
+        <li id="src-12">Perplexity, <a href="https://docs.perplexity.ai/docs/resources/perplexity-crawlers" rel="noopener">crawler documentation</a>, no date shown on the page, checked November 2026.</li>
+        <li id="src-13">Search Engine Roundtable, <a href="https://www.seroundtable.com/google-does-not-endorse-llms-txt-40789.html" rel="noopener">"Google Search Team Does Not Endorse LLMs.txt Files"</a>, Barry Schwartz, 20 January 2026.</li>
+        <li id="src-14">Search Engine Journal, <a href="https://www.searchenginejournal.com/google-says-llms-txt-comparable-to-keywords-meta-tag/544804/" rel="noopener">"Google Says LLMs.Txt Comparable To Keywords Meta Tag"</a>, Roger Montti, 17 April 2025.</li>
+        <li id="src-15">Mintlify, <a href="https://www.mintlify.com/blog/how-often-do-llms-visit-llms-txt" rel="noopener">"How often do LLMs visit llms.txt?"</a>, Tiffany Chen, 27 June 2025. 25 companies, 7 days, data from Profound. Mintlify sells llms.txt generation.</li>
+        <li id="src-16">Anthropic, <a href="https://docs.claude.com/llms.txt" rel="noopener">documentation llms.txt</a>, served when checked on 10 November 2026.</li>
+      </ol>
+    </details>
+    </article>
+
+    <div class="byline-box"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><p>Written by Redaccel, a Reddit and AI visibility agency in Oslo. Every figure links to where it came from. Spotted something wrong? <a href="mailto:contact@redaccel.com">contact@redaccel.com</a></p></div>
+
+    <aside class="cta-panel" aria-label="Free AI visibility audit">
+      <p class="eyebrow">Free AI visibility audit</p>
+      <h2>Find out if AI recommends you.</h2>
+      <p>Which engines mention you, which recommend competitors instead, and the exact pages behind those answers.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free audit</a>
+        <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-cta">
+      <div>
+        <p class="eyebrow">Free &middot; 48 hours &middot; no call</p>
+        <p class="footer-cta-line">See which AI engines recommend you, and which recommend your competitors instead.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI audit</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+        <p>Reddit and AI visibility agency. We measure which sources AI engines cite in your category, then earn you a place in them.</p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/what-we-do/">What we do</a></li>
+          <li><a href="/reddit-marketing-agency/">Reddit marketing</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/case-studies/">Case studies</a></li>
+          <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="/what-is-geo/">What is GEO?</a></li>
+          <li><a href="/geo-vs-seo/">GEO vs SEO</a></li>
+          <li><a href="/reddit-marketing-2026/">Reddit in 2026</a></li>
+          <li><a href="/geo-agencies-compared/">GEO agencies compared</a></li>
+          <li><a href="/guides/">All guides</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="mailto:contact@redaccel.com">contact@redaccel.com</a></li>
+          <li><a href="https://calendly.com/redaccel/30min" rel="noopener">Book 30 minutes</a></li>
+          <li><a href="https://www.linkedin.com/company/redaccel" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.designrush.com/agency/search-engine-optimization" rel="noopener">Listed on DesignRush</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Redaccel DA &middot; Org. 936133428 &middot; Oslo, Norway</span>
+      <span>Updated November 2026</span>
+      <span><a href="/llms.txt">llms.txt</a> &middot; <a href="/sitemap.xml">Sitemap</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

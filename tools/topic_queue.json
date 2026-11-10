@@ -215,7 +215,9 @@
         "which engines respect it (evidence, not vibes)",
         "our own file as a worked example"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-11-10",
+      "url": "https://www.redaccel.com/blog/llms-txt-explained/"
     },
     {
       "slug": "how-to-rank-in-chatgpt",
