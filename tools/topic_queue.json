@@ -237,7 +237,9 @@
         "why 'rank' is the wrong model",
         "the levers that exist"
       ],
-      "status": "queued"
+      "status": "published",
+      "published": "2026-11-17",
+      "url": "https://www.redaccel.com/blog/how-to-rank-in-chatgpt/"
     },
     {
       "slug": "perplexity-seo",

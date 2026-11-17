@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-site-verification" content="vw6Man9T2eUz1uEUmdFGjCx_DjkAYjhS49LDgpfVWIA">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css?v=20261024b">
+<script defer src="/assets/js/main.js?v=20261024b"></script>
+<title>How to rank in ChatGPT: there is no rank, only selection</title>
+<meta name="description" content="How to rank in ChatGPT, answered with 2026 data: how ChatGPT search retrieves and picks sources, why position is the wrong model, and the levers you control.">
+<link rel="canonical" href="https://www.redaccel.com/blog/how-to-rank-in-chatgpt/">
+<meta property="og:title" content="You can't rank in ChatGPT. You can get picked.">
+<meta property="og:description" content="In a 2026 study, 44.5% of the URLs ChatGPT retrieved showed up in only 1 of 20 identical runs. Here is how retrieval and selection work, and what moves them.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.redaccel.com/blog/how-to-rank-in-chatgpt/">
+<meta property="og:image" content="https://www.redaccel.com/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to rank in ChatGPT: how retrieval and selection work, and the levers that exist",
+      "description": "How to rank in ChatGPT, answered with 2026 data: how ChatGPT search retrieves and picks sources, why position is the wrong model, and the levers you control.",
+      "author": {
+        "@type": "Organization",
+        "name": "Redaccel",
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "publisher": {
+        "@id": "https://www.redaccel.com/#org"
+      },
+      "datePublished": "2026-11-17",
+      "dateModified": "2026-11-17",
+      "mainEntityOfPage": "https://www.redaccel.com/blog/how-to-rank-in-chatgpt/",
+      "about": "how to rank in chatgpt"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.redaccel.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.redaccel.com/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to rank in ChatGPT: how retrieval and selection work, and the levers that exist",
+          "item": "https://www.redaccel.com/blog/how-to-rank-in-chatgpt/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I rank in ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do not rank in ChatGPT in the Google sense. It rewrites the question, retrieves a pool of pages that changes from run to run and cites a few. To be cited more often, allow OAI-SearchBot, cover the sub-queries the model writes (prices, reviews, comparisons, official pages), build depth across your topic and write self-contained passages it can quote."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does ranking on Google help me get cited by ChatGPT?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It helps you get into the candidate pool, but it is a weak predictor of citation. In a 2026 study, Google's results contained only 6.4% to 9.4% of the exact URLs ChatGPT cited. Ahrefs found in 2025 that 8.0% of ChatGPT's in-text citations ranked in Google's top 10 for the same prompt. Treat SEO as the foundation, not the finish line."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does ChatGPT search the web for every question?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Ahrefs found that only 14.4% of 66.6 million free, logged-out ChatGPT responses from August and September 2026 contained fan-out search queries. Paid and reasoning models search more. When ChatGPT does not search, it answers from training data and cites no pages, so your broader presence on the open web matters too."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the ChatGPT ranking factors?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OpenAI does not publish any. Public research points to signals that correlate with citation: being retrieved repeatedly across runs, being accessible to OAI-SearchBot, offering long self-contained passages and being named on sources ChatGPT trusts in your category. These are observational findings from 2025 and 2026, not confirmed factors, and they shift as OpenAI updates its models."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to start getting ChatGPT citations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nobody has published reliable timelines. Crawler access changes apply in about 24 hours according to OpenAI, but whether new content gets retrieved and selected depends on the queries ChatGPT writes and the competition in the pool. Measure across repeated runs for several weeks before judging any change, because single checks are dominated by run-to-run variation."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell header-row">
+    <a class="wordmark" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="nav-toggle-bars" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    <nav class="site-nav" id="nav" aria-label="Main">
+      <div class="nav-links">
+        <a class="nav-link" href="/what-we-do/">What we do</a>
+        <a class="nav-link" href="/case-studies/">Case studies</a>
+        <a class="nav-link" href="/pricing/">Pricing</a>
+        <div class="nav-menu" data-current="true">
+          <button class="nav-link nav-menu-btn" type="button" aria-expanded="false" aria-controls="nav-learn">Learn</button>
+          <div class="nav-menu-panel" id="nav-learn">
+            <a href="/what-is-geo/"><b>What is GEO?</b><span>The plain definition, with sources</span></a>
+            <a href="/geo-vs-seo/"><b>GEO vs SEO</b><span>What changes and what carries over</span></a>
+            <a href="/reddit-marketing-2026/"><b>Reddit in 2026</b><span>Why engines cite Reddit, and what survives</span></a>
+            <a href="/geo-agencies-compared/"><b>GEO agencies compared</b><span>30 days of citation data</span></a>
+            <a href="/guides/"><b>All guides</b><span>Straight answers to the questions buyers ask AI</span></a>
+            <a href="/blog/" aria-current="page"><b>Blog</b><span>One sourced article every Tuesday</span></a>
+          </div>
+        </div>
+        <a class="nav-link" href="/about/">About</a>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="/contact/">Contact</a>
+        <a class="btn btn-primary btn-sm" href="/free-ai-visibility-audit/">Free AI audit</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="shell">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">redaccel.com</a> <span aria-hidden="true">/</span> <a href="/blog/">blog</a> <span aria-hidden="true">/</span> <span>how-to-rank-in-chatgpt</span></nav>
+    <article>
+    <h1>How to rank in ChatGPT: how retrieval and selection work, and the levers that exist</h1>
+    <div class="dateline"><span class="flag">Updated November 2026</span> <span>7 min read</span> <span>By Redaccel</span></div>
+
+    <div class="extract">
+      <div class="extract-chip"><span class="tag">Extract</span> <span>redaccel.com &middot; strategy &middot; November 2026</span></div>
+<p><mark>You cannot rank in ChatGPT in the way you rank in Google, because there is no stable list to climb: ChatGPT rewrites the question, retrieves a pool of pages that changes from run to run, and selects a handful to cite.</mark> In a 2026 study of 1,600 runs per model, GPT-5.5 Instant retrieved about 23 candidate pages per answer and cited about 6.5, and 44.5% of candidate URLs appeared in only 1 of 20 identical runs<sup class="cite"><a href="#src-1">[1]</a></sup>. The job is to be retrieved often and chosen when you are.</p>
+    </div>
+
+<h2>Can you rank in ChatGPT at all?</h2>
+<p>No, not in the sense of holding position 3 for a keyword. ChatGPT produces a new answer every time, built from whatever its search step returned on that run, so there is no page of ten blue links that you can sit on. What you can do is raise the probability that your pages are retrieved and then picked as a source. That probability is measurable, and several things move it.</p>
+<p>The clearest public evidence comes from a preprint by researchers at the National University of Singapore and Xi'an Jiaotong University, published on 11 October 2026. They asked 80 questions 20 times each to ChatGPT 5.3 Instant and 5.5 Instant between 29 March and 29 July 2026, and logged both the pages ChatGPT retrieved and the pages it cited<sup class="cite"><a href="#src-1">[1]</a></sup>. It is not peer reviewed, and 80 questions is a modest sample, but it is the only study we know of that separates retrieval from citation inside production ChatGPT. Most of what follows leans on it, with the labels left on.</p>
+
+<h2>How does ChatGPT search actually retrieve sources?</h2>
+<p>It retrieves in three steps: decide whether to search, write its own queries, then pull candidates and choose a few to cite. Each step is a filter, and each one can drop you.</p>
+<p><strong>Step 1: decide whether to search.</strong> Often it does not. Ahrefs analysed 66.6 million free, logged-out GPT-5.6 Luna responses from August and September 2026 and found that only 14.4% contained fan-out queries, at about 1.6 queries each<sup class="cite"><a href="#src-2">[2]</a></sup>. Ahrefs notes that paid and reasoning models search more. Separately, Goodie, which sells AI search analytics, tracked 94,851 ChatGPT answers and saw the share with no sources at all jump from about 1.5% to about 12.2% on 31 October 2026<sup class="cite"><a href="#src-3">[3]</a></sup>. Goodie's leading explanation is that ChatGPT searched less, which OpenAI has not confirmed. When there is no search, the answer comes from what the model learned in training, and no page gets cited.</p>
+<p><strong>Step 2: rewrite the question.</strong> ChatGPT does not search for your customer's words. In the 2026 study, none of the GPT-5.3 Instant or GPT-5.5 Instant runs issued a search query identical to the user's question; for the older GPT-5.2 Instant it was 5.5% of runs<sup class="cite"><a href="#src-1">[1]</a></sup>. Ahrefs found the rewritten queries drifting toward words like "official" (10.1% to 13.1% of English fan-outs from August to September 2026) and "price" (6.0% to 8.9%), and 6.8% of fan-outs used a <code>site:</code> operator to search one domain directly<sup class="cite"><a href="#src-2">[2]</a></sup>.</p>
+<p><strong>Step 3: retrieve, then select.</strong> GPT-5.5 Instant pulled an average of 23.47 candidate pages per run and cited 6.53. GPT-5.3 Instant pulled 18.74 and cited 5.55<sup class="cite"><a href="#src-1">[1]</a></sup>. So roughly 1 in 3 or 4 retrieved pages makes it into the answer. Being retrieved is necessary. It is not enough.</p>
+
+<h2>Why is "rank" the wrong model for ChatGPT?</h2>
+<p>Because the pool of candidates changes almost every time the same question is asked. Across 20 identical runs, 40.8% (GPT-5.3) and 44.5% (GPT-5.5) of retrieved URLs appeared only once, and only 9.4% and 7.7% made it into a stable core seen in at least 14 runs<sup class="cite"><a href="#src-1">[1]</a></sup>. One question produced 96 to 132 distinct URLs on average over those 20 runs.</p>
+<p>The final answers vary just as much. SparkToro and Gumshoe had 600 volunteers run 12 prompts 2,961 times across ChatGPT, Claude and Google's AI in November and December 2025, and found less than a 1 in 100 chance that ChatGPT or Google's AI would return the same list of brands twice, and about 1 in 1,000 for the same list in the same order<sup class="cite"><a href="#src-4">[4]</a></sup>.</p>
+<p>Google rankings are a weak stand-in, too. Google's results contained only 9.4% (GPT-5.3) and 6.4% (GPT-5.5) of the exact URLs ChatGPT cited, and even Google plus OpenAI's own Responses API recovered just 28.3% and 26.2%<sup class="cite"><a href="#src-1">[1]</a></sup>. In mid-2025, Ahrefs found that 8.0% of ChatGPT's in-text citations ranked in Google's top 10 for the same prompt, across 15,000 long-tail queries<sup class="cite"><a href="#src-5">[5]</a></sup>. Good SEO still helps you get into the pool. It does not tell you whether you will be picked.</p>
+<p>The useful replacement for "what position am I?" is "in what share of runs am I retrieved, and in what share am I cited?". That is a rate, not a rank, and it only means something across many runs. Our guide to <a href="/blog/what-is-ai-visibility/">measuring AI visibility</a> covers how to sample it.</p>
+
+<h2>What are the levers that actually exist?</h2>
+<p>There are about six, and they split into two groups: getting retrieved and getting selected. The table shows each one with how strong the evidence is today.</p>
+<div class="table-wrap">
+<table>
+<caption>Levers for getting cited by ChatGPT, the stage they affect, and the strength of evidence (sources checked November 2026).</caption>
+<thead><tr><th>Lever</th><th>Stage</th><th>What to do</th><th>Evidence</th></tr></thead>
+<tbody>
+<tr><td><strong>Crawler access</strong></td><td>Retrieval</td><td>Allow OAI-SearchBot in robots.txt</td><td>Evidenced: OpenAI says opted-out sites are not shown in ChatGPT search answers<sup class="cite"><a href="#src-6">[6]</a></sup></td></tr>
+<tr><td><strong>Match the rewritten queries</strong></td><td>Retrieval</td><td>Cover "official", "price", "review" and "vs" intents on clear pages</td><td>Evidenced for query wording<sup class="cite"><a href="#src-2">[2]</a></sup>; effect on citations inferred</td></tr>
+<tr><td><strong>Be retrieved repeatedly</strong></td><td>Both</td><td>Build depth across a topic, not one hero page</td><td>Evidenced: retrieval frequency predicts citation, AUC 0.65 to 0.71 for GPT-5.5<sup class="cite"><a href="#src-1">[1]</a></sup></td></tr>
+<tr><td><strong>Quotable passages</strong></td><td>Selection</td><td>Self-contained answers of a few hundred words</td><td>Correlational: 16.9% of cited snippets were 500+ characters vs 1.9% of uncited (GPT-5.5)<sup class="cite"><a href="#src-1">[1]</a></sup></td></tr>
+<tr><td><strong>Third-party mentions</strong></td><td>Both</td><td>Be named on the sources ChatGPT cites in your category</td><td>Partly evidenced: entity-level matching beats URL-level<sup class="cite"><a href="#src-1">[1]</a></sup>; cited domains shift month to month<sup class="cite"><a href="#src-2">[2]</a></sup></td></tr>
+<tr><td><strong>Training-data presence</strong></td><td>No search</td><td>Be widely and consistently described on the open web</td><td>Inferred: no public study isolates it</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>How do you get retrieved more often?</h2>
+<p>Start with access, then cover the queries the model writes rather than the ones your customer types. OpenAI's documentation says sites that opt out of OAI-SearchBot will not be shown in ChatGPT search answers, apart from navigational links, and that robots.txt changes take about 24 hours to apply<sup class="cite"><a href="#src-6">[6]</a></sup>. GPTBot is a different crawler used for training, so blocking it does not remove you from search. Check that your CDN or firewall is not blocking OAI-SearchBot either; a robots.txt allow is useless if the request never reaches you.</p>
+<p>Next, think in sub-queries. If a buyer asks "what is the best invoicing tool for a small agency", ChatGPT may search for prices, reviews, comparisons and official product pages. A pricing page that states the price in text, a comparison page that names alternatives fairly and a product page that says plainly what you do each give it something to retrieve. This is the core of <a href="/what-is-geo/">generative engine optimisation</a>, and our <a href="/blog/llm-seo/">LLM SEO playbook</a> goes deeper on structure.</p>
+<p>Finally, aim for depth across a topic. The 2026 study found that items retrieved more often across runs were more likely to be cited, and that the signal was stronger at the hostname and entity level than for single URLs<sup class="cite"><a href="#src-1">[1]</a></sup>. Our reading, which is inference, is that a site that covers a subject from several angles gets more chances to land in a shifting pool than a site with one strong page.</p>
+
+<h2>How do you get selected once you are retrieved?</h2>
+<p>Give the model a passage it can lift without editing. In the 2026 study, cited snippets were far more often long, self-contained blocks than uncited ones, and snippet length on its own predicted citation with an AUC of 0.61 to 0.63<sup class="cite"><a href="#src-1">[1]</a></sup>. That is a modest signal and a correlation, so treat it as a writing habit rather than a rule: answer the question in the first sentence of a section, keep the claim and its evidence together, and name the year on every figure.</p>
+<details class="more"><summary>Read more: position inside the candidate list matters less than you would think</summary>
+<p>Candidates that sat beyond position 15 in ChatGPT's retrieved list were still cited 24.0% (GPT-5.3) and 19.0% (GPT-5.5) of the time<sup class="cite"><a href="#src-1">[1]</a></sup>. Being near the top of the pool helps, but the selection step clearly weighs content, not just order. This is one more reason the word "rank" misleads.</p>
+</details>
+<p>Selection also happens at the level of who is mentioned, not only which URL is linked. Both proxies in the study matched ChatGPT's choices better at the entity level than at the exact-URL level<sup class="cite"><a href="#src-1">[1]</a></sup>. In plain terms, being named on the pages ChatGPT trusts in your category can count as much as your own page. Which pages those are changes quickly: Ahrefs' Brand Radar data showed PubMed rising from 64th to 4th among ChatGPT's most-cited domains between March and September 2026, while Reddit citations fell 88% over the same period<sup class="cite"><a href="#src-2">[2]</a></sup>. Check your own category before you copy someone else's source list.</p>
+
+<h2>What does not work, or is unproven?</h2>
+<p>Anything sold as a ChatGPT ranking factor list with precise weights. OpenAI does not publish its retrieval or selection logic, and the public studies are observational. Three common claims to treat with care:</p>
+<ul>
+<li><strong>"Rank top 3 in Google and you are in."</strong> The overlap figures above say otherwise for ChatGPT.</li>
+<li><strong>"One check proves it worked."</strong> With most retrieved URLs appearing in a single run, one screenshot is noise<sup class="cite"><a href="#src-1">[1]</a></sup>.</li>
+<li><strong>"This tactic is permanent."</strong> ChatGPT's behaviour changed visibly within a single day in October 2026<sup class="cite"><a href="#src-3">[3]</a></sup>. Ahrefs calls its own findings a snapshot of one model<sup class="cite"><a href="#src-2">[2]</a></sup>.</li>
+</ul>
+<p>Nobody has yet published a controlled test showing that a given content change raises ChatGPT citation rates by a given amount. That is the honest state of the field in November 2026.</p>
+
+<h2>How should you measure progress?</h2>
+<p>Track retrieval and citation rates across a fixed set of prompts, run many times, over weeks. Pick 20 to 50 questions your buyers actually ask, run each repeatedly, and record whether you were cited, whether you were mentioned without a link, and which domains were cited instead. Compare month to month, and expect noise. If you want a starting point, our <a href="/free-ai-visibility-audit/">free AI visibility audit</a> runs that baseline for your category.</p>
+
+    <h2>Frequently asked</h2>
+    <div class="faq-list">
+  <details class="faq-item">
+    <summary>How do I rank in ChatGPT?</summary>
+    <div class="faq-a"><p>You do not rank in ChatGPT in the Google sense. It rewrites the question, retrieves a pool of pages that changes from run to run and cites a few. To be cited more often, allow OAI-SearchBot, cover the sub-queries the model writes (prices, reviews, comparisons, official pages), build depth across your topic and write self-contained passages it can quote.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Does ranking on Google help me get cited by ChatGPT?</summary>
+    <div class="faq-a"><p>It helps you get into the candidate pool, but it is a weak predictor of citation. In a 2026 study, Google's results contained only 6.4% to 9.4% of the exact URLs ChatGPT cited. Ahrefs found in 2025 that 8.0% of ChatGPT's in-text citations ranked in Google's top 10 for the same prompt. Treat SEO as the foundation, not the finish line.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>Does ChatGPT search the web for every question?</summary>
+    <div class="faq-a"><p>No. Ahrefs found that only 14.4% of 66.6 million free, logged-out ChatGPT responses from August and September 2026 contained fan-out search queries. Paid and reasoning models search more. When ChatGPT does not search, it answers from training data and cites no pages, so your broader presence on the open web matters too.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>What are the ChatGPT ranking factors?</summary>
+    <div class="faq-a"><p>OpenAI does not publish any. Public research points to signals that correlate with citation: being retrieved repeatedly across runs, being accessible to OAI-SearchBot, offering long self-contained passages and being named on sources ChatGPT trusts in your category. These are observational findings from 2025 and 2026, not confirmed factors, and they shift as OpenAI updates its models.</p></div>
+  </details>
+  <details class="faq-item">
+    <summary>How long does it take to start getting ChatGPT citations?</summary>
+    <div class="faq-a"><p>Nobody has published reliable timelines. Crawler access changes apply in about 24 hours according to OpenAI, but whether new content gets retrieved and selected depends on the queries ChatGPT writes and the competition in the pool. Measure across repeated runs for several weeks before judging any change, because single checks are dominated by run-to-run variation.</p></div>
+  </details>
+    </div>
+
+    <details class="sources">
+      <summary>Sources</summary>
+      <ol>
+        <li id="src-1">Jiang, Zhang, Xing, Chang and Xiao (National University of Singapore and Xi'an Jiaotong University), <a href="https://arxiv.org/abs/2610.15382" rel="noopener">"Understanding ChatGPT Citations: Evidence from Production Web Search Across Model Generations"</a>, arXiv preprint, 11 October 2026. 80 queries, 20 runs each, 1,600 runs per model for GPT-5.3 Instant and GPT-5.5 Instant, collected 29 March to 29 July 2026. Not peer reviewed.</li>
+        <li id="src-2">Ahrefs, <a href="https://ahrefs.com/blog/query-fan-out-chatgpt/" rel="noopener">"How ChatGPT Does Query Fan-Out (15 Million Queries Studied)"</a>, Louise Linehan with Xibeijia Guan, 12 October 2026. 66.6 million free, logged-out GPT-5.6 Luna responses, August and September 2026; cited-domain shifts from Brand Radar, US, March to September 2026.</li>
+        <li id="src-3">Goodie, <a href="https://higoodie.com/?p=8525" rel="noopener">"ChatGPT's Zero-Source Answers Jumped 8x Overnight"</a>, Mostafa ElBermawy, 12 November 2026. 94,851 ChatGPT web answers, 9 October to 9 November 2026. Vendor research; cause not confirmed by OpenAI.</li>
+        <li id="src-4">SparkToro, <a href="https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/" rel="noopener">"NEW Research: AIs are highly inconsistent when recommending brands or products"</a>, Rand Fishkin with Patrick O'Donnell (Gumshoe), 28 January 2026. 600 volunteers, 12 prompts, 2,961 runs, November to December 2025.</li>
+        <li id="src-5">Ahrefs, <a href="https://ahrefs.com/blog/ai-search-overlap/" rel="noopener">"Only 12% of AI Cited URLs Rank in Google's Top 10 for the Original Prompt"</a>, Louise Linehan with Xibeijia Guan, 11 August 2025. 15,000 long-tail queries across Google, Bing, ChatGPT, Gemini, Copilot and Perplexity.</li>
+        <li id="src-6">OpenAI, <a href="https://developers.openai.com/api/docs/bots" rel="noopener">crawler documentation (OAI-SearchBot, GPTBot, ChatGPT-User)</a>, no date shown on the page, checked November 2026.</li>
+      </ol>
+    </details>
+    </article>
+
+    <div class="byline-box"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><p>Written by Redaccel, a Reddit and AI visibility agency in Oslo. Every figure links to where it came from. Spotted something wrong? <a href="mailto:contact@redaccel.com">contact@redaccel.com</a></p></div>
+
+    <aside class="cta-panel" aria-label="Free AI visibility audit">
+      <p class="eyebrow">Free AI visibility audit</p>
+      <h2>Find out if AI recommends you.</h2>
+      <p>Which engines mention you, which recommend competitors instead, and the exact pages behind those answers.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free audit</a>
+        <span class="cta-note">48 hours &middot; no call &middot; no mailing list</span>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <div class="footer-cta">
+      <div>
+        <p class="eyebrow">Free &middot; 48 hours &middot; no call</p>
+        <p class="footer-cta-line">See which AI engines recommend you, and which recommend your competitors instead.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/free-ai-visibility-audit/">Get the free AI audit</a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="wordmark wordmark-light" href="/" aria-label="Redaccel home"><svg class="wordmark-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="6.5" fill="currentColor"/><path d="M6.8 6.5L12.3 12L6.8 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.6 6.5L17.1 12L11.6 17.5" stroke="#0B0C10" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></svg><span>redaccel</span></a>
+        <p>Reddit and AI visibility agency. We measure which sources AI engines cite in your category, then earn you a place in them.</p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/what-we-do/">What we do</a></li>
+          <li><a href="/reddit-marketing-agency/">Reddit marketing</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/case-studies/">Case studies</a></li>
+          <li><a href="/free-ai-visibility-audit/">Free AI audit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Learn</h2>
+        <ul>
+          <li><a href="/what-is-geo/">What is GEO?</a></li>
+          <li><a href="/geo-vs-seo/">GEO vs SEO</a></li>
+          <li><a href="/reddit-marketing-2026/">Reddit in 2026</a></li>
+          <li><a href="/geo-agencies-compared/">GEO agencies compared</a></li>
+          <li><a href="/guides/">All guides</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="mailto:contact@redaccel.com">contact@redaccel.com</a></li>
+          <li><a href="https://calendly.com/redaccel/30min" rel="noopener">Book 30 minutes</a></li>
+          <li><a href="https://www.linkedin.com/company/redaccel" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.designrush.com/agency/search-engine-optimization" rel="noopener">Listed on DesignRush</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; 2026 Redaccel DA &middot; Org. 936133428 &middot; Oslo, Norway</span>
+      <span>Updated November 2026</span>
+      <span><a href="/llms.txt">llms.txt</a> &middot; <a href="/sitemap.xml">Sitemap</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

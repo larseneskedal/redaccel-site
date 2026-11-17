@@ -39,6 +39,7 @@
 ## Articles
 
 - [Blog](https://www.redaccel.com/blog/): Index of all articles, one sourced article a week on GEO and AI search.
+- [How to rank in ChatGPT (and why rank is the wrong word)](https://www.redaccel.com/blog/how-to-rank-in-chatgpt/): ChatGPT has no fixed ranking to climb. It rewrites the question, retrieves a shifting pool of pages and picks a few to cite. This guide explains that process with 2026 data and lists the levers you can actually pull.
 - [llms.txt, explained with evidence](https://www.redaccel.com/blog/llms-txt-explained/): What the llms.txt proposal specifies, which AI engines and agents actually fetch the file according to 2026 log data, what the citation studies found, and our own file as a worked example.
 - [LLM optimization: page-level mechanics](https://www.redaccel.com/blog/llm-optimization/): How to write and structure a page so an AI engine can lift an answer from it: front-loading, chunk-level retrieval, tables and lists, schema, and a confidence rating on each extraction study.
 - [Reddit SEO for AI search](https://www.redaccel.com/blog/reddit-and-ai-search/): Why Reddit sits at or near the top of AI citation rankings in 2026, how its LLM-based spam crackdown works, what kind of participation survives moderation, and why buying accounts is the fastest way to lose your Reddit presence.

@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "how-to-rank-in-chatgpt",
+      "keyword": "how to rank in chatgpt",
+      "card_title": "How to rank in ChatGPT (and why rank is the wrong word)",
+      "card_summary": "ChatGPT has no fixed ranking to climb. It rewrites the question, retrieves a shifting pool of pages and picks a few to cite. This guide explains that process with 2026 data and lists the levers you can actually pull.",
+      "date_published": "2026-11-17",
+      "date_modified": "2026-11-17",
+      "read_minutes": 7
+    },
+    {
       "slug": "llms-txt-explained",
       "keyword": "llms.txt",
       "card_title": "llms.txt, explained with evidence",
