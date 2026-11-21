@@ -4,6 +4,63 @@
   doc.classList.add('js');
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ----- Black Week 2026: a strip on every page from 23 to 30 November, Lisbon time ----- */
+  // Lisbon is on UTC in late November, so the window is two UTC instants and does not
+  // depend on the visitor's time zone. From 1 December the strip is never added and the
+  // offer page shows its closed state. Nothing has to be removed by hand.
+  var BW_START = Date.UTC(2026, 10, 23, 0, 0, 0);
+  var BW_END = Date.UTC(2026, 11, 1, 0, 0, 0);
+  var bwNow = Date.now();
+  var bwState = bwNow >= BW_END ? 'closed' : (bwNow >= BW_START ? 'open' : 'before');
+  var bwParams = null;
+  try { bwParams = new URLSearchParams(window.location.search); } catch (e) { bwParams = null; }
+  // Preview copies only, never on redaccel.com: ?bw=open, ?bw=closed or ?bw=before forces a state.
+  if (bwParams && !/(^|\.)redaccel\.com$/.test(window.location.hostname)) {
+    var bwForce = bwParams.get('bw');
+    if (bwForce === 'open' || bwForce === 'closed' || bwForce === 'before') bwState = bwForce;
+  }
+  var bwHeader = document.querySelector('.site-header');
+  if (bwState === 'open' && bwHeader) {
+    var strip = document.createElement('a');
+    strip.className = 'bw-strip';
+    strip.href = '/black-week/';
+    var bwLong = document.createElement('span');
+    bwLong.className = 'bw-long';
+    bwLong.textContent = 'Black Week: 30% off a three-month retainer for new clients. Closes Monday 30 November.';
+    var bwShort = document.createElement('span');
+    bwShort.className = 'bw-short';
+    bwShort.textContent = 'Black Week: 30% off three months. Ends 30 Nov.';
+    var bwGo = document.createElement('span');
+    bwGo.className = 'bw-go';
+    var bwGoText = document.createElement('span');
+    bwGoText.className = 'bw-go-text';
+    bwGoText.textContent = 'See the offer ';
+    bwGo.appendChild(bwGoText);
+    bwGo.appendChild(document.createTextNode('\u2192'));
+    strip.appendChild(bwLong);
+    strip.appendChild(bwShort);
+    strip.appendChild(document.createTextNode(' '));
+    strip.appendChild(bwGo);
+    bwHeader.parentNode.insertBefore(strip, bwHeader);
+  }
+  var bwOpenBlock = document.querySelector('[data-bw="open"]');
+  var bwClosedBlock = document.querySelector('[data-bw="closed"]');
+  if (bwOpenBlock && bwClosedBlock && bwState === 'closed') {
+    bwOpenBlock.hidden = true;
+    bwClosedBlock.hidden = false;
+    document.title = 'The Black Week offer has closed | Redaccel';
+  }
+
+  /* ----- where a request came from: ?src=tag, or a visit to the Black Week page ----- */
+  var SRC_RE = /^[a-z0-9-]{1,40}$/;
+  var srcTag = '';
+  try {
+    var srcSeen = (bwParams && bwParams.get('src')) || '';
+    if (!srcSeen && bwOpenBlock && bwState !== 'closed') srcSeen = 'black-week';
+    if (SRC_RE.test(srcSeen)) window.sessionStorage.setItem('ra_src', srcSeen);
+    srcTag = window.sessionStorage.getItem('ra_src') || '';
+  } catch (e) { srcTag = ''; }
+
   /* ----- mobile nav ----- */
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.site-nav');
@@ -179,6 +236,7 @@
       btn.textContent = 'Sending…';
       var data = {};
       new FormData(form).forEach(function (v, k) { data[k] = v; });
+      if (SRC_RE.test(srcTag)) data.source = srcTag;
       var web = form.querySelector('[name="website"]');
       if (web) {
         var norm = normaliseSite(web.value);

@@ -8,6 +8,7 @@ import re
 import hmac
 import json
 import smtplib
+from datetime import datetime, timezone
 import requests
 from typing import Optional
 from email.mime.text import MIMEText
@@ -167,11 +168,35 @@ def index():
     return _serve_site_path("")
 
 
+# Black Week 2026 (Johan, 21 Nov 2026): 30% off a three-month retainer for new clients,
+# Monday 23 to Monday 30 November, Lisbon time (Lisbon is on UTC in late November). The strip
+# on every page is added by site/assets/js/main.js inside the same window. From 1 December
+# the offer page is served in its closed state, so nothing has to be deployed to end it.
+BLACK_WEEK_END = datetime(2026, 12, 1, 0, 0, 0, tzinfo=timezone.utc)
+
+
+def _black_week_page():
+    with open(os.path.join(SITE_DIR, "black-week", "index.html"), encoding="utf-8") as f:
+        html = f.read()
+    if datetime.now(timezone.utc) >= BLACK_WEEK_END:
+        html = html.replace('<div data-bw="open">', '<div data-bw="open" hidden>', 1)
+        html = html.replace('<div data-bw="closed" hidden>', '<div data-bw="closed">', 1)
+        html = re.sub(r"<title>.*?</title>", "<title>The Black Week offer has closed | Redaccel</title>",
+                      html, count=1, flags=re.S)
+    resp = make_response(html)
+    resp.headers["Content-Type"] = "text/html; charset=utf-8"
+    resp.headers["Cache-Control"] = "no-cache"
+    resp.headers["X-Robots-Tag"] = "noindex"  # a dated offer: never a page the engines quote
+    return resp
+
+
 @app.route("/<path:path>")
 def site_page(path: str):
     target = LEGACY_REDIRECTS.get("/" + path.strip("/"))
     if target:
         return redirect(target, code=301)
+    if path.strip("/") == "black-week" and (request.path or "").endswith("/"):
+        return _black_week_page()
     return _serve_site_path(path)
 
 

@@ -470,3 +470,59 @@ def test_booking_missing_field_is_400(client, smtp, field):
     r = client.post("/api/booking", json=body)
     assert r.status_code == 400
     assert smtp.sent == []
+
+
+# ---------------------------------------------------------------------------
+# Black Week 2026: the offer page, its end date and the source tag
+# ---------------------------------------------------------------------------
+
+def _visible(html, which):
+    """True when the open or closed block of the offer page is not hidden."""
+    return ('<div data-bw="%s">' % which) in html
+
+
+def test_black_week_page_is_open_before_the_end_and_noindex(client, monkeypatch):
+    from datetime import datetime, timezone
+    monkeypatch.setattr(redaccel_app, "BLACK_WEEK_END", datetime(2999, 1, 1, tzinfo=timezone.utc))
+    r = client.get("/black-week/")
+    html = r.get_data(as_text=True)
+    assert r.status_code == 200
+    assert r.headers["X-Robots-Tag"] == "noindex"
+    assert 'name="robots" content="noindex' in html
+    assert _visible(html, "open") and not _visible(html, "closed")
+    assert "30% off" in html
+
+
+def test_black_week_page_says_closed_after_the_end(client, monkeypatch):
+    from datetime import datetime, timezone
+    monkeypatch.setattr(redaccel_app, "BLACK_WEEK_END", datetime(2000, 1, 1, tzinfo=timezone.utc))
+    html = client.get("/black-week/").get_data(as_text=True)
+    assert _visible(html, "closed") and not _visible(html, "open")
+    assert "<title>The Black Week offer has closed | Redaccel</title>" in html
+
+
+def test_black_week_ends_at_midnight_lisbon_after_30_november():
+    from datetime import datetime, timezone
+    assert redaccel_app.BLACK_WEEK_END == datetime(2026, 12, 1, 0, 0, tzinfo=timezone.utc)
+    js = open(os.path.join(SITE, "assets", "js", "main.js"), encoding="utf-8").read()
+    assert "Date.UTC(2026, 10, 23, 0, 0, 0)" in js and "Date.UTC(2026, 11, 1, 0, 0, 0)" in js
+
+
+def test_black_week_page_has_no_price_and_stays_out_of_the_sitemap_and_llms():
+    html = open(os.path.join(SITE, "black-week", "index.html"), encoding="utf-8").read()
+    assert "$" not in html and "USD" not in html and "\u20ac" not in html
+    assert "/black-week/" not in SITEMAP_PATHS
+    for name in ("llms.txt", "llms-full.txt", "search-index.json"):
+        assert "black-week" not in open(os.path.join(SITE, name), encoding="utf-8").read()
+
+
+def test_black_week_without_slash_redirects(client):
+    r = client.get("/black-week")
+    assert r.status_code == 301 and r.headers["Location"].endswith("/black-week/")
+
+
+def test_audit_accepts_a_source_tag_and_logs_it(client, smtp, capsys):
+    r = client.post("/api/audit", json=dict(VALID, source="black-week"))
+    assert r.status_code == 200
+    assert len(smtp.sent) == 1
+    assert '"source": "black-week"' in capsys.readouterr().out

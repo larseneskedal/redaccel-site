@@ -760,3 +760,14 @@ main.article .search-results li { margin-top: 0; padding-left: 1.25rem; }
 .sample-table td:nth-child(2) { font-family: var(--mono); font-size: .875rem; }
 .sample-split .mock-wrap { max-width: 34rem; }
 @media (min-width: 1024px) { .sample-split { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+
+/* Black Week 2026 strip. main.js adds it between 23 and 30 November only. */
+.bw-strip { display: block; background: var(--night); color: var(--night-ink); text-align: center; font-size: .8125rem; line-height: 1.35; padding: .5rem 1rem; text-decoration: none; }
+.bw-strip:hover { color: #fff; }
+.bw-strip .bw-go { color: var(--red-on-night); font-weight: 600; white-space: nowrap; margin-left: .4rem; }
+.bw-strip .bw-long { display: none; }
+@media (max-width: 479px) { .bw-strip .bw-go-text { display: none; } }
+@media (min-width: 720px) { .bw-strip .bw-long { display: inline; } .bw-strip .bw-short { display: none; } }
+.nav-open .bw-strip { display: none; }
+.bw-page .page-hero .badge { margin: .9rem 0 1rem; }
+@media print { .bw-strip { display: none !important; } }
