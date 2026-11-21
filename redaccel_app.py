@@ -106,6 +106,9 @@ LEGACY_REDIRECTS = {
     "/blog/why-reddit-posts-rank-quickly": "/reddit-marketing-2026/",
     "/blog/case-study-90-days": "/about/",
     "/case-studies/creator-management-platform": "/case-studies/content-creator-software/",
+    # 2026-11-21: this page answered the same question as /reddit-marketing-2026/ (same h1) and
+    # split its Google ranking and AI citations. One URL per question.
+    "/is-reddit-marketing-worth-it-2026": "/reddit-marketing-2026/",
 }
 
 
