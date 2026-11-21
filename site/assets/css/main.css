@@ -756,6 +756,7 @@ main.article .search-results li { margin-top: 0; padding-left: 1.25rem; }
 .steps-row strong { display: block; margin-top: .45rem; font-size: 1.0625rem; letter-spacing: -.01em; }
 .steps-row p { margin-top: .5rem; font-size: .9375rem; color: var(--slate); }
 .sample-split { align-items: start; }
+.sample-split > * { min-width: 0; } /* on a phone the sample table scrolls in its own box, not the whole page */
 .sample-table { margin-top: 1.5rem; }
 .sample-table td:nth-child(2) { font-family: var(--mono); font-size: .875rem; }
 .sample-split .mock-wrap { max-width: 34rem; }
