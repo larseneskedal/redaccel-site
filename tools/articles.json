@@ -1,6 +1,15 @@
 {
   "articles": [
     {
+      "slug": "perplexity-seo",
+      "keyword": "perplexity seo",
+      "card_title": "Perplexity SEO: what actually transfers from Google",
+      "card_summary": "Perplexity's citations overlap with Google's top 10 more than ChatGPT's do, but most of what it cites still sits outside it. This guide compares three overlap studies, shows Perplexity's source mix for November 2026 and lists the steps that matter.",
+      "date_published": "2026-11-24",
+      "date_modified": "2026-11-24",
+      "read_minutes": 6
+    },
+    {
       "slug": "how-to-rank-in-chatgpt",
       "keyword": "how to rank in chatgpt",
       "card_title": "How to rank in ChatGPT (and why rank is the wrong word)",
